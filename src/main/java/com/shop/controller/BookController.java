@@ -15,12 +15,12 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	//---------------------------------------------------------------------------//
-	// ¸ŞÀÎ ÆäÀÌÁö
+	// ë©”ì¸í˜ì´ì§€ë¡œ ì´ë™
 	//---------------------------------------------------------------------------//
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void mainPageGET() {
 		
-		logger.info("¸ŞÀÎ ÆäÀÌÁö ÁøÀÔ");
+		logger.info("ë©”ì¸í˜ì´ì§€ ìš”ì²­ë°›ìŒ");
 		
 	}
 	

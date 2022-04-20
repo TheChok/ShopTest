@@ -15,19 +15,19 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	// È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+	// íšŒì›ê°€ì… í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public void joinGET() {
 		
-		logger.info("È¸¿ø°¡ÀÔ ÆäÀÌÁö ÁøÀÔ");
+		logger.info("íšŒì›ê°€ì… í˜ì´ì§€ë¡œ...");
 		
 	}
 	
-	// ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿
+	// ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public void loginGET() {
 		
-		logger.info("·Î±×ÀÎ ÆäÀÌÁö·Î ÁøÀÔÇÕ´Ï´Ù.");
+		logger.info("ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ....");
 		
 	}
 	
