@@ -2,9 +2,14 @@ package com.shop.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.shop.model.MemberVO;
+import com.shop.service.MemberService;
 
 //-----------------------------------------------------------------------//
 // public class MemberController
@@ -15,20 +20,65 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	// È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+	@Autowired
+	private MemberService memberService;
+	
+	//-----------------------------------------------------------------------//
+	// íšŒì›ê°€ì… í˜ì´ì§€ë¡œ ì´ë™
+	//-----------------------------------------------------------------------//
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public void joinGET() {
 		
-		logger.info("È¸¿ø°¡ÀÔ ÆäÀÌÁö ÁøÀÔ");
+		logger.info("íšŒì›ê°€ì… í˜ì´ì§€ ì§„ì…");
 		
-	}
+	}	
 	
-	// ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿
+	//-----------------------------------------------------------------------//
+	// íšŒì›ê°€ì…
+	//-----------------------------------------------------------------------//
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String joinPOST(MemberVO memberVO) throws Exception {
+		
+		logger.info("Join ì§„ì…");
+		
+		// íšŒì›ê°€ì… ì„œë¹„ìŠ¤ ì‹¤í–‰
+		memberService.memberJoin(memberVO);
+		
+		logger.info("Join Service ì„±ê³µ");
+		
+		return "redirect:/main";
+	}		
+	
+	//-----------------------------------------------------------------------//
+	// ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™
+	//-----------------------------------------------------------------------//
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public void loginGET() {
 		
-		logger.info("·Î±×ÀÎ ÆäÀÌÁö·Î ÁøÀÔÇÕ´Ï´Ù.");
+		logger.info("ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ....");
 		
+	}
+	
+	//------------------------------------------------------------------------//
+	// ì•„ì´ë”” ì¤‘ë³µ ê²€ì‚¬
+	//------------------------------------------------------------------------//
+	@RequestMapping(value="/member_id_ck", method=RequestMethod.POST)
+	@ResponseBody
+	public String member_id_ckPOST(String member_id) throws Exception {
+		
+		/* logger.info("member_id_ck() ì§„ì…"); */
+		
+		int result = memberService.idCheck(member_id);
+		
+logger.info("ê²°ê³¼ê°’ = " + result);
+		
+		if(result != 0) {			
+			return "fail";	// ì¤‘ë³µ ì•„ì´ë””ê°€ ì¡´ì¬
+			
+		} else {			
+			return "success";	// ì¤‘ë³µ ì•„ì´ë”” x
+			
+		}			
 	}
 	
 	

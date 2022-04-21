@@ -1,1 +1,7 @@
-com\shop\exam\HomeController.class
+com\shop\mapper\MemberMapper.class
+com\shop\service\MemberServiceImpl.class
+com\shop\controller\MemberController.class
+com\shop\model\MemberVO.class
+com\shop\controller\HomeController.class
+com\shop\service\MemberService.class
+com\shop\controller\BookController.class

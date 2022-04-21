@@ -21,8 +21,15 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.shop.exam" />
+	
+	<!-- Controller 어노테이션은 servlet-context.xml 파일에 컴포넌트를 등록해야 한다. -->
+	<!-- 스프링에서 웹 관련 설정 파일은 servlet-context.xml 파일에 경로를 검색하기 때문이다. -->
+	<!-- 그 외 일반 설정 파일은 root-context.xml 또는 별도로 추가한 xml 파일에 색인을 한다. -->
+	<!-- DB 설정 및 service나 dao 수행 기능과 관련된 경로도 root-context.xml에 경로를 지정한다. -->
+
 	<context:component-scan base-package="com.shop.controller" />
+
+	
 	
 	
 	
