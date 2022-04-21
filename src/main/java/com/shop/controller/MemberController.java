@@ -20,28 +20,22 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-<<<<<<< HEAD
 	@Autowired
 	private MemberService memberService;
 	
 	//-----------------------------------------------------------------------//
 	// 회원가입 페이지로 이동
 	//-----------------------------------------------------------------------//
-=======
+
 	// 회원가입 페이지로 이동
->>>>>>> refs/remotes/origin/main
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public void joinGET() {
 		
-<<<<<<< HEAD
 		logger.info("회원가입 페이지 진입");
-=======
-		logger.info("회원가입 페이지로...");
->>>>>>> refs/remotes/origin/main
-		
+
 	}	
 	
-<<<<<<< HEAD
+
 	//-----------------------------------------------------------------------//
 	// 회원가입
 	//-----------------------------------------------------------------------//
@@ -61,9 +55,6 @@ public class MemberController {
 	//-----------------------------------------------------------------------//
 	// 로그인 페이지로 이동
 	//-----------------------------------------------------------------------//
-=======
-	// 로그인 페이지로 이동
->>>>>>> refs/remotes/origin/main
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public void loginGET() {
 		
@@ -82,7 +73,7 @@ public class MemberController {
 		
 		int result = memberService.idCheck(member_id);
 		
-logger.info("결과값 = " + result);
+		logger.info("결과값 = " + result);
 		
 		if(result != 0) {			
 			return "fail";	// 중복 아이디가 존재
