@@ -59,6 +59,7 @@
 					<input class="email_input" name="member_email">
 				</div>
 				<span class="final_email_ck">이메일을 입력해주세요.</span>
+				<span class="email_input_box_warn"></span>
 				<div class="email_check_wrap">
 					<div class="email_check_input_box" id="email_check_input_box_false">
 						<input class="email_check_input" disabled="disabled">
@@ -74,7 +75,7 @@
 				<div class="address_name">주소</div>
 				<div class="address_input_1_wrap">
 					<div class="address_input_1_box">
-						<input class="address_input_1" name="member_addr1" disabled="disabled"/>
+						<input class="address_input_1" name="member_addr1" readonly="readonly"/>
 					</div>
 					<div class="address_button" onClick="execution_daum_address()">
 						<span>주소 찾기</span>
@@ -83,12 +84,12 @@
 				</div>
 				<div class ="address_input_2_wrap">
 					<div class="address_input_2_box">
-						<input class="address_input_2" name="member_addr2" disabled="disabled"/>
+						<input class="address_input_2" name="member_addr2" readonly="readonly"/>
 					</div>
 				</div>
 				<div class ="address_input_3_wrap">
 					<div class="address_input_3_box">
-						<input class="address_input_3" name="member_addr3" disabled="disabled"/>
+						<input class="address_input_3" name="member_addr3" readonly="readonly"/>
 					</div>
 				</div>
 				<span class="final_addr_ck">주소를 입력해주세요.</span>
@@ -103,7 +104,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-var code = "";										// 이메일전송 인증번호 저장위한 코드
+var code = "";		// 이메일전송 인증번호 저장위한 코드
 
 	/* 유효성 검사 통과유무 변수 */
 	var idck		= false;
@@ -115,9 +116,6 @@ var code = "";										// 이메일전송 인증번호 저장위한 코드
 	var emailck		= false;
 	var emailNumck	= false;
 	var addressck	= false;
-	
-	
-	
 	
 
 // 회원가입 페이지 이동
@@ -145,7 +143,7 @@ $(document).ready(function() {
 							
 		/* 비밀번호 유효성 검사 */
 		if(pw == "") {
-			$("final_pw_ck").css("display", "block");
+			$(".final_pw_ck").css("display", "block");
 			pwck	= false;
 		} else {
 			$(".final_pw_ck").css("display", "none");
@@ -188,9 +186,14 @@ $(document).ready(function() {
 			addressck	= true;
 		}
 		
+		/* 최종 유효성 검사 */
+		if(idck&&idck_check&&pwck&&pwck_check&&pwckck&&nameck&&emailck&&emailNumck&&addressck) {
+			$("#join_form").attr("action", "/member/join");
+			$("#join_form").submit();
+			
+		}
 		
-	  //$("#join_form").attr("action", "/member/join");
-	  //$("#join_form").submit();
+		return false;
 	});
 });
 
@@ -226,14 +229,24 @@ $(".email_check_button").click(function(){
 	var email 		= $(".email_input").val();      // 입력한 이메일
 	var checkBox 	= $(".email_check_input");		// 인증번호 입력란
 	var boxWrap		= $(".email_check_input_box");	// 인증번호 입력란 박스
+	var warnMsg		= $(".email_input_box_warn");	// 이메일 입력 경고글
 	
+	/* 이메일 형식 유효성 검사 */
+	if(emailFormCheck(email)) {
+		warnMsg.html("이메일이 전송되었습니다. 이메일을 확인해주세요.");
+		warnMsg.css("display", "inline-block");
+	} else {
+		warnMsg.html("올바르지 못한 이메일 형식입니다.");
+		warnMsg.css("display", "inline-block");
+		return false;
+	}
 	
 	$.ajax({
 		
         type:"GET",
         url: "emailCheck?email=" + email,
         success: function(data) {
-			alert("인증번호를 전송했습니다.");
+			// alert("인증번호를 전송했습니다.");
         	// console.log("data: " + data);
         	
         	checkBox.attr("disabled", false);
@@ -256,14 +269,14 @@ $(".email_check_input").blur(function() {
 	var inputCode 	= $(".email_check_input").val();		// 입력코드
 	var checkResult = $("#email_check_input_box_warn");		// 비교결과
 	
-	if(inputCode == code) {
+	if(inputCode == code) {									// 일치할 경우
+		emailNumck	= true;
 		checkResult.html("인증번호가 일치합니다.");
 		checkResult.attr("class", "correct");
-		emailNumck	= true;
 	} else {
+		emailNumck	= false;
 		checkResult.html("인증번호를 다시 확인해주세요");
 		checkResult.attr("class", "incorrect");
-		emailNumck	= false;
 	}
 	
 });
@@ -317,7 +330,7 @@ function execution_daum_address(){
             //$("[name=memberAddr2]").val(addr);            // 대체가능
 
             // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
-            $(".address_input_3").attr("disabled", false);
+            $(".address_input_3").attr("readonly", false);
             $('.address_input_3').focus();
             
          }
@@ -346,6 +359,11 @@ $(".pwck_input").on("propertychange change keyup paste input", function() {
 	
 });
 
+/* 입력 이메일 형식 유효성 검사 */
+function emailFormCheck(email) {
+	var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	return form.test(email);
+}
 
 
 

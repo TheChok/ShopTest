@@ -38,7 +38,8 @@ public class MemberMapperTests {
 											// memberVO에 있는 값들을 매개로 쿼리 메서드가 실행 될 것이다.
 	}
 */
-	
+
+/*
 	// 아이디 중복 검사
 	@Test
 	public void member_id_ck() throws Exception {
@@ -49,6 +50,27 @@ public class MemberMapperTests {
 		membermapper.idCheck(id2);
 		
 	}
+*/
+	
+	// 로그인 쿼리 mapper 메서드 테스트
+	@Test
+	public void memberLogin() throws Exception {
+		System.out.println("테스트 시작");
+		MemberVO member = new MemberVO();	// MemberVO 변수 선언 및 초기화
+		
+		// 올바른 아이디 비번 입력의 경우
+		//member.setMember_id("test1");
+		//member.setMember_pw("test1");
+		
+		// 올바르지 않은 아이디 비번 입력의 경우
+		member.setMember_id("test112233");
+		member.setMember_pw("test112233");
+		
+		membermapper.memberLogin(member);
+		System.out.println("결과 값: " + membermapper.memberLogin(member));
+		
+	}
+	
 	
 	
 	
