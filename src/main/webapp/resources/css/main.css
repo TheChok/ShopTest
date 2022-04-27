@@ -45,11 +45,15 @@ a{
 }
 /* 로고 영역 */
 .logo_area{
-	width:				25%;
-	height:				100%;
-	background-color:	red;
-	float:				left;
+    width: 				25%;
+    height: 			100%;
+    float:				left;
 }
+.logo_area img{
+    width: 				100%;
+    height: 			100%;
+}
+ 
 /* 검색 박스 영역 */
 .search_area{
 	width:				50%;
@@ -122,7 +126,45 @@ a{
 	border-radius:		25px;
 	color:				#606267;
 }
+
+
+/* footer navi 영역 */
+.footer_nav{
+	width:				100%;
+	height:				50px;
+}
+.footer_nav_container{
+	width:				100%;
+	height:				100%;
+	background-color:	#8EC0E4;
+}
+.footer_nav_container>ul{
+	font-weight:		bold;
+	float:				left;
+	list-style:			none;
+	position:			relative;
+	padding-top:		10px;
+}
+
+
+
+
+
+
+
 /* float 속성 해제 */
 .clearfix{
 	clear:				both;
 }
+
+
+
+
+
+
+
+
+
+
+
+

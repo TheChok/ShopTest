@@ -1,4 +1,4 @@
-@charset "UTF-8";
+/*  @charset "UTF-8"; */
 *{
     margin: 0;
     padding:0;
@@ -53,11 +53,12 @@ ul{
     font-weight: bolder;
 }
 /* 관리자 wrap(네비+컨텐츠) */
+/*
 .admin_wrap{
     
     
 }
- 
+*/ 
 /* 관리자페이지 네비 영역 */
 .admin_navi_wrap{
     width: 20%;
