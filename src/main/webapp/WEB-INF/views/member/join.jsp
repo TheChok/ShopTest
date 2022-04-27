@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="/resources/css/member/join.css">
+	<link rel="stylesheet" type="text/css"  href="/resources/css/member/join.css?after">
 	
 	<script
   		src="https://code.jquery.com/jquery-3.4.1.js"
