@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	
-	<link rel="stylesheet" type="text/css" href="/resources/css/admin/admain.css?after">
+	<link rel="stylesheet" type="text/css" href="/resources/css/admin/authorManage.css?after">
 	
 	<script
 	  	src="https://code.jquery.com/jquery-3.4.1.js"
@@ -46,7 +46,7 @@
 			        </li>
 			        <li>
 			            <a class="admin_list_02"
-			            href="/admin/goodsManage">상품 목록</a>
+			            href="/admin/goodsManage">상품 관리</a>
 			        </li>
 			        <lI>
 			            <a class="admin_list_03"
@@ -63,7 +63,7 @@
 			    </ul>
 	    	</div>
 		    <div class="admin_content_wrap">
-		        <div>관리자 페이지 입니다.</div>
+		       <div class="admin_content_subject"><span>작가 관리</span></div>
 		    </div>
 		    <div class="clearfix"></div>
 		</div>
@@ -110,6 +110,28 @@
     </div>	<!-- End - class="wrap" -->
 </div>	<!-- End - class="wrapeer" -->
 
+<script>
+
+/* 작가 등록여부 확인 */
+$(document).ready(function() {
+	
+	let result = '<c:out value="${enroll_result}"/>';
+	
+	checkResult(result);
+	
+	function checkResult(result) {
+		
+		if(result != '') {
+			return;
+		}
+		
+		alert("작가 '${enroll_result}'을(를) 등록하였습니다.");
+		
+	}
+	
+});
+
+</script>
 
 </body>
 </html>

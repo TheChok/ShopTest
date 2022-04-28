@@ -22,7 +22,7 @@ ul{
 .top_gnb_area{
     width: 				100%;
     height: 			50px;
-    background-color: 	#f0f0f1;
+    background-color: #f0f0f1;
     position:			relative;
 }
 .top_gnb_area .list{
@@ -43,7 +43,7 @@ ul{
 .admin_top_wrap{
     height:				110px;
     line-height: 		110px;
-    background-color: 	#5080bd;
+    background-color: #5080bd;
     margin-bottom:		15px;
 }
 .admin_top_wrap>span{
@@ -88,22 +88,87 @@ ul{
 .admin_navi_wrap li a:visited 	{color: black;}
 .admin_navi_wrap li a:active 	{color: black;}
 .admin_navi_wrap li a:hover 	{color: black;}
- 
- 
+
+.admin_list_03{
+	background-color:	#C8C8C8;
+}
+
 /* 관리자페이지 컨텐츠 영역 */
 .admin_content_wrap{
     width: 				80%;
     float:				left;
     height: 			100%;
-    height: 			700px;
-    
 }
-.admin_content_wrap div{
-    margin-top: 280px;
-    text-align: center;
-    font-size: 50px;
-    font-weight: bolder;
+.admin_content_subject{
+	font-size:			40px;
+	font-weight:		bolder;
+	padding-left:		15px;
+	background-color:	#6AAFE6;
+	height:				80px;
+	line-height:		80px;
+	color:				white;
 }
+
+/* 관리자 컨텐츠 메인 영역 */
+.form_section{
+	width:				95%;
+	margin-left:		2%;
+	margin-top:			20px;
+	border:				1px solid #DBDDE2;
+	background-color:	#EFEFEF;
+}
+.form_section_title{
+	padding:			20px 35px;
+}
+.form_section_title label{
+	display:			block;
+	font-size:			20px;
+	font-weight:		800;
+}
+.form_section_content{
+	padding:			20px 35px;
+	border-top:			1px solid #DBDDE2;
+}
+.form_section_content input {
+	width:				98%;
+	height:				25px;
+	font-size:			20px;
+	padding:			5px 1%;
+}
+.form_section_content select{
+	width:				98%;
+	height:				35px;
+	font-size:			20px;
+	text-align-last:	center;
+}
+
+/* 입력란 공란 경고 태그 */
+.form_section_content span{
+	display:			none;
+	padding-top:		10px;
+	text-align:			center;
+	color:				#E05757;
+	font-weight:		300;
+}
+
+/* 버튼 영역 */
+.btn_section{
+	text-align:			center;
+	margin:				80px 0;
+}
+.btn{
+	min-width:			180px;
+	padding:			4px 30px;
+	font-size:			25px;
+	font-weight:		600;
+	line-height:		40px;
+}
+.enroll_btn{
+	background-color:	#DBDDE2;
+	margin-left:		15px;
+}
+
+
 
 /* footer navai 영역 */
 .footer_nav{
