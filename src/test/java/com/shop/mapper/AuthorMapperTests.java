@@ -18,6 +18,7 @@ public class AuthorMapperTests {
 	@Autowired
 	private AuthorMapper mapper;
 	
+/*	
 	// 작가 등록 테스트
 	@Test
 	public void authorEnroll() throws Exception {
@@ -31,9 +32,48 @@ public class AuthorMapperTests {
 		mapper.authorEnroll(author);
 		
 	}
+*/
+/*	
+	// 작가 목록 테스트
+	@Test
+	public void authorGetListTest() throws Exception{
+		
+		Criteria cri = new Criteria(3, 10);	// 3페이지 % 10개 행 표시
+		cri.setKeyword("작가");
+		
+		List<AuthorVO> list = mapper.authorGetList(cri);
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println("list" + i + "..........." + list.get(i));
+		}
+		
+	}
+*/	
+/*	
+	// 작가 총 수
+	@Test
+	public void authorGetTotalTest() throws Exception {
+		
+		Criteria cri	= new Criteria();
+		cri.setKeyword("작가");
+		
+		int total = mapper.authorGetTotal(cri);
+		
+		System.out.println("total...................." + total);
+	}
+*/
 	
-	
-	
+	// 작가 상세 페이지
+	@Test
+	public void authorGetDetailTest() throws Exception {
+		
+		int author_id = 30;
+		
+		AuthorVO author = mapper.authorGetDetail(author_id);
+		
+		System.out.println("author : " + author);
+		
+	}
 	
 	
 } // End - public class AuthorMapperTests

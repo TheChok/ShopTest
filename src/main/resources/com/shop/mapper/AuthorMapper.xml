@@ -10,4 +10,43 @@
 		VALUES(author_seq.nextval, #{author_name}, #{nation_id}, #{author_intro})
 	</insert>
 
+	<!-- 작가 목록 -->
+	<select id="authorGetList" resultType="com.shop.model.AuthorVO">
+		<![CDATA[
+			SELECT * 
+			FROM ( SELECT /*+INDEX_DESC(book_author SYS_C007573) */ rownum as rn, author_id, author_name, nation_id, regdate, updatedate 
+				   FROM	book_author
+				   WHERE
+		]]>
+					<if test="keyword != null">
+						author_name LIKE '%' || #{keyword} || '%' AND
+					</if>
+		<![CDATA[
+				   rownum <= #{pageNum} * #{amount}
+				 )
+			WHERE rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 작가 수 -->
+	<select id="authorGetTotal" resultType="int">
+		SELECT count(*) FROM book_author
+		<if test="keyword != null">
+		WHERE author_name LIKE '%' || #{keyword} || '%'
+		</if>
+	</select>
+
+	<!-- 작가 상세 -->
+	<select id="authorGetDetail" resultType="com.shop.model.AuthorVO">
+		SELECT * FROM book_author
+		WHERE author_id = #{author_id}
+	</select>
+
+
+
+
+
+
+
+
   </mapper>
