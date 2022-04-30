@@ -36,13 +36,18 @@
 		</if>
 	</select>
 
-	<!-- 작가 상세 -->
+	<!-- 작가 상세 페이지 -->
 	<select id="authorGetDetail" resultType="com.shop.model.AuthorVO">
 		SELECT * FROM book_author
 		WHERE author_id = #{author_id}
 	</select>
 
-
+	<!-- 작가 정보 수정 -->
+	<update id="authorModify">
+		UPDATE book_author
+		SET author_name=#{author_name}, nation_id=#{nation_id}, author_intro=#{author_intro}, updatedate=sysdate 
+		WHERE author_id=#{author_id}
+	</update>
 
 
 

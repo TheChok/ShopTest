@@ -113,13 +113,16 @@
 
 <script>
 
-/* 작가 등록여부 확인 */
+/* 작가 등록, 수정 여부 확인 */
 $(document).ready(function() {
 	
-	let result = '<c:out value="${enroll_result}"/>';
+	let result 	= '<c:out value="${enroll_result}"/>';
+	let mresult	= '<c:out value="${modify_result}"/>';
 	
 	checkResult(result);
+	checkmResult(mresult);
 	
+	/* 작가 등록 여부 확인 */
 	function checkResult(result) {
 		
 		if(result == '') {
@@ -127,8 +130,20 @@ $(document).ready(function() {
 		}
 		
 		alert("작가 '${enroll_result}'을(를) 등록하였습니다.");
+	}
+	
+	/* 작가 수정 여부 확인 */
+	function checkmResult(mresult) {
+		
+		if(mresult == '1') {
+			alert("작가 정보 수정을 완료하였습니다.");
+		} else if(mresult == '0') {
+			alert("작가 정보 수정을 못하였습니다.");
+		}
 		
 	}
+	
+	
 	
 });
 

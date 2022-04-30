@@ -62,18 +62,18 @@ public class AuthorMapperTests {
 		System.out.println("total...................." + total);
 	}
 */
-	
+/*	
 	// 작가 상세 페이지
 	@Test
 	public void authorGetDetailTest() throws Exception {
 		
-		int author_id = 30;
+		int author_id = 650;
 		
 		AuthorVO author = mapper.authorGetDetail(author_id);
 		
 		System.out.println("author : " + author);
 		
 	}
-	
+*/	
 	
 } // End - public class AuthorMapperTests

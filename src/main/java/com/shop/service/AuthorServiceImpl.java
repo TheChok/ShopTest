@@ -52,7 +52,7 @@ public class AuthorServiceImpl implements AuthorService {
 		logger.info("(Service)authorGetTotal().................." + cri);
 		return authorMapper.authorGetTotal(cri);
 	}
-
+	
 	//--------------------------------------------------------------------------------------------------//
 	// 작가 상세 페이지
 	//--------------------------------------------------------------------------------------------------//	
@@ -61,6 +61,16 @@ public class AuthorServiceImpl implements AuthorService {
 		logger.info("authorGetDetail 실행..... author_id : " + author_id);
 		return authorMapper.authorGetDetail(author_id);
 	}
+	
+	//--------------------------------------------------------------------------------------------------//
+	// 작가 정보 수정
+	//--------------------------------------------------------------------------------------------------//
+	@Override
+	public int authorModify(AuthorVO author) throws Exception {
+		logger.info("authorModify 실행...... author 정보 : " + author);
+		return authorMapper.authorModify(author);
+	}
+	
 	
 	
 	

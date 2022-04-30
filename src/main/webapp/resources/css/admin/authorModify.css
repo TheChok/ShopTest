@@ -148,6 +148,16 @@ ul{
 	background-color:	#F9F9F9;
 }
 
+/* 입력란 공란 경고 태그 */
+.form_section_content span{
+	display:			none;
+	padding-top:		10px;
+	text-align:			center;
+	color:				#E05757;
+	font-weight:		300;
+}
+
+
 /* 버튼 영역 */
 .btn_section{
 	text-align:			center;
