@@ -102,7 +102,7 @@
 		e.preventDefault();
 		
 		$("input[name=author_id]").remove();
-		moveForm.attr("action", "/admin/authorManage")
+		moveForm.attr("action", "/admin/authorManage");
 		moveForm.submit();
 		
 	});

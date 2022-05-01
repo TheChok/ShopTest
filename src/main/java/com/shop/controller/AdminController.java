@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shop.model.AuthorVO;
+import com.shop.model.BookVO;
 import com.shop.model.Criteria;
 import com.shop.model.PageDTO;
+import com.shop.service.AdminService;
 import com.shop.service.AuthorService;
 
 //-----------------------------------------------------------------------//
@@ -30,6 +33,12 @@ public class AdminController {
 	@Autowired
 	private AuthorService authorService;
 	
+	@Autowired
+	private AdminService adminService;
+	
+	
+	
+	// 관리자 페이지 이동 및 관리
 	
 	//------------------------------------------------------------------------------------------//
 	// 관리자 메인 페이지 이동
@@ -89,6 +98,10 @@ public class AdminController {
 		// model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
 	}
 	
+	
+	
+	// 관리자 페이지 - 작가 등록 및 관리
+	
 	//------------------------------------------------------------------------------------------//
 	// 작가 등록
 	//------------------------------------------------------------------------------------------//
@@ -136,6 +149,28 @@ public class AdminController {
 		
 		return "redirect:/admin/authorManage";
 	}
+	
+	
+	
+	// 관리자 페이지 - 상품 등록 및 관리
+	
+	//------------------------------------------------------------------------------------------//	
+	// 상품 등록(book)
+	//------------------------------------------------------------------------------------------//
+	@PostMapping("/goodsEnroll")
+	public String goodsEnrollPOST(BookVO bookVO, RedirectAttributes rttr) throws Exception {
+		
+		System.out.println("상품 등록 콘트롤러에 진입했습니다.");
+		
+		logger.info("goodsEnrollPOST 작동...... book : " + bookVO);
+
+		adminService.bookEnroll(bookVO);
+		System.out.println("등록된 작품명 : " + bookVO.getBook_name());
+		rttr.addFlashAttribute("enroll_result", bookVO.getBook_name());
+		
+		return "redirect:/admin/goodsManage";
+	}
+	
 	
 	
 } // End - public class AdminController
