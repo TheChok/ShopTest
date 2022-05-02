@@ -260,8 +260,40 @@
 	}
 	
 	/* 중분류 <option> 태그 */
-	$()
+	$(cateSelect1).on("change",function(){
+		
+		let selectVal1 = $(this).find("option:selected").val();	
+		
+		cateSelect2.children().remove();
+		cateSelect3.children().remove();
+		
+		cateSelect2.append("<option value='none'>선택</option>");
+		cateSelect3.append("<option value='none'>선택</option>");
+		
+		for(let i = 0; i < cate2Array.length; i++){
+			if(selectVal1 == cate2Array[i].cate_parent){
+				cateSelect2.append("<option value='"+cate2Array[i].cateCode+"'>" + cate2Array[i].cate_name + "</option>");	
+			}
+		}// for
+		
+	});
 	
+	/* 소분류 <option>태그 */
+	$(cateSelect2).on("change",function(){
+		
+		let selectVal2 = $(this).find("option:selected").val();
+		
+		cateSelect3.children().remove();
+		
+		cateSelect3.append("<option value='none'>선택</option>");		
+		
+		for(let i = 0; i < cate3Array.length; i++){
+			if(selectVal2 == cate3Array[i].cate_parent){
+				cateSelect3.append("<option value='"+cate3Array[i].cateCode+"'>" + cate3Array[i].cate_name + "</option>");	
+			}
+		}// for		
+		
+	});	
 	
 	
 </script>
