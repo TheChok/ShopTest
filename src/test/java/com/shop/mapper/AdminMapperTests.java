@@ -17,7 +17,8 @@ public class AdminMapperTests {
 	
 	@Autowired
 	private AdminMapper adminMapper;
-	
+
+/*	
 	// 상품 등록
 	@Test
 	public void bookEnrllTest() throws Exception {
@@ -38,6 +39,15 @@ public class AdminMapperTests {
 		System.out.println("등록 요청할 book 정보 : " + book);
 		
 		adminMapper.bookEnroll(book);
+		
+	}
+*/
+	
+	// 카테고리 리스트
+	@Test
+	public void cateListTest() throws Exception {
+		
+		System.out.println("cateList().........." + adminMapper.cateList());
 		
 	}
 	
