@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.model.AuthorVO;
 import com.shop.model.BookVO;
 import com.shop.model.Criteria;
@@ -61,8 +62,19 @@ public class AdminController {
 	// 상품 등록 페이지 접속
 	//------------------------------------------------------------------------------------------//
 	@RequestMapping(value="goodsEnroll", method=RequestMethod.GET)
-	public void goodsEnrollGET() throws Exception {
+	public void goodsEnrollGET(Model model) throws Exception {
 		logger.info("상품 등록 페이지 접속");
+		
+		ObjectMapper objm	= new ObjectMapper();
+		
+		List list = adminService.cateList();
+		
+		String cateList = objm.writeValueAsString(list);
+		
+		model.addAttribute("cateList", cateList);
+		
+		//logger.info("변경 전............" + list);
+		//logger.info("변경 후............" + cateList);
 	}
 	
 	//------------------------------------------------------------------------------------------//
@@ -166,6 +178,30 @@ public class AdminController {
 		
 		return "redirect:/admin/goodsManage";
 	}
+	
+	//------------------------------------------------------------------------------------------//	
+	// 작가 검색 팝업창
+	//------------------------------------------------------------------------------------------//
+	@GetMapping("/authorPop")
+	public void authorPopGET(Criteria cri, Model model) throws Exception {
+		
+		logger.info("authorPopGET..........");
+		
+		cri.setAmount(5);
+		
+		// 작가 목록데이터 출력
+		List list = authorService.authorGetList(cri);
+				
+		if(!list.isEmpty()) {		// 작가 있음.
+			model.addAttribute("list", list);
+		} else {					// 작가 없음.
+			model.addAttribute("listCheck", "empty");
+		}
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
+		
+	}
+	
 	
 	
 	

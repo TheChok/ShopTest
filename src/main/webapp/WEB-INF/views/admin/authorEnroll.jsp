@@ -125,11 +125,13 @@ $("#enrollBtn").click(function(){
     
 });
 
-
 /* 취소 버튼 */
 $("#cancelBtn").click(function() {
 	location.href="/admin/authorManage"
 });
+
+
+
 
 </script>
 
