@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -151,25 +150,24 @@ public class AdminController {
 	}
 	
 	
-	
 	// 관리자 페이지 - 상품 등록 및 관리
 	
 	//------------------------------------------------------------------------------------------//	
 	// 상품 등록(book)
 	//------------------------------------------------------------------------------------------//
-	@PostMapping("/goodsEnroll")
-	public String goodsEnrollPOST(BookVO bookVO, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value="/goodsEnroll", method=RequestMethod.POST)
+	public String goodsEnrollPOST(BookVO book, RedirectAttributes rttr) {
 		
-		System.out.println("상품 등록 콘트롤러에 진입했습니다.");
+		logger.info("goodsEnrollPOST........." + book);
 		
-		logger.info("goodsEnrollPOST 작동...... book : " + bookVO);
-
-		adminService.bookEnroll(bookVO);
-		System.out.println("등록된 작품명 : " + bookVO.getBook_name());
-		rttr.addFlashAttribute("enroll_result", bookVO.getBook_name());
+		adminService.bookEnroll(book);
+		
+		rttr.addFlashAttribute("enroll_result", book.getBook_name());
 		
 		return "redirect:/admin/goodsManage";
 	}
+	
+	
 	
 	
 	

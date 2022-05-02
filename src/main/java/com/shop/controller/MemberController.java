@@ -65,6 +65,7 @@ public class MemberController {
         encodePw = pwEncoder.encode(rawPw);  	// 비밀번호 인코딩
         memberVO.setMember_pw(encodePw);     	// 인코딩된 비밀번호 member객체에 다시 저장
         
+        System.out.println("memberVO의 값: " + memberVO);
         
 		// 회원가입 쿼리 실행
 		memberService.memberJoin(memberVO);

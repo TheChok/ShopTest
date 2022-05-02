@@ -29,6 +29,8 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void authorEnroll(AuthorVO author) throws Exception {
 		
+		System.out.println("작가 등록 서비스로 이동했습니다...... author : " + author);
+		
 		authorMapper.authorEnroll(author);
 
 	}

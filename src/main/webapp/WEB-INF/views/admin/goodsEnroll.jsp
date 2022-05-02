@@ -21,7 +21,7 @@
 
 	    <div class="admin_content_wrap">
 	        <div class="admin_content_subject"><span>상품 등록</span></div>
-	        
+
 	        <div class="admin_content_main">
 			<form action="/admin/goodsEnroll" method="post" id="enrollForm">
 				<div class="form_section">
@@ -111,7 +111,9 @@
 		 	</div> 
 		</div>
 	    </div> <!-- End - class="admin_content_wrap" -->
-		    
+
+	 
+	 
 	<%@ include file="../includes/admin/footer.jsp" %>		    
 
 <script>
@@ -129,6 +131,7 @@
 	
 		e.preventDefault();
 		enrollForm.submit();
+		
 	});
 	
 	
