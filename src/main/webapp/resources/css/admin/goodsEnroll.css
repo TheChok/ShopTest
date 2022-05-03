@@ -185,6 +185,14 @@ input[name='publeYear']{
 	margin-left:		5px;
 }
 
+/* 입력란 공란 경고 태그 */
+.ck_warn{
+	display:			none;
+	padding-top:		10px;
+	text-align:			center;
+	color:				#E05757;
+	font-weight:		300;
+}
 
 
 /* 버튼 영역 */

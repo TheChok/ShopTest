@@ -27,113 +27,123 @@
 	        <div class="admin_content_subject"><span>상품 등록</span></div>
 
 	        <div class="admin_content_main">
-			<form action="/admin/goodsEnroll" method="post" id="enrollForm">
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>책 제목</label>
-					</div>
-					<div class="form_section_content">
-						<input name="book_name"/>
-					</div>
-				</div>
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>작가</label>
-					</div>
-					<div class="form_section_content">
-						<input id="author_name_input" readonly="readonly"/>
-						<input id="author_id_input" name="author_id" type="hidden"/>
-						<button class="author_id_btn">작가 선택</button>
-					</div>
-				</div>            
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>출판일</label>
-					</div>
-					<div class="form_section_content">
-						<input name="publeYear" autocomplete="off" readonly="readonly"/>
-					</div>
-				</div>            
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>출판사</label>
-					</div>
-					<div class="form_section_content">
-						<input name="publisher"/>
-					</div>
-				</div>             
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>책 카테고리</label>
-					</div>
-					<div class="form_section_content">
-						<div class="cate_wrap">
-							<span>대분류</span>
-							<select class="cate1">
-								<option selected value="none">선택</option>
-							</select>
+				<form action="/admin/goodsEnroll" method="post" id="enrollForm">
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>책 제목</label>
 						</div>
-						<div class="cate_wrap">
-							<span>중분류</span>
-							<select class="cate2">
-								<option selected value="none">선택</option>
-							</select>
-						</div>
-						<div class="cate_wrap">
-							<span>소분류</span>
-							<select class="cate3" name="cateCode">
-								<option selected value="none">선택</option>
-							</select>
+						<div class="form_section_content">
+							<input name="book_name"/>
+							<span class="ck_warn book_name_warn">책 이름을 입력해주세요.</span>
 						</div>
 					</div>
-				</div>          
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>상품 가격</label>
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>작가</label>
+						</div>
+						<div class="form_section_content">
+							<input id="author_name_input" readonly="readonly"/>
+							<input id="author_id_input" name="author_id" type="hidden"/>
+							<button class="author_id_btn">작가 선택</button>
+							<span class="ck_warn author_id_warn">작가를 선택해주세요</span>
+						</div>
+					</div>            
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>출판일</label>
+						</div>
+						<div class="form_section_content">
+							<input name="publeYear" autocomplete="off" readonly="readonly"/>
+							<span class="ck_warn publeYear_warn">출판일을 입력해주세요.</span>
+						</div>
+					</div>            
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>출판사</label>
+						</div>
+						<div class="form_section_content">
+							<input name="publisher"/>
+							<span class="ck_warn publisher_warn">출판사를 입력해주세요.</span>
+						</div>
+					</div>             
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>책 카테고리</label>
+						</div>
+						<div class="form_section_content">
+							<div class="cate_wrap">
+								<span>대분류</span>
+								<select class="cate1">
+									<option selected value="none">선택</option>
+								</select>
+							</div>
+							<div class="cate_wrap">
+								<span>중분류</span>
+								<select class="cate2">
+									<option selected value="none">선택</option>
+								</select>
+							</div>
+							<div class="cate_wrap">
+								<span>소분류</span>
+								<select class="cate3" name="cateCode">
+									<option selected value="none">선택</option>
+								</select>
+							</div>
+							<span class="ck_warn cateCode_warn">카테고리를 입력해주세요.</span>
+						</div>
+					</div>          
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>상품 가격</label>
+						</div>
+						<div class="form_section_content">
+							<input name="book_price" value="0"/>
+							<span class="ck_warn book_price_warn">상품 가격을 입력해주세요.</span>
+						</div>
+					</div>               
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>상품 재고</label>
+						</div>
+						<div class="form_section_content">
+							<input name="book_stock" value="0"/>
+							<span class="ck_warn book_stock_warn">상품 재고를 입력해주세요.</span>
+						</div>
+					</div>          
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>상품 할인율</label>
+						</div>
+						<div class="form_section_content">
+							<input name="book_discount" placeholder="0.01~0.99 사이의 숫자를 입력해주세요"/>
+							<span class="ck_warn book_discount_warn">상품 할인율을 입력해주세요</span>
+						</div>
+					</div>          		
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>책 소개</label>
+						</div>
+						<div class="form_section_content bit">
+							<textarea name="book_intro" id="book_intro_textarea"></textarea>
+							<span class="ck_warn book_intro_warn">책 소개를 입력해주세요.</span>
+						</div>
+					</div>        		
+					<div class="form_section">
+						<div class="form_section_title">
+							<label>책 목차</label>
+						</div>
+						<div class="form_section_content bct">
+							<textarea name="book_contents" id="book_contents_textarea"></textarea>
+							<span class="ck_warn book_contents_warn">책 목차를 입력해주세요.</span>
+						</div>
 					</div>
-					<div class="form_section_content">
-						<input name="book_price" value="0"/>
-					</div>
-				</div>               
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>상품 재고</label>
-					</div>
-					<div class="form_section_content">
-						<input name="book_stock" value="0"/>
-					</div>
-				</div>          
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>상품 할인율</label>
-					</div>
-					<div class="form_section_content">
-						<input name="book_discount" value="0"/>
-					</div>
-				</div>          		
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>책 소개</label>
-					</div>
-					<div class="form_section_content">
-						<textarea name="book_intro" id="book_intro_textarea"></textarea>
-					</div>
-				</div>        		
-				<div class="form_section">
-					<div class="form_section_title">
-						<label>책 목차</label>
-					</div>
-					<div class="form_section_content">
-						<textarea name="book_contents" id="book_contents_textarea"></textarea>
-					</div>
-				</div>
-			</form>
-			<div class="btn_section">
-				<button id="cancelBtn" class="btn">취 소</button>
-		 		<button id="enrollBtn" class="btn enroll_btn">등 록</button>
-		 	</div> 
-		</div>
-	    </div> <!-- End - class="admin_content_wrap" -->
+				</form>
+				<div class="btn_section">
+					<button id="cancelBtn" class="btn">취 소</button>
+			 		<button id="enrollBtn" class="btn enroll_btn">등 록</button>
+			 	</div> 
+			</div>
+		</div> <!-- End - class="admin_content_wrap" -->
 
 	 
 	 
@@ -153,7 +163,119 @@
 	$("#enrollBtn").on("click",function(e){
 	
 		e.preventDefault();
-		enrollForm.submit();
+		
+		/* 체크 변수 */
+		let bookNameCk 	= false;
+		let authorIdCk 	= false;
+		let publeYearCk = false;
+		let publisherCk = false;
+		let cateCodeCk 	= false;
+		let priceCk 	= false;
+		let stockCk 	= false;
+		let discountCk 	= false;
+		let introCk 	= false;
+		let contentsCk 	= false;
+		
+		/* 체크 대상 변수 */
+		let bookName 	= $("input[name='book_name']").val();
+		let authorId 	= $("input[name='author_id']").val();
+		let publeYear 	= $("input[name='publeYear']").val();
+		let publisher 	= $("input[name='publisher']").val();
+		let cateCode 	= $("select[name='cateCode']").val();
+		let bookPrice 	= $("input[name='book_price']").val();
+		let bookStock 	= $("input[name='book_stock']").val();
+		let bookDiscount = $("input[name='book_discount']").val();
+		let bookIntro 	= $(".bit p").html();
+		let bookContents = $(".bct p").html();
+		
+		
+		if(bookName){
+			$(".book_name_warn").css('display','none');
+			bookNameCk = true;
+		} else {
+			$(".book_name_warn").css('display','block');
+			bookNameCk = false;
+		}
+		
+		if(authorId){
+			$(".author_id_warn").css('display','none');
+			authorIdCk = true;
+		} else {
+			$(".author_id_warn").css('display','block');
+			authorIdCk = false;
+		}
+		
+		if(publeYear){
+			$(".publeYear_warn").css('display','none');
+			publeYearCk = true;
+		} else {
+			$(".publeYear_warn").css('display','block');
+			publeYearCk = false;
+		}	
+		
+		if(publisher){
+			$(".publisher_warn").css('display','none');
+			publisherCk = true;
+		} else {
+			$(".publisher_warn").css('display','block');
+			publisherCk = false;
+		}
+		
+		if(cateCode != 'none'){
+			$(".cateCode_warn").css('display','none');
+			cateCodeCk = true;
+		} else {
+			$(".cateCode_warn").css('display','block');
+			cateCodeCk = false;
+		}	
+		
+		if(bookPrice != 0){
+			$(".book_price_warn").css('display','none');
+			priceCk = true;
+		} else {
+			$(".book_price_warn").css('display','block');
+			priceCk = false;
+		}	
+		
+		if(bookStock != 0){
+			$(".book_stock_warn").css('display','none');
+			stockCk = true;
+		} else {
+			$(".book_stock_warn").css('display','block');
+			stockCk = false;
+		}		
+		
+		if(bookDiscount < 1 && bookDiscount != ''){
+			$(".book_discount_warn").css('display','none');
+			discountCk = true;
+		} else {
+			$(".book_discount_warn").css('display','block');
+			discountCk = false;
+		}	
+		
+		if(bookIntro != '<br data-cke-filler="true">'){
+			$(".book_intro_warn").css('display','none');
+			introCk = true;
+		} else {
+			$(".book_intro_warn").css('display','block');
+			introCk = false;
+		}	
+		
+		if(bookContents != '<br data-cke-filler="true">'){
+			$(".book_contents_warn").css('display','none');
+			contentsCk = true;
+		} else {
+			$(".book_contents_warn").css('display','block');
+			contentsCk = false;
+		}	
+		
+		/* 최종 검사 */
+		if(bookNameCk && authorIdCk && publeYearCk && publisherCk && cateCodeCk && priceCk && stockCk && discountCk && introCk && contentsCk ){
+			//alert('통과');
+			enrollForm.submit();
+		} else {
+			return false;
+		}
 		
 	});
 	
@@ -294,7 +416,6 @@
 		}// for		
 		
 	});	
-	
 	
 </script>
 
