@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.model.AuthorVO;
 import com.shop.model.BookVO;
@@ -51,12 +52,64 @@ public class AdminController {
 	}
 	
 	//------------------------------------------------------------------------------------------//
-	// 상품 등록 페이지 접속
+	// 상품 관리(상품목록) 페이지 접속
 	//------------------------------------------------------------------------------------------//
 	@RequestMapping(value="goodsManage", method=RequestMethod.GET)
-	public void goodsManageGET() throws Exception {
-		logger.info("상품 등록 페이지 접속");
+	public void goodsManageGET(Criteria cri, Model model) throws Exception {
+		
+		logger.info("상품 관리(상품목록) 페이지 접속");
+		
+		// 상품 리스트 데이터
+		List list = adminService.goodsGetList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+			return;
+		}
+		
+		// 페이지 인터페이스 데이터
+		model.addAttribute("pageMaker", new PageDTO(cri, adminService.goodsGetTotal(cri)));
+		
 	}
+	
+	//------------------------------------------------------------------------------------------//
+	// 상품 조회 페이지 접속
+	//------------------------------------------------------------------------------------------//
+	@GetMapping({"/goodsDetail", "/goodsModify"})
+	public void goodsGetInfoGET(int book_id, Criteria cri, Model model) throws JsonProcessingException {
+		
+		logger.info("goodsGetDetail.............bookId : " + book_id);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		// 카테고리 리스트 데이터
+		model.addAttribute("cateList", mapper.writeValueAsString(adminService.cateList()));
+		
+		// 목록 페이지 조건 정보
+		model.addAttribute("cri", cri);
+		
+		// 조회 페이지 정보
+		model.addAttribute("goodsInfo", adminService.goodsGetDetail(book_id));
+		
+	}
+	
+	//------------------------------------------------------------------------------------------//
+	// 상품 등록 페이지 접속
+	//------------------------------------------------------------------------------------------//
+	@RequestMapping(value="/goodsModify", method=RequestMethod.POST)
+	public String goodsModifyPOST(BookVO vo, RedirectAttributes rttr) {
+		
+		logger.info("goodsModifyPOST............vo : " + vo);
+		
+		int result = adminService.goodsModify(vo);
+		
+		rttr.addFlashAttribute("modify_result", result);
+		
+		return "redirect:/admin/goodsManage";
+	}
+	
 	
 	//------------------------------------------------------------------------------------------//
 	// 상품 등록 페이지 접속

@@ -99,6 +99,8 @@ ul{
     float:				left;
 	min-height: 		700px;
 }
+
+/* 관리자 컨텐츠 제목 영역 */
 .admin_content_subject{
 	font-size:			40px;
 	font-weight:		bolder;
@@ -109,111 +111,94 @@ ul{
 	color:				white;
 }
 
-/* 상품 목록 영역 */
-.goods_table_wrap{
+/* 관리자 페이지 컨텐츠 메인 영역 */
+.form_section{
+	width:				95%;
+	margin-left:		2%;
+	margin-top:			20px;
+	border:				1px solid #DBDDE2;
+	background-color:	#EFEFEF;
+}
+.form_section_title{
 	padding:			20px 35px;
 }
-.goods_table{
-	width:				100%;
-	border:				1px solid #D3D8E1;
-	text-align:			center;
-	border-collapse:	collapse;
+.form_section_title label {
+	display:			block;
+	font-size:			20px;
+	font-weight:		800;
 }
-.goods_table td{
-	padding:			10px 5px;
-	border:				1px solid #E9EBF0;
+.form_section_content{
+	padding:			20px 35px;
+	border-top:			1px solid #DBDDE2;
 }
-.goods_table thead{
-	background-color:	#F8F9FD;
+.form_section_content input{
+	width:				98%;
+	height:				25px;
+	font-size:			20px;
+	padding:			5px 1%;
+	background-color:	white;
+}
+
+/* 캘린더 CSS 설정 */
+.ui-datepicker-trigger{
+	margin-left:		25px;
+	width:				14%;
+	height:				38px;
 	font-weight:		600;
-}
-.goods_table a{
-	color:				#1088ED;
-	font-weight:		500;
-}
-.th_column_1{
-	width:				120px;
-}
-.th_column_3{
-	width:				110px;
-}
-.th_column_4{
-	width:				140px;
-}
-.th_column_5{
-	width:				140px;
-}
-/*
-.th_column_6{
-	
-}
-*/
-
-.table_empty{
-	height:				50px;
-	text-align:			center;
-	margin:				200px 0 215px 0px;
-	font-size:			25px;
-}
-
-/* 검색 영역 */
-.search_wrap{
-	margin-top:			15px;
-}
-.search_input{
-	position:			relative;
-	text-align:			center;
-}
-.search_input input[name='keyword']{
-	padding:			4px 10px;
+	background-color:	#DFE8F5;
 	font-size:			15px;
-	height:				20px;
-	line-height:		20px;
+	cursor:				pointer;
 }
-.search_btn{
-	height:				32px;
-	width:				80px;
+
+/* 작가 선택 CSS 설정 */
+.author_id_btn{
+	margin-left:		25px;
+	width:				14%;
+	height:				38px;
 	font-weight:		600;
-	font-size:			18px;
-	line-height:		20px;
-	position:			absolute;
-	margin-left:		15px;
-	background-color:	#C3DAF7;
+	background-color:	#DFE8E5;
+	font-size:			15px;
+	cursor:				pointer;
 }
 
-/* 페이지 버튼 인터페이스 */
-.pageMaker_wrap{
+/* ck-editor 높이 */
+.ck-content{
+	height:				170px;
+}
+
+/* 버튼 영역 */
+.btn_section{
 	text-align:			center;
-	margin-top:			30px;
-	margin-bottom:		40px;
+	margin:				80px 0;
 }
-.pageMaker{
-	list-style:			none;
-	display:			inline-block;
-}
-.pageMaker_btn{
-	float:				left;
-	width:				40px;
-	height:				40px;
+.btn{
+	min-width:			180px;
+	padding:			4px 30px;
+	font-size:			800;
 	line-height:		40px;
-	margin-left:		20px;
 }
-.active{
-	border:				2px solid black;
-	font-weight:		400;
+.enroll_btn{
+	background-color:	#DBDDE2;
+	margin-left:		15px;
 }
-.next, .prev{
-	border:				1px solid #CCC;
-	padding:			0 10px;
-}
-.pageMaker_btn a:link 		{color: black;}
-.pageMaker_btn a:visited 	{color: black;}
-.pageMaker_btn a:active 	{color: black;}
-.pageMaker_btn a:hover 		{color: black;}
-.next a, .prev a{
-	color:				#CCC;
+#enrollBtn:hover{
+	background-color:	#C9CBD0;
 }
 
+/* 카테고리 CSS 설정 */
+.form_section_content select{
+	width:				92%;
+	height:				35px;
+	font-size:			20px;
+	text-align-last:	center;
+	margin-left:		5px;
+}
+.cate_wrap span{
+	font-weight:		600;
+}
+.cate_wrap:not(:first-child) {
+	margin-top:			20px;
+}
 
 
 

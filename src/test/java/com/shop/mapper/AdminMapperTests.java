@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.shop.model.BookVO;
+import com.shop.model.Criteria;
 
 //----------------------------------------------------------------------------------------------------------//
 // public class AdminMapperTests
@@ -42,7 +43,7 @@ public class AdminMapperTests {
 		
 	}
 */
-	
+/*	
 	// 카테고리 리스트
 	@Test
 	public void cateListTest() throws Exception {
@@ -50,8 +51,64 @@ public class AdminMapperTests {
 		System.out.println("cateList().........." + adminMapper.cateList());
 		
 	}
+*/
+/*
+	// 상품 리스트 및 상품 총 갯수
+	@Test
+	public void goodsGetListTest() {
+		
+		Criteria cri = new Criteria();
+		
+		
+		// 검색 조건
+		cri.setKeyword("테스트");
+		
+		// 검색 리스트
+		List list = adminMapper.goodsGetList(cri);
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("result......... ==> " + i + " : " + list.get(i));
+		}
 	
 	
-	
-	
+		// 상품 총 갯수
+		int result = adminMapper.goodsGetTotal(cri);
+		System.out.println("result....... ==> " + result);
+	}
+*/		
+/*	
+	@Test
+	public void goodsGetDetailTest() {
+		
+		int book_id	= 5;
+		
+		BookVO result = adminMapper.goodsGetDetail(book_id);
+		
+		System.out.println("상품 조회 데이터 : " + result);
+	}
+*/		
+	@Test
+	public void goodsModifyTest() {
+		
+		BookVO book = new BookVO();
+		
+		book.setBook_id(1);
+		book.setBook_name("아 테스형!");
+		book.setAuthor_id(66);
+		book.setPubleYear("2022-02-22");
+		book.setPublisher("나훈출판사");
+		book.setCateCode("103002");
+		book.setBook_price(20000);
+		book.setBook_discount(0.23);
+		book.setBook_intro("세상이 왜이래~~");
+		book.setBook_contents("왜 이렇게 힘들어~♬");
+		
+		adminMapper.goodsModify(book);
+		
+		
+	}
+		
+		
+		
+		
+		
 } // End - public class AdminMapperTests

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.shop.mapper.AdminMapper;
 import com.shop.model.BookVO;
 import com.shop.model.CateVO;
+import com.shop.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -44,6 +45,46 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminMapper.cateList();
 	}
+
+	//--------------------------------------------------------------------------------//
+	// 상품 리스트
+	//--------------------------------------------------------------------------------//
+	@Override
+	public List<BookVO> goodsGetList(Criteria cri) {
+		log.info("goodsGetList...............");
+		return adminMapper.goodsGetList(cri);
+	}
+	
+	//--------------------------------------------------------------------------------//
+	// 상품 총 개수
+	//--------------------------------------------------------------------------------//
+	@Override
+	public int goodsGetTotal(Criteria cri) {
+		log.info("goodsGetTotal.............");
+		return adminMapper.goodsGetTotal(cri);
+	}
+
+	//--------------------------------------------------------------------------------//
+	// 상품 조회 페이지
+	//--------------------------------------------------------------------------------//
+	@Override
+	public BookVO goodsGetDetail(int book_id) {
+		log.info("(service)bookGetDetail....... bookId : " + book_id);
+		return adminMapper.goodsGetDetail(book_id);
+	}
+
+	//--------------------------------------------------------------------------------//
+	// 상품 정보 수정
+	//--------------------------------------------------------------------------------//
+	@Override
+	public int goodsModify(BookVO vo) {
+		log.info("goodsModify.................");
+		return adminMapper.goodsModify(vo);
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -30,7 +30,7 @@
 			        </li>
 			        <li>
 			            <a class="admin_list_02"
-			            href="/admin/goodsManage">상품 목록</a>
+			            href="/admin/goodsManage">상품 관리</a>
 			        </li>
 			        <lI>
 			            <a class="admin_list_03"

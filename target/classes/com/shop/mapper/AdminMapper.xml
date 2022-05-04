@@ -16,6 +16,63 @@
 		SELECT * FROM book_cate ORDER BY cateCode
 	</select>
 	
+	<!-- 상품 리스트 -->
+	<select id="goodsGetList" resultType="com.shop.model.BookVO">
+		<![CDATA[
+		SELECT * FROM 
+		(
+			select /*+INDEX_DESC(book_book SYS_C007598)*/ rownum as rn, book_id, book_name, 
+				   (select author_name from book_author where book_book.author_id = book_author.author_id) author_name, 
+				   (select cate_name from book_cate where book_book.cateCode = book_cate.cateCode) cate_name, book_stock, regDate 
+			from	book_book 
+			where 
+		]]>
+			<if test="keyword != null">
+					book_name like '%' || #{keyword} || '%' and 
+			</if>
+		<![CDATA[
+					rownum <= #{pageNum} * #{amount} 
+		) 
+		WHERE rn > (#{pageNum} - 1) * #{amount} 
+		]]>
+	</select>
+	
+	<!-- 상품 총 개수 -->
+	<select id="goodsGetTotal" resultType="int">
+		SELECT 	count(*) 
+		FROM 	book_book 
+		<if test="keyword != null">
+		WHERE 	book_name like '%' || #{keyword} || '%' 
+		</if>
+	</select>
+	
+	<!-- 상품 조회 페이지 -->
+	<select id="goodsGetDetail" resultType="com.shop.model.BookVO">
+		SELECT  book_id, book_name, (select author_name from book_author where author_id=book_book.author_id) author_name, author_id, 
+				publeYear, publisher, cateCode, book_price, book_stock, book_discount, book_intro, book_contents, regDate, updateDate 
+		FROM	book_book 
+		WHERE	book_id=#{book_id} 
+	</select>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="goodsModify">
+		UPDATE  book_book 
+		SET 	book_name=#{book_name}, author_id=#{author_id}, publeYear=#{publeYear}, publisher=#{publisher}, cateCode=#{cateCode}, book_price=#{book_price}, 
+				book_stock=#{book_stock}, book_discount=#{book_discount}, book_intro=#{book_intro}, book_contents=#{book_contents}, updateDate=sysdate 
+		WHERE	book_id=#{book_id} 
+	</update>
+	
+	
 	
 	
 </mapper>
+
+
+
+
+
+
+
+
+
+
