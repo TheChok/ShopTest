@@ -37,6 +37,9 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	// 관리자 페이지 이동 및 관리
+	// 작가 등록 및 관리
+	// 상품 등록 및 관리
 	
 	
 	// 관리자 페이지 이동 및 관리
@@ -228,6 +231,35 @@ public class AdminController {
 		
 		return "redirect:/admin/authorManage";
 	}
+	
+	//------------------------------------------------------------------------------------------//	
+	// 작가 정보 삭제
+	//------------------------------------------------------------------------------------------//
+	@PostMapping("authorDelete")
+	public String authorDelte(int author_id, RedirectAttributes rttr) throws Exception {
+		
+		logger.info("authorDeletePOST........... author : " + author_id);
+		
+		int result = 0;
+		
+		try {
+			
+			result = authorService.authorDelete(author_id);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			
+			result = 2;
+			rttr.addFlashAttribute("delete_result", result);
+			
+			return "redirect:/admin/authorManage";
+		}
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/authorManage";
+	}
+	
 	
 	
 	// 관리자 페이지 - 상품 등록 및 관리

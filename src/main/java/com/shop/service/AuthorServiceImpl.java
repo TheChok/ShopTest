@@ -72,6 +72,15 @@ public class AuthorServiceImpl implements AuthorService {
 		logger.info("authorModify 실행...... author 정보 : " + author);
 		return authorMapper.authorModify(author);
 	}
+
+	//--------------------------------------------------------------------------------------------------//
+	// 작가 정보 삭제
+	//--------------------------------------------------------------------------------------------------//
+	@Override
+	public int authorDelete(int author_id) throws Exception {
+		logger.info("authorDelete 실행..... author_id : " + author_id);
+		return authorMapper.authorDelete(author_id);
+	}
 	
 	
 	

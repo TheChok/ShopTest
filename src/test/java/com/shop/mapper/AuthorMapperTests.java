@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.shop.model.AuthorVO;
-
 //------------------------------------------------------------------------------//
 // public class AuthorMapperTests
 //------------------------------------------------------------------------------//
@@ -75,5 +73,25 @@ public class AuthorMapperTests {
 		
 	}
 */	
+	// 작가 삭제
+	@Test
+	public void authorDeleteTest() {
+		
+		int author_id = 67;
+		
+		int result = mapper.authorDelete(author_id);
+		
+		if(result == 1) {
+			System.out.println("작가 삭제 완료");
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 } // End - public class AuthorMapperTests
