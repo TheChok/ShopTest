@@ -29,6 +29,12 @@ public interface AdminService {
 	// 상품 수정
 	public int goodsModify(BookVO vo);
 	
+	// 상품 정보 삭제
+	public int goodsDelete(int book_id);
+	
+	
+	
+	
 	
 	
 	

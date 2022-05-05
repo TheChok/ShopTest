@@ -131,6 +131,21 @@ public class AdminController {
 	}
 	
 	//------------------------------------------------------------------------------------------//
+	// 상품 정보 삭제
+	//------------------------------------------------------------------------------------------//
+	@PostMapping("/goodsDelete")
+	public String goodsDeletePOST(int book_id, RedirectAttributes rttr) {
+		logger.info("goodsDeletePOST.............");
+		
+		int result = adminService.goodsDelete(book_id);
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/goodsManage";
+	}
+	
+	
+	//------------------------------------------------------------------------------------------//
 	// 작가 등록 페이지 접속
 	//------------------------------------------------------------------------------------------//
 	@RequestMapping(value="authorEnroll", method=RequestMethod.GET)

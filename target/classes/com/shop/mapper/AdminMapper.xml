@@ -62,7 +62,11 @@
 		WHERE	book_id=#{book_id} 
 	</update>
 	
-	
+	<!-- 상품 정보 삭제 -->
+	<delete id="goodsDelete">
+		DELETE FROM book_book 
+		WHERE book_id=#{book_id} 
+	</delete>
 	
 	
 </mapper>

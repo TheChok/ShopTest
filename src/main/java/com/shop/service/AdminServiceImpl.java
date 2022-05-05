@@ -72,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
 		log.info("(service)bookGetDetail....... bookId : " + book_id);
 		return adminMapper.goodsGetDetail(book_id);
 	}
-
+	
 	//--------------------------------------------------------------------------------//
 	// 상품 정보 수정
 	//--------------------------------------------------------------------------------//
@@ -80,6 +80,15 @@ public class AdminServiceImpl implements AdminService {
 	public int goodsModify(BookVO vo) {
 		log.info("goodsModify.................");
 		return adminMapper.goodsModify(vo);
+	}
+
+	//--------------------------------------------------------------------------------//
+	// 상품 정보 삭제
+	//--------------------------------------------------------------------------------//
+	@Override
+	public int goodsDelete(int book_id) {
+		log.info("goodsDelete.................");
+		return adminMapper.goodsDelete(book_id);
 	}
 	
 	

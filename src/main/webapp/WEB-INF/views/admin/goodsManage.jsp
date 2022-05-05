@@ -140,6 +140,13 @@ $(document).ready(function(){
 		alert("수정 완료");
 	}
 	
+	// 삭제 성공 이벤트
+	let delete_result = '${delete_result}';
+	
+	if(delete_result == 1) {
+		alert("삭제 완료");
+	}
+	
 });
 
 

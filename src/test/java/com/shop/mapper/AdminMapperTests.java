@@ -18,6 +18,9 @@ public class AdminMapperTests {
 	
 	@Autowired
 	private AdminMapper adminMapper;
+	
+	@Autowired
+	BookVO book;
 
 /*	
 	// 상품 등록
@@ -76,6 +79,7 @@ public class AdminMapperTests {
 	}
 */		
 /*	
+	// 상품 상세 정보
 	@Test
 	public void goodsGetDetailTest() {
 		
@@ -85,7 +89,9 @@ public class AdminMapperTests {
 		
 		System.out.println("상품 조회 데이터 : " + result);
 	}
-*/		
+*/	
+/*
+	// 상품 정보 수정
 	@Test
 	public void goodsModifyTest() {
 		
@@ -106,7 +112,20 @@ public class AdminMapperTests {
 		
 		
 	}
+*/
+	// 상품 정보 삭제
+	@Test
+	public void goodsDeleteTest() {
 		
+		int bookId = 7;
+		
+		int result 	= adminMapper.goodsDelete(bookId); 
+		
+		if(result == 1) {
+			System.out.println("삭제 성공");
+		}
+		
+	}
 		
 		
 		

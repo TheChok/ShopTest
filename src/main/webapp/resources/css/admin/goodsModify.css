@@ -216,7 +216,13 @@ input[name='publeYear']{
 #enrollBtn:hover {
     background-color: 	#c9cbd0;
 }
+.delete_btn{
+	background-color:	#EFCDCD;
+}
 
+.delete_btn:hover{
+	background-color:	#E4A7A7;
+}
 
 
 
