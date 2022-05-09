@@ -1,6 +1,7 @@
 package com.shop.model;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,9 @@ public class BookVO {
     private Date	regDate;		// 등록 날짜
     private Date 	updateDate;		// 수정 날짜
 	
+    private AttachImageVO		imageVO;	// 이미지 경로, uuid, 파일 이름
+    private List<AttachImageVO> imageList;
+    
 	
 	
 	
