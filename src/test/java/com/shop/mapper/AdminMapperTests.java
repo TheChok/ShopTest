@@ -22,7 +22,7 @@ public class AdminMapperTests {
 	@Autowired
 	BookVO book;
 
-/*	
+
 	// 상품 등록
 	@Test
 	public void bookEnrllTest() throws Exception {
@@ -45,7 +45,7 @@ public class AdminMapperTests {
 		adminMapper.bookEnroll(book);
 		
 	}
-*/
+
 /*	
 	// 카테고리 리스트
 	@Test
@@ -113,6 +113,7 @@ public class AdminMapperTests {
 		
 	}
 */
+/*	
 	// 상품 정보 삭제
 	@Test
 	public void goodsDeleteTest() {
@@ -126,7 +127,7 @@ public class AdminMapperTests {
 		}
 		
 	}
-		
+*/		
 		
 		
 		
