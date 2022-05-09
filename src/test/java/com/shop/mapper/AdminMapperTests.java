@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
-import com.shop.model.Criteria;
 
 //----------------------------------------------------------------------------------------------------------//
 // public class AdminMapperTests
@@ -18,11 +18,8 @@ public class AdminMapperTests {
 	
 	@Autowired
 	private AdminMapper adminMapper;
-	
-	@Autowired
-	BookVO book;
 
-
+/*
 	// 상품 등록
 	@Test
 	public void bookEnrllTest() throws Exception {
@@ -30,7 +27,7 @@ public class AdminMapperTests {
 		BookVO book = new BookVO();
 		
 		book.setBook_name("테스트");
-		book.setAuthor_id(123);
+		book.setAuthor_id(5);
 		book.setPubleYear("2021-03-18");
 		book.setPublisher("출판사");
 		book.setCateCode("0231");
@@ -40,12 +37,14 @@ public class AdminMapperTests {
 		book.setBook_intro("책 소개");
 		book.setBook_contents("책 목차");
 		
-		System.out.println("등록 요청할 book 정보 : " + book);
+	
 		
 		adminMapper.bookEnroll(book);
 		
-	}
 
+		
+	}
+*/
 /*	
 	// 카테고리 리스트
 	@Test
@@ -128,7 +127,23 @@ public class AdminMapperTests {
 		
 	}
 */		
+/*	
+	// 이미지 등록
+	@Test
+	public void imageEnrollTest() {
 		
+		AttachImageVO vo = new AttachImageVO();
 		
+		vo.setBook_id(1);
+		vo.setFileName("test1");
+		vo.setUploadPath("test1");
+		vo.setUuid("test4");
 		
+		adminMapper.imageEnroll(vo);
+		
+	}
+*/		
+		
+	
+	
 } // End - public class AdminMapperTests

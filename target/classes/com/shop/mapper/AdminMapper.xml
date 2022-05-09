@@ -7,14 +7,21 @@
 
 	<!-- 작가 등록 -->
 	<insert id="bookEnroll">
+	
+		<selectKey resultType="int" keyProperty="book_id" order="AFTER">
+  			SELECT MAX(book_id) FROM book_book
+  		</selectKey>
+	
 		INSERT INTO book_book(book_id, book_name, author_id, publeYear, publisher, cateCode, book_price, book_stock, book_discount, book_intro, book_contents) 
-		values(book_seq.nextval, #{book_name},#{author_id}, #{publeYear},#{publisher},#{cateCode},#{book_price},#{book_stock},#{book_discount},#{book_intro},#{book_contents})
+		VALUES(book_seq.nextval, #{book_name},#{author_id}, #{publeYear},#{publisher},#{cateCode},#{book_price},#{book_stock},#{book_discount},#{book_intro},#{book_contents})
 	</insert>
+	
 	
 	<!-- 카테고리 리스트 -->
 	<select id="cateList" resultType="com.shop.model.CateVO">
 		SELECT * FROM book_cate ORDER BY cateCode
 	</select>
+	
 	
 	<!-- 상품 리스트 -->
 	<select id="goodsGetList" resultType="com.shop.model.BookVO">
@@ -37,6 +44,7 @@
 		]]>
 	</select>
 	
+	
 	<!-- 상품 총 개수 -->
 	<select id="goodsGetTotal" resultType="int">
 		SELECT 	count(*) 
@@ -46,6 +54,7 @@
 		</if>
 	</select>
 	
+	
 	<!-- 상품 조회 페이지 -->
 	<select id="goodsGetDetail" resultType="com.shop.model.BookVO">
 		SELECT  book_id, book_name, (select author_name from book_author where author_id=book_book.author_id) author_name, author_id, 
@@ -53,6 +62,7 @@
 		FROM	book_book 
 		WHERE	book_id=#{book_id} 
 	</select>
+	
 	
 	<!-- 상품 정보 수정 -->
 	<update id="goodsModify">
@@ -62,12 +72,25 @@
 		WHERE	book_id=#{book_id} 
 	</update>
 	
+	
 	<!-- 상품 정보 삭제 -->
 	<delete id="goodsDelete">
 		DELETE 
 		FROM 	book_book 
 		WHERE 	book_id=#{book_id} 
 	</delete>
+	
+	
+	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+		INSERT
+		INTO 	book_image(book_id, fileName, uploadPath, uuid) 
+		VALUES	(#{book_id}, #{fileName}, #{uploadPath}, #{uuid})
+	</insert>
+	
+	
+	
+	
 	
 	
 </mapper>

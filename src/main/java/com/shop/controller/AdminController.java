@@ -54,7 +54,7 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
-	
+
 	// 관리자 페이지 이동 및 관리
 	// 작가 등록 및 관리
 	// 상품 등록 및 관리
