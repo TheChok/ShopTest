@@ -19,7 +19,7 @@ public class AdminMapperTests {
 	@Autowired
 	private AdminMapper adminMapper;
 
-/*
+
 	// 상품 등록
 	@Test
 	public void bookEnrllTest() throws Exception {
@@ -27,24 +27,24 @@ public class AdminMapperTests {
 		BookVO book = new BookVO();
 		
 		book.setBook_name("테스트");
-		book.setAuthor_id(5);
-		book.setPubleYear("2021-03-18");
+		book.setAuthor_id(66);
+		book.setPubleYear("2022-05-04");
 		book.setPublisher("출판사");
-		book.setCateCode("0231");
+		book.setCateCode("202001");
 		book.setBook_price(25000);
 		book.setBook_stock(250);
 		book.setBook_discount(0.23);
 		book.setBook_intro("책 소개");
 		book.setBook_contents("책 목차");
 		
-	
+		System.out.println("Before BookVO : " + book);
 		
 		adminMapper.bookEnroll(book);
 		
-
-		
+		System.out.println("After BookVO : " + book);
+	
 	}
-*/
+
 /*	
 	// 카테고리 리스트
 	@Test
@@ -127,7 +127,7 @@ public class AdminMapperTests {
 		
 	}
 */		
-/*	
+	
 	// 이미지 등록
 	@Test
 	public void imageEnrollTest() {
@@ -137,12 +137,12 @@ public class AdminMapperTests {
 		vo.setBook_id(1);
 		vo.setFileName("test1");
 		vo.setUploadPath("test1");
-		vo.setUuid("test4");
+		vo.setUuid("test3");
 		
 		adminMapper.imageEnroll(vo);
 		
 	}
-*/		
+		
 		
 	
 	
