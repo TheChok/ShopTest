@@ -338,7 +338,7 @@
 				
 				let str = "";
 				str += "<div id='result_card'>";
-				str += "<img src='/resources/img/goodsNoImage.png'>";
+				str += "<img src='../resources/img/goodsNoImage.png'>";
 				str += "</div>";
 				
 				uploadReslut.html(str);	

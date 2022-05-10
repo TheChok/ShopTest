@@ -1,9 +1,12 @@
+com\shop\service\AttachServiceImpl.class
 com\shop\interceptor\LoginInterceptor.class
+com\shop\mapper\AttachMapper.class
 com\shop\model\BookVO.class
 com\shop\service\AuthorService.class
 com\shop\service\MemberServiceImpl.class
 com\shop\model\Criteria.class
 com\shop\controller\AdminController.class
+com\shop\service\AttachService.class
 com\shop\model\MemberVO.class
 com\shop\service\MemberService.class
 com\shop\interceptor\AdminInterceptor.class
@@ -16,6 +19,7 @@ com\shop\service\AuthorServiceImpl.class
 com\shop\controller\HomeController.class
 com\shop\controller\BookController.class
 com\shop\mapper\MemberMapper.class
+com\shop\model\AttachImageVO.class
 com\shop\model\CateVO.class
 com\shop\controller\MemberController.class
 com\shop\mapper\AuthorMapper.class

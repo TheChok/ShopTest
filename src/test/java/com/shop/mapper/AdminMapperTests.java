@@ -19,7 +19,7 @@ public class AdminMapperTests {
 	@Autowired
 	private AdminMapper adminMapper;
 
-
+/*
 	// 상품 등록
 	@Test
 	public void bookEnrllTest() throws Exception {
@@ -44,7 +44,7 @@ public class AdminMapperTests {
 		System.out.println("After BookVO : " + book);
 	
 	}
-
+*/
 /*	
 	// 카테고리 리스트
 	@Test
@@ -127,7 +127,7 @@ public class AdminMapperTests {
 		
 	}
 */		
-	
+/*	
 	// 이미지 등록
 	@Test
 	public void imageEnrollTest() {
@@ -142,8 +142,18 @@ public class AdminMapperTests {
 		adminMapper.imageEnroll(vo);
 		
 	}
+*/		
+	
+	// 지정 상품 이미지만 삭제
+	@Test
+	public void deleteImageAllTest() {
 		
+		int book_id = 35;
 		
+		adminMapper.deleteImageAll(book_id);
+		
+	}
+	
 	
 	
 } // End - public class AdminMapperTests

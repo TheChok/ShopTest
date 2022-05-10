@@ -333,7 +333,7 @@
 		
 	});
 	
-/* 위지웍 적용 */
+	/* 위지웍 적용 */
 	/* 책 소개 */
 	ClassicEditor
 		.create(document.querySelector('#book_intro_textarea'))
@@ -348,8 +348,7 @@
 		console.error(error);
 	});
 
-/* 캘린더 위젯 적용 */
-	
+	/* 캘린더 위젯 적용 */
 	/* 캘린더 */
 	$(function() {
   		$( "input[name='publeYear']" ).datepicker({
@@ -370,8 +369,7 @@
   		});
 	});
 	
-/* 작가 선택 버튼 */	
-	
+	/* 작가 선택 버튼 */	
 	/* 작가 선택 */
 	$('.author_id_btn').on("click", function(e) {
 		
@@ -504,19 +502,14 @@
 		}
 	});
 	
-/* 이미지 업로드 */	
-	
+	/* 이미지 업로드 */	
 	/* 업로드 */
 	$("input[type='file']").on("change", function(e){
-		if($(".imgDeleteBtn").length > 0){
-			deleteFile();
-		}
 		
 		/* 이미지 존재시 삭제 */
-		if($(".imgDeleteBtn").length > 0){
+		if($("#result_card").length > 0){
 			deleteFile();
 		}
-		
 		
 		let formData	= new FormData();
 		let fileInput	= $('input[name="uploadFile"]');

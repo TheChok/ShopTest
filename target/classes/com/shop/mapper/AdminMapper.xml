@@ -89,6 +89,12 @@
 	</insert>
 	
 	
+	<!-- 지정 상품 이미지 전체 삭제(이미지만 삭제) -->
+	<delete id="deleteImageAll">
+		DELETE 
+		FROM 	book_image 
+		WHERE 	book_id = #{book_id}
+	</delete>
 	
 	
 	
