@@ -51,11 +51,11 @@ public class AdminServiceTests {
 		
 		image1.setFileName("test Image 1");
 		image1.setUploadPath("test image 1");
-		image1.setUuid("test11112");
+		image1.setUuid("test11111");
 		
 		image2.setFileName("test Image 2");
 		image2.setUploadPath("test image 2");
-		image2.setUuid("test22222");
+		image2.setUuid("test22221");
 		
 		imageList.add(image1);
 		imageList.add(image2);

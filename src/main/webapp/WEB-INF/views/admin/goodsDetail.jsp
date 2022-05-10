@@ -16,6 +16,17 @@
 	</script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
 	
+	<style type="text/css">
+		#result_card img{
+			max-width:	100%;
+			height:		auto;
+			display:	block;
+			padding:	5px;
+			margin-top:	10px;
+			margin:		auto;
+		}
+	</style>
+	
 </head>
 <body>
 	
@@ -140,6 +151,19 @@
 	    				<textarea name="book_contents" id="book_contents_textarea">${goodsInfo.book_contents }</textarea>
 	    			</div>
 	    		</div>
+	    		
+	    		<div class="form_section">
+	    			<div class="form_section_title">
+	    				<label>상품 이미지</label>
+	    			</div>
+	    			<div class="form_section_content">
+	    				
+	    				<div id="uploadReslut">
+	    					
+	    				</div>
+	    			</div>
+	    		</div>
+	    		
 	    		<div class="btn_section">
 	    			<button id="cancelBtn" class="btn">상품 목록</button>
 	    			<button id="modifyBtn" class="btn enroll_btn">수정</button>
@@ -304,8 +328,40 @@
 			$("#moveForm").submit();
 		});
 		
+		/* 이미지 정보 호출 */
+		let book_id = '<c:out value="${goodsInfo.book_id}"/>';
+		let uploadReslut = $("#uploadReslut");			
 		
-	});	// End - $(document).ready
+		$.getJSON("/getAttachList", {book_id : book_id}, function(arr){	
+			
+			if(arr.length == 0) {
+				
+				let str = "";
+				str += "<div id='result_card'>";
+				str += "<img src='/resources/img/goodsNoImage.png'>";
+				str += "</div>";
+				
+				uploadReslut.html(str);	
+				
+				return;
+			}
+			
+			let str = "";
+			let obj = arr[0];	
+			
+			let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+			str += "<div id='result_card'";
+			str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+			str += ">";
+			str += "<img src='/display?fileName=" + fileCallPath +"'>";
+			str += "</div>";		
+			
+			uploadReslut.html(str);						
+			
+		});	
+		
+		
+	});	// End - $(document).ready(function())
 	
 	
 	
