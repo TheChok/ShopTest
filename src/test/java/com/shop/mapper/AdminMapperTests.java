@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.shop.model.AttachImageVO;
-import com.shop.model.BookVO;
-
 //----------------------------------------------------------------------------------------------------------//
 // public class AdminMapperTests
 //----------------------------------------------------------------------------------------------------------//
@@ -143,8 +140,8 @@ public class AdminMapperTests {
 		
 	}
 */		
-	
-	// 지정 상품 이미지만 삭제
+/*	
+	// 지정 상품의 이미지만 삭제
 	@Test
 	public void deleteImageAllTest() {
 		
@@ -153,6 +150,17 @@ public class AdminMapperTests {
 		adminMapper.deleteImageAll(book_id);
 		
 	}
+*/
+	
+	// 어제 날짜의 이미지 리스트
+	@Test
+	public void checkImageListTest() {
+		
+		adminMapper.checkFileList();
+		
+	}
+	
+	
 	
 	
 	
