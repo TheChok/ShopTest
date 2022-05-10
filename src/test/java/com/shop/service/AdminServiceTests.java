@@ -56,6 +56,7 @@ public class AdminServiceTests {
 		imageList.add(image1);
 		imageList.add(image2);
 		
+		System.out.println("메서드 실행 전 값, image1 : " + image1 + ", image2 : " + image2 + ", book : " + book);
 		
 		// bookEnroll() 메서드 호출
 		service.bookEnroll(book);

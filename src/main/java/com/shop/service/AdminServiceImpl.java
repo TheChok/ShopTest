@@ -32,14 +32,20 @@ public class AdminServiceImpl implements AdminService {
 		log.info("(service)bookEnroll....");
 		
 		adminMapper.bookEnroll(book);
-		
+
 		if(book.getImageList() == null || book.getImageList().size() <= 0) {
 			return;
 		}
 		
 		book.getImageList().forEach(attach ->{
+			
+			System.out.println("서비스에서 실행되는 book.getBook_id : " + book.getBook_id());
+			
 			attach.setBook_id(book.getBook_id());
 			adminMapper.imageEnroll(attach);
+			
+			System.out.println("서비스에서 실행되는 attch.Getbook_id : " + attach.getBook_id());
+			
 		});
 		
 	}
