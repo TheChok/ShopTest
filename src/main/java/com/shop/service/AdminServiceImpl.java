@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.mapper.AdminMapper;
+import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
 import com.shop.model.CateVO;
 import com.shop.model.Criteria;
@@ -111,14 +112,27 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
-
+	
 	//--------------------------------------------------------------------------------//
 	// 상품 정보 삭제
 	//--------------------------------------------------------------------------------//
 	@Override
+	@Transactional
 	public int goodsDelete(int book_id) {
 		log.info("goodsDelete.................");
+		
+		adminMapper.deleteImageAll(book_id);
+		
 		return adminMapper.goodsDelete(book_id);
+	}
+	
+	//--------------------------------------------------------------------------------//
+	// 지정 상품 이미지 정보 얻기
+	//--------------------------------------------------------------------------------//
+	@Override
+	public List<AttachImageVO> getAttachInfo(int book_id) {
+		log.info("getAttachInfo.............");
+		return adminMapper.getAttachInfo(book_id);
 	}
 	
 	

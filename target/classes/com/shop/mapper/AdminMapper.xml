@@ -7,11 +7,9 @@
 
 	<!-- 작가 등록 -->
 	<insert id="bookEnroll">
-	
 		<selectKey resultType="int" keyProperty="book_id" order="AFTER">
   			SELECT MAX(book_id) FROM book_book
   		</selectKey>
-	
 		INSERT INTO book_book(book_id, book_name, author_id, publeYear, publisher, cateCode, book_price, book_stock, book_discount, book_intro, book_contents) 
 		VALUES(book_seq.nextval, #{book_name},#{author_id}, #{publeYear},#{publisher},#{cateCode},#{book_price},#{book_stock},#{book_discount},#{book_intro},#{book_contents})
 	</insert>
@@ -103,6 +101,20 @@
 		FROM 	book_image 
 		WHERE 	uploadPath = to_char(sysdate -1, 'yyyy\mm\dd')
 	</select>
+	
+	
+	<!-- 지정 상품 이미지 정보 얻기 -->
+	<select id="getAttachInfo" resultType="com.shop.model.AttachImageVO">
+	
+		SELECT 	* 
+		FROM 	book_image 
+		WHERE 	book_id = #{book_id}
+	
+	</select>
+	
+	
+	
+	
 	
 	
 </mapper>

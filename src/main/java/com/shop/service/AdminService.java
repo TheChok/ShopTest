@@ -2,6 +2,7 @@ package com.shop.service;
 
 import java.util.List;
 
+import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
 import com.shop.model.CateVO;
 import com.shop.model.Criteria;
@@ -31,6 +32,9 @@ public interface AdminService {
 	
 	// 상품 정보 삭제
 	public int goodsDelete(int book_id);
+	
+	// 지정 상품 이미지 정보 얻기
+	public List<AttachImageVO> getAttachInfo(int book_id);
 	
 	
 	
