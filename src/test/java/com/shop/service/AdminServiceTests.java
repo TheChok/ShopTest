@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.shop.mapper.AdminMapper;
 import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
 
@@ -22,14 +23,17 @@ public class AdminServiceTests {
 	@Autowired
 	private AdminService service;
 	
-	// 상품 등록 & 상품 이미지 등록 테스트
+	@Autowired
+	private AdminMapper adminMapper;
+	
+	/* 상품 등록 & 상품 이미지 등록 테스트 */
 	@Test
-	public void bookEnrollTests() {
-		
+	public void bookEnrollTEsts() {
+
 		BookVO book = new BookVO();
 		// 상품 정보
 		book.setBook_name("service 테스트");
-		book.setAuthor_id(66);
+		book.setAuthor_id(27);
 		book.setPubleYear("2021-03-18");
 		book.setPublisher("출판사");
 		book.setCateCode("202001");
@@ -47,25 +51,26 @@ public class AdminServiceTests {
 		
 		image1.setFileName("test Image 1");
 		image1.setUploadPath("test image 1");
-		image1.setUuid("test1111");
+		image1.setUuid("test11112");
 		
 		image2.setFileName("test Image 2");
 		image2.setUploadPath("test image 2");
-		image2.setUuid("test2222");
+		image2.setUuid("test22222");
 		
 		imageList.add(image1);
 		imageList.add(image2);
 		
-		System.out.println("메서드 실행 전 값, image1 : " + image1 + ", image2 : " + image2 + ", book : " + book);
+		
+		book.setImageList(imageList);
 		
 		// bookEnroll() 메서드 호출
 		service.bookEnroll(book);
 		
 		System.out.println("등록된 VO : " + book);
 		
+		System.out.println("imageList 정보 : " + imageList.size() + ", 상세 정보 : " + imageList);
 		
 	}
-	
 	
 	
 	
