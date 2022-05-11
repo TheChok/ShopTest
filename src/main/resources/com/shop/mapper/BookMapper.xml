@@ -4,6 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.shop.mapper.BookMapper">
 	
+	<!-- Criteria(검색조건) -->
+	<sql id="criteria">
+	
+		<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+	  		<foreach item="type" collection="typeArr">
+	  			<trim prefix="AND">
+	  				<choose>
+	  					<when test="type == 'A'.toString()">
+	  						<trim prefixOverrides="or">
+			  					<foreach collection="authorArr" item="author_id">
+			  						<trim prefix="or">
+			  							author_id = #{author_id}
+			  						</trim>
+			  					</foreach>  						
+	  						</trim>
+	  					</when>
+	  					<when test="type == 'C'.toString()">
+	  						cateCode like '%' || #{cateCode} || '%'
+	  					</when>  					
+	  					<when test="type == 'T'.toString()">
+	  						book_name like '%' || #{keyword} || '%'
+	  					</when>  					
+	  				</choose>
+	  			</trim>
+	  		</foreach>
+	  	</trim>
+		
+	</sql>
+	
+	
 	<!-- 상품 리스트 -->
 	<select id="getGoodsList" resultType="com.shop.model.BookVO">
 		<![CDATA[
@@ -11,13 +41,11 @@
 		(
 			select /*+INDEX_DESC(book_book SYS_C007598)*/ rownum as rn, book_id, book_name, 
 				   (select author_name from book_author where book_book.author_id = book_author.author_id) author_name, author_id, 
-				   (select cate_name from book_cate where book_book.cateCode = book_cate.cateCode) cate_name, cateCode, publisher, publeYear, book_price  
+				   (select cate_name from book_cate where book_book.cateCode = book_cate.cateCode) cate_name, cateCode, publisher, publeYear, book_price, book_discount 
 			from	book_book 
 			where 
 		]]>
-			<if test="keyword != null">
-					book_name like '%' || #{keyword} || '%' and 
-			</if>
+			<include refid="criteria"></include>
 		<![CDATA[
 					rownum <= #{pageNum} * #{amount} 
 		) 
@@ -25,17 +53,29 @@
 		]]>
 	</select>
 	
+	
 	<!-- 상품 총 개수 -->
 	<select id="goodsGetTotal" resultType="int">
-	
 		select 	count(*) from book_book
 		where
-		<if test="keyword != null">
-				book_name like '%' || #{keyword} || '%' and 
-		</if>
-				book_id >0
-		
+		<include refid="criteria"></include>
+				book_id > 0
 	</select>
+	
+	
+	<!-- 작가 id 리스트 요청 -->
+	<select id="getAuthorIdList" resultType="String">
+		SELECT 	author_id 
+		FROM 	book_author 
+		WHERE 	author_name LIKE '%' || #{keyword} || '%'	
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

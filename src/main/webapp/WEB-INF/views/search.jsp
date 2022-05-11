@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome BookMall</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/main.css?after"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/search.css?after"/>
 	<script
 	  src="https://code.jquery.com/jquery-3.4.1.js"
 	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -65,7 +65,7 @@
 								<option value="T">책 제목</option>
 								<option value="A">작가</option>
 							</select>
-							<input type="text" name="keyword"/>
+							<input type="text" name="keyword" value="<c:out value='${pageMaker.cri.keyword }'/>"/>
 							<button class="btn search_btn">검 색</button>
 						</div>
 					</form>
@@ -94,17 +94,106 @@
 			<div class="clearfix"></div>
 		</div> <!-- End - class="top_area" -->
 		
-		
-		<!-- class="navi_bar_area" -->
-		<div class="navi_bar_area">
-			<h1>navi area</h1>
-		</div>
-		
 		<!-- class="content_area" -->
 		<div class="content_area">
-			<h1>content area</h1>
+			<!-- 게시물 o -->
+			<c:if test="${listcheck != 'empty'}">
+				<div class="list_search_result">
+					<table class="type_list">
+						<colgroup>
+							<col width="110">
+							<col width="*">
+							<col width="120">
+							<col width="120">
+							<col width="120">
+						</colgroup>
+						<tbody id="searchList">
+							<c:forEach items="${list }" var="list">
+								<tr>
+									<td class="image">
+										<div class="image_wrap" data-bookid="${list.imageList[0].book_id}" data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}" data-filename="${list.imageList[0].fileName}">
+											<img>
+										</div>
+									</td>
+									<td class="detail">
+										<div class="category">
+											[${list.cate_name }]
+										</div>
+										<div class="title">
+											${list.book_name }
+										</div>
+										<div class="author">
+											<fmt:parseDate var="publeYear" value="${list.publeYear }" pattern="yyyy-MM-dd"/>
+											${list.author_name } 지음 | ${list.publisher } | <fmt:formatDate value="${publeYear}" pattern="yyyy-MM-dd"/>
+										</div>
+									</td>
+									<td class="info">
+										<div class="rating">
+											평점(추후 추가)
+										</div>
+									</td>
+									<td class="price">
+										<div class="org_price">
+											<del>
+												<fmt:formatNumber value="${list.book_price }" pattern="#,### 원"/>
+											</del>
+										</div>
+										<div class="sell_price">
+											<strong>
+												<fmt:formatNumber value="${list.book_price * (1 - list.book_discount) }" pattern="#,### 원"/>
+											</strong>
+										</div>
+									</td>
+									<td class="option"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				
+				<!-- 페이지 이동 인터페이스 -->
+				<div class="pageMaker_wrap">
+					<ul class="pageMaker">
+							
+						<!-- 이전 버튼 -->
+						<c:if test="${pageMaker.prev }">
+							<li class="pageMaker_btn prev">
+								<a href="${pageMaker.pageStart }">이전</a>
+							</li>
+						</c:if>
+						
+						<!-- 페이지 번호 -->	
+						<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
+							<li class="pageMaker_btn ${pageMaker.cri.pageNum == num? 'active' : '' }" >
+								<a href="${num }">${num }</a>
+							</li>
+						</c:forEach>
+						
+						<!-- 다음 버튼 -->
+						<c:if test="${pageMaker.next }">
+							<li class="pageMaker_btn next">
+								<a href="${pageMaker.pageEnd + 1 }">다음</a>
+							</li>
+						</c:if>
+					</ul>
+				</div>
+				
+				<form id="moveForm" action="/search" method="get">
+					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"/>
+					<input type="hidden" name="amount" 	value="${pageMaker.cri.amount }"/>
+					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"/>
+					<input type="hidden" name="type" 	value="${pageMaker.cri.type }"/>
+				</form>
+				
+			</c:if>
+			
+			<!-- 게시물 x -->
+			<c:if test="${listcheck == 'empty'}">
+				<div class="table_empty">
+					검색결과가 없습니다.
+				</div>
+			</c:if>
 		</div>
-		
 		
 		<!-- Footer 영역 -->
         <div class="footer_nav">
@@ -163,6 +252,54 @@ $("#gnb_logout_button").click(function(){
         } 
     }); // ajax 
 });
+    
+/* 페이지 이동 버튼 */
+const moveForm = $('#moveForm');
+
+$(".pageMaker_btn a").on("click", function(e){
+	
+	e.preventDefault();
+	
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	moveForm.submit();
+	
+});
+
+$(document).ready(function(){
+	
+	// 검색 타입 selected
+	const selectedType = '<c:out value="${pageMaker.cri.type}"/>';
+	
+	if(selectedType != ""){
+		$("select[name='type']").val(selectedType).attr("selected", "selected");	
+	}
+	
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+			
+		if(bobj.data("bookid")) {
+			const uploadPath = bobj.data("path");
+			const uuid = bobj.data("uuid");
+			const fileName = bobj.data("filename");
+			
+			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			
+			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+			
+		} else {
+			$(this).find("img").attr('src', '/resources/img/goodsNoImage.png');
+		}
+			
+		
+			
+		
+		
+	});
+	
+}); // End - $(document).ready(function()
     
 </script>
 

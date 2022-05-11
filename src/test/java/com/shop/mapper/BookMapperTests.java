@@ -21,6 +21,7 @@ public class BookMapperTests {
 	@Autowired
 	private BookMapper mapper;
 	
+	
 	@Test
 	public void getGoodsListTest() {
 		
@@ -38,7 +39,42 @@ public class BookMapperTests {
 		
 	}
 	
-	
+/*	
+	// 작가 id 리스트 요청
+	@Test
+	public void getAuthorIdListTest() {
+		
+		String keyword	= "테스";
+		String list[]	= mapper.getAuthorIdList(keyword);
+		
+		System.out.println("결과 : " + list.toString());
+		
+		for(String id : list) {
+			System.out.println("개별 결과 : " + id);
+		}
+		
+	}
+*/	
+/*	
+	// 검색(동적 쿼리 적용) - 작가
+	@Test
+	public void getGoodsListTest1() {
+		Criteria cri 	= new Criteria();
+		String 	type 	= "A";
+		String 	keyword ="테스";
+		String 	cateCode = "";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		
+		List<BookVO> list = mapper.getGoodsList(cri);
+		
+		System.out.println("cri : " + cri);
+		System.out.println("list : " + list);
+		
+	}
+*/	
 	
 	
 	
