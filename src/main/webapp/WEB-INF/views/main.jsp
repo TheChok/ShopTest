@@ -103,12 +103,9 @@
 						<i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content">
-						<a href="/search?type=C&cateCode=202001&keyword=">교양</a>
-						<a href="#">테스트2</a>
-						<a href="#">테스트3</a>
-						<a href="#">테스트4</a>
-						<a href="#">테스트5</a>
-						<a href="#">테스트6</a>
+						<c:forEach items="${cate1 }" var="cate">
+							<a href="search?type=C&keyword=&cateCode=${cate.cateCode }">${cate.cate_name }</a>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="dropdown">
@@ -116,12 +113,9 @@
 						<i class="dropbtn"></i>
 					</button>
 					<div class="dropdown-content">
-						<a href="#">테스트1</a>
-						<a href="#">테스트2</a>
-						<a href="#">테스트3</a>
-						<a href="#">테스트4</a>
-						<a href="#">테스트5</a>
-						<a href="#">테스트6</a>
+						<c:forEach items="${cate2}" var="cate">
+							<a href="search?type=C&keyword=&cateCode=${cate.cateCode }">${cate.cate_name }</a>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

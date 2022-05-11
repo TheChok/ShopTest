@@ -44,12 +44,17 @@ public class BookController {
 	// 메인페이지로 이동
 	//---------------------------------------------------------------------------//
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void mainPageGET() {
-		
+	public void mainPageGET(Model model) {
 		logger.info("메인페이지 요청받음");
 		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 	}
 	
+	
+	//---------------------------------------------------------------------------//
+	// display 요청처리
+	//---------------------------------------------------------------------------//
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName) {
 		

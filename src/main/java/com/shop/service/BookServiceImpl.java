@@ -10,6 +10,7 @@ import com.shop.mapper.AttachMapper;
 import com.shop.mapper.BookMapper;
 import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
+import com.shop.model.CateVO;
 import com.shop.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
@@ -28,7 +29,9 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private AttachMapper attachMapper;
 	
+	//-----------------------------------------------------------------------------------------------------------------------------//
 	// 상품 검색
+	//-----------------------------------------------------------------------------------------------------------------------------//
 	@Override
 	public List<BookVO> getGoodsList(Criteria cri) {
 		log.info("getGoodsList................");
@@ -61,14 +64,38 @@ public class BookServiceImpl implements BookService {
 		return list;
 	}
 	
-	
+	//-----------------------------------------------------------------------------------------------------------------------------//
 	// 상품 총 갯수
+	//-----------------------------------------------------------------------------------------------------------------------------//
 	@Override
 	public int goodsGetTotal(Criteria cri) {
 		log.info("goodsGetTotal................");
 		return bookMapper.goodsGetTotal(cri);
 	}
 
+	//-----------------------------------------------------------------------------------------------------------------------------//
+	// 국내 카테고리 리스트
+	//-----------------------------------------------------------------------------------------------------------------------------//
+	@Override
+	public List<CateVO> getCateCode1() {
+		log.info("getCateCode1().....................");
+		return bookMapper.getCateCode1();
+	}
+
+	//-----------------------------------------------------------------------------------------------------------------------------//
+	// 외국 카테고리 리스트
+	//-----------------------------------------------------------------------------------------------------------------------------//
+	@Override
+	public List<CateVO> getCateCode2() {
+		log.info("getCateCode2().....................");
+		return bookMapper.getCateCode2();
+	}
+
+	
+	
+	
+	
+	
 	
 } // End - public class BookServiceImpl implements BookService
 

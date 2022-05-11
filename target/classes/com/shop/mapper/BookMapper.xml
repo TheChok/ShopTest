@@ -71,6 +71,24 @@
 	</select>
 	
 	
+	<!-- 국내 카테고리 리스트 -->
+	<select id="getCateCode1" resultType="com.shop.model.CateVO">
+		<![CDATA[
+			SELECT 	* 
+			FROM 	book_cate 
+			WHERE 	cateCode > 100000 AND cateCode < 200000
+		]]>
+	</select>
+	
+	
+	<!-- 외국 카테고리 리스트 -->
+	<select id="getCateCode2" resultType="com.shop.model.CateVO">
+		<![CDATA[
+			SELECT 	* 
+			FROM 	book_cate 
+			WHERE 	cateCode > 200000 AND cateCode < 300000
+		]]>
+	</select>
 	
 	
 	

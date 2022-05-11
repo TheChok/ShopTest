@@ -179,10 +179,11 @@
 				</div>
 				
 				<form id="moveForm" action="/search" method="get">
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"/>
-					<input type="hidden" name="amount" 	value="${pageMaker.cri.amount }"/>
-					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"/>
-					<input type="hidden" name="type" 	value="${pageMaker.cri.type }"/>
+					<input type="hidden" name="pageNum"  value="${pageMaker.cri.pageNum }"/>
+					<input type="hidden" name="amount" 	 value="${pageMaker.cri.amount }"/>
+					<input type="hidden" name="keyword"  value="${pageMaker.cri.keyword }"/>
+					<input type="hidden" name="cateCode" value="<c:out value='${pageMaker.cri.cateCode }'/>"/>
+					<input type="hidden" name="type" 	 value="${pageMaker.cri.type }"/>
 				</form>
 				
 			</c:if>
@@ -254,17 +255,17 @@ $("#gnb_logout_button").click(function(){
 });
     
 /* 페이지 이동 버튼 */
+
 const moveForm = $('#moveForm');
 
 $(".pageMaker_btn a").on("click", function(e){
-	
 	e.preventDefault();
 	
 	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-	
 	moveForm.submit();
 	
-});
+});		
+
 
 $(document).ready(function(){
 	
