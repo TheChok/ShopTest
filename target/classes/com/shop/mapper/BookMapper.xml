@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.shop.mapper.BookMapper">
+	
+	<!-- 상품 리스트 -->
+	<select id="getGoodsList" resultType="com.shop.model.BookVO">
+		<![CDATA[
+		SELECT * FROM 
+		(
+			select /*+INDEX_DESC(book_book SYS_C007598)*/ rownum as rn, book_id, book_name, 
+				   (select author_name from book_author where book_book.author_id = book_author.author_id) author_name, author_id, 
+				   (select cate_name from book_cate where book_book.cateCode = book_cate.cateCode) cate_name, cateCode, publisher, publeYear, book_price  
+			from	book_book 
+			where 
+		]]>
+			<if test="keyword != null">
+					book_name like '%' || #{keyword} || '%' and 
+			</if>
+		<![CDATA[
+					rownum <= #{pageNum} * #{amount} 
+		) 
+		WHERE rn > (#{pageNum} - 1) * #{amount} 
+		]]>
+	</select>
+	
+	<!-- 상품 총 개수 -->
+	<select id="goodsGetTotal" resultType="int">
+	
+		select 	count(*) from book_book
+		where
+		<if test="keyword != null">
+				book_name like '%' || #{keyword} || '%' and 
+		</if>
+				book_id >0
+		
+	</select>
+	
+	
+	
+  </mapper>
