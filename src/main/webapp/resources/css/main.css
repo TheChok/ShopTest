@@ -159,6 +159,7 @@ a{
 }
 
 .dropdown-content {
+  display:				none;
   position: 			absolute;
   background-color: 	#f9f9f9;
   width: 				466px;
@@ -175,7 +176,15 @@ a{
   text-align: 			left;
   width: 				80px;
 }
-
+.dropdown:hover .dropdown-content{
+	display:			block;
+}
+.navi_area a:hover, .dropdown:hover .dropbtn{
+	background-color:	#475382;
+}
+.dropdown-content a:hover{
+	background-color:	#DDD;
+}
 /* 홈페이지 메인 제품 목록 */
 .content_area{
 	width:				100%;

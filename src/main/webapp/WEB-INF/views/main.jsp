@@ -103,7 +103,7 @@
 						<i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content">
-						<a href="#">테스트1</a>
+						<a href="/search?type=C&cateCode=202001&keyword=">교양</a>
 						<a href="#">테스트2</a>
 						<a href="#">테스트3</a>
 						<a href="#">테스트4</a>
