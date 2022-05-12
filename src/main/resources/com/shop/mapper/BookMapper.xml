@@ -141,6 +141,15 @@
 	</select>
 	
 	
+	<!-- 상품 정보 -->
+	<select id="getGoodsInfo" resultType="com.shop.model.BookVO">
+		SELECT 	a.book_id, a.book_name, a.author_id, b.author_name, a.publeYear, a.publisher, a.cateCode, 
+				c.cate_name, a.book_price, a.book_stock, a.book_discount, a.book_intro, a.book_contents
+		FROM 	book_book a LEFT OUTER JOIN book_author b ON a.author_id = b.author_id
+				LEFT OUTER JOIN book_cate c ON a.cateCode = c.cateCode
+		WHERE 	book_id = ${book_id}
+	</select>
+	
 	
 	
 	

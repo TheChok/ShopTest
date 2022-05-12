@@ -5,9 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.shop.model.Criteria;
+import com.shop.model.BookVO;
+import com.shop.service.BookService;
 
 //----------------------------------------------------------------------------------------------------------------------//
 // public class BookMapperTests
@@ -18,6 +18,9 @@ public class BookMapperTests {
 	
 	@Autowired
 	private BookMapper mapper;
+	
+	@Autowired
+	private BookService bookService;
 	
 /*	
 	@Test
@@ -96,7 +99,7 @@ public class BookMapperTests {
 		
 	}
 */
-	
+/*	
 	// 카테고리 정보 얻기
 	@Test
 	public void getCateInfoTest1() {
@@ -114,10 +117,34 @@ public class BookMapperTests {
 		mapper.getCateInfo(cri);
 		
 	}
+*/	
+/*	
+	// 상품 정보
+	@Test
+	public void getGoodsInfo() {
+		int book_id = 14;
+		BookVO goodsInfo = mapper.getGoodsInfo(book_id);
+		System.out.println("=============================================");
+		System.out.println(goodsInfo);
+		System.out.println("=============================================");
+		
+	}
+*/	
 	
-	
-	
-	
+	// 상품 상세 정보
+	@Test
+	public void getGoodsInfoTest() {
+		int book_id = 14;
+		
+		BookVO goodsInfo = bookService.getGoodsInfo(book_id);
+		
+		System.out.println("==결과==");
+		System.out.println("전체 : " + goodsInfo);
+		System.out.println("book_id : " + goodsInfo.getBook_id());
+		System.out.println("이미지 정보 : " + goodsInfo.getImageList().isEmpty());
+		
+		
+	}
 	
 	
 	

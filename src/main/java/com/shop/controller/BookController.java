@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -121,6 +122,19 @@ public class BookController {
 		return "search";
 	}
 	
+	//------------------------------------------------------------------------------------------//
+	// 상품 검색
+	//------------------------------------------------------------------------------------------//
+	@GetMapping("/goodsDetail/{book_id}")
+	public String goodsDetailGET(@PathVariable("book_id")int book_id, Model model) {
+		logger.info("goodsDetailGET().................");
+		
+		model.addAttribute("goodsInfo", bookService.getGoodsInfo(book_id));
+		
+		return "goodsDetail";
+	}
+	
+	
 	
 	
 	
@@ -128,3 +142,13 @@ public class BookController {
 	
 	
 } // End - public class BookController
+
+
+
+
+
+
+
+
+
+

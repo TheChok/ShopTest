@@ -105,10 +105,18 @@
 						<button class="filter_button" id="filter_button_b">외국</button>
 					</div>
 					<div class="filter_content filter_a">
-						
+						<c:forEach items="${filter_info }" var="filter">
+							<c:if test="${filter.cateGroup eq '1' }">
+								<a href="${filter.cateCode }">${filter.cate_name }(${filter.cateCount })</a>
+							</c:if>
+						</c:forEach>
 					</div>
 					<div class="filter_content filter_b">
-						
+						<c:forEach items="${filter_info }" var="filter">
+							<c:if test="${filter.cateGroup eq '2' }">
+								<a href="${filter.cateCode }">${filter.cate_name }(${filter.cateCount })</a>
+							</c:if>
+						</c:forEach>
 					</div>
 				</div>
 				<form id="filter_form" action="/search" method="get">
@@ -140,7 +148,9 @@
 											[${list.cate_name }]
 										</div>
 										<div class="title">
-											${list.book_name }
+											<a href="/goodsDetail/${list.book_id }">
+												${list.book_name }
+											</a>
 										</div>
 										<div class="author">
 											<fmt:parseDate var="publeYear" value="${list.publeYear }" pattern="yyyy-MM-dd"/>
@@ -290,18 +300,38 @@ $(".pageMaker_btn a").on("click", function(e){
 let buttonA = $("#filter_button_a");
 let buttonB = $("#filter_button_b");
 
-buttonA.on("click", function() {
+buttonA.on("click", function(){
 	$(".filter_b").css("display", "none");
-	$(".filter_a").css("display", "block");
+	$(".filter_a").css("display", "block");		
 	buttonA.attr("class", "filter_button filter_active");
 	buttonB.attr("class", "filter_button");
-});
-buttonB.on("click", function() {
+});	
+
+buttonB.on("click", function(){
 	$(".filter_a").css("display", "none");
 	$(".filter_b").css("display", "block");
-	buttonA.attr("class", "filter_button filter_active");
-	buttonB.attr("class", "filter_button");
+	buttonB.attr("class", "filter_button filter_active");
+	buttonA.attr("class", "filter_button");		
+});		
+
+/* 필터링 태그 동작 */
+$(".filter_content a").on("click", function(e){
+	e.preventDefault();
+	
+	let type = '<c:out value="${pageMaker.cri.type}"/>';
+	if(type === 'A' || type === 'T'){
+		type = type + 'C';	
+	}
+	let keyword = '<c:out value="${pageMaker.cri.keyword}"/>';
+	let cateCode= $(this).attr("href");
+	
+	$("#filter_form input[name='keyword']").val(keyword);
+	$("#filter_form input[name='cateCode']").val(cateCode);
+	$("#filter_form input[name='type']").val(type);
+	$("#filter_form").submit();
+	
 });
+
 
 
 /* DOCUMENT READY */
