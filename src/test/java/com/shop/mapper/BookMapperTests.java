@@ -1,14 +1,12 @@
 package com.shop.mapper;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.shop.model.BookVO;
 import com.shop.model.Criteria;
 
 //----------------------------------------------------------------------------------------------------------------------//
@@ -21,7 +19,7 @@ public class BookMapperTests {
 	@Autowired
 	private BookMapper mapper;
 	
-	
+/*	
 	@Test
 	public void getGoodsListTest() {
 		
@@ -38,7 +36,7 @@ public class BookMapperTests {
 		System.out.println("totla : " + goodsTotal);
 		
 	}
-	
+*/	
 /*	
 	// 작가 id 리스트 요청
 	@Test
@@ -75,6 +73,50 @@ public class BookMapperTests {
 		
 	}
 */	
+/*	
+	// 카테고리 리스트
+	@Test
+	public void getCateListTest() {
+		
+		Criteria cri = new Criteria();
+		
+		String type = "TC";
+		String keyword = "테스";
+		// String type ="A";
+		// String keyword = "피카";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		// cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		
+		String[] cateList	= mapper.getCateList(cri);
+		for(String codeNum : cateList) {
+			System.out.println("codeNum ==> " + codeNum);
+		}
+		
+	}
+*/
+	
+	// 카테고리 정보 얻기
+	@Test
+	public void getCateInfoTest1() {
+		
+		Criteria cri = new Criteria();
+		
+		String type = "TC";
+		String keyword = "test";
+		String cateCode = "1004001";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setCateCode(cateCode);
+		
+		mapper.getCateInfo(cri);
+		
+	}
+	
+	
+	
 	
 	
 	

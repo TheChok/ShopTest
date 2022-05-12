@@ -3,6 +3,7 @@ package com.shop.service;
 import java.util.List;
 
 import com.shop.model.BookVO;
+import com.shop.model.CateFilterDTO;
 import com.shop.model.CateVO;
 import com.shop.model.Criteria;
 
@@ -22,6 +23,12 @@ public interface BookService {
 	
 	// 외국 카테고리 리스트
 	public List<CateVO> getCateCode2();
+	
+	// 검색결과 카테고리 필터 정보
+	public List<CateFilterDTO> getCateInfoList(Criteria cri);
+	
+	
+	
 	
 	
 	

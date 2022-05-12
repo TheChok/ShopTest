@@ -91,6 +91,57 @@
 	</select>
 	
 	
+	<!-- 검색 대상 카테고리 리스트 -->
+	<select id="getCateList" resultType="String">
+		SELECT DISTINCT cateCode 
+		FROM 			book_book 
+		WHERE 
+		<foreach item="type" collection="typeArr">
+			<choose>
+				<when test="type == 'A'.toString()">
+					<trim prefixOverrides="or">
+						<foreach collection="authorArr" item="author_id">
+							<trim prefix="or">
+								author_id=#{author_id} 
+							</trim>
+						</foreach>
+					</trim>
+				</when>
+				<when test="type == 'T'.toString()">
+					book_name like '%' || #{keyword} || '%' 
+				</when>
+			</choose>
+		</foreach>
+	</select>
+	
+	
+	<!-- 카테고리 정보(+검색대상 갯수) -->
+	<select id="getCateInfo" resultType="com.shop.model.CateFilterDTO">
+		SELECT DISTINCT count(*) cateCount, a.cateCode, b.cate_name 
+		FROM 			book_book a left join book_cate b on a.cateCode = b.cateCode 
+		WHERE 
+		<foreach item="type" collection="typeArr">		
+  				<choose>
+  					<when test="type == 'A'.toString()">
+  						<trim prefix="(" suffix=")" prefixOverrides="or">
+		  					<foreach collection="authorArr" item="author_id">
+		  						<trim prefix="or">
+		  							author_id = #{author_id} 
+		  						</trim>
+		  					</foreach>
+  						</trim>
+  						AND a.cateCode = #{cateCode} 
+  					</when>
+  					<when test="type == 'T'.toString()">
+  						book_name like '%' || #{keyword} || '%' and a.cateCode = #{cateCode} 
+  					</when>
+  				</choose>
+  		</foreach>
+  		GROUP BY a.cateCode, b.cate_name
+	</select>
+	
+	
+	
 	
 	
 	
@@ -98,3 +149,16 @@
 	
 	
   </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

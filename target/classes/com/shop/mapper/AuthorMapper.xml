@@ -16,16 +16,17 @@
 		<![CDATA[
 			SELECT * 
 			FROM  ( SELECT /*+INDEX_DESC(book_author SYS_C007573) */ rownum as rn, author_id, author_name, nation_id, regdate, updatedate 
-				    FROM	book_author
-				    WHERE
+				    FROM	book_author 
+				    WHERE 
 		]]>
 					<if test="keyword != null">
-						author_name LIKE '%' || #{keyword} || '%' AND
+						author_name LIKE '%' || #{keyword} || '%' AND 
 					</if>
 		<![CDATA[
-				    rownum <= #{pageNum} * #{amount}
+				    rownum <= #{pageNum} * #{amount} 
 				  )
-			WHERE rn > (#{pageNum} - 1) * #{amount}
+			WHERE rn > (#{pageNum} - 1) * #{amount} 
+			ORDER BY author_id desc
 		]]>
 	</select>
 	

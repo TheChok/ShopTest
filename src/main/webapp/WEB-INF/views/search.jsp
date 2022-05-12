@@ -98,6 +98,26 @@
 		<div class="content_area">
 			<!-- 게시물 o -->
 			<c:if test="${listcheck != 'empty'}">
+				<!-- search_filter -->
+				<div class="search_filter">
+					<div class="filter_button_wrap">
+						<button class="filter_button filter_active" id="filter_button_a">국내</button>
+						<button class="filter_button" id="filter_button_b">외국</button>
+					</div>
+					<div class="filter_content filter_a">
+						
+					</div>
+					<div class="filter_content filter_b">
+						
+					</div>
+				</div>
+				<form id="filter_form" action="/search" method="get">
+					<input type="hidden" name="keyword"/>
+					<input type="hidden" name="cateCode"/>
+					<input type="hidden" name="type"/>
+				</form>
+				
+				<!-- list_search_result -->
 				<div class="list_search_result">
 					<table class="type_list">
 						<colgroup>
@@ -266,7 +286,25 @@ $(".pageMaker_btn a").on("click", function(e){
 	
 });		
 
+/* 검색 필터 */
+let buttonA = $("#filter_button_a");
+let buttonB = $("#filter_button_b");
 
+buttonA.on("click", function() {
+	$(".filter_b").css("display", "none");
+	$(".filter_a").css("display", "block");
+	buttonA.attr("class", "filter_button filter_active");
+	buttonB.attr("class", "filter_button");
+});
+buttonB.on("click", function() {
+	$(".filter_a").css("display", "none");
+	$(".filter_b").css("display", "block");
+	buttonA.attr("class", "filter_button filter_active");
+	buttonB.attr("class", "filter_button");
+});
+
+
+/* DOCUMENT READY */
 $(document).ready(function(){
 	
 	// 검색 타입 selected
