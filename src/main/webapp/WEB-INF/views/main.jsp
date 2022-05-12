@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome BookMall</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/main.css?after"/>
+	<link rel="stylesheet" type="text/css" href="/resources/css/main.css?after"/>
 	<script
 	  src="https://code.jquery.com/jquery-3.4.1.js"
 	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

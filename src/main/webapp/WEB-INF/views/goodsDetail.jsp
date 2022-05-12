@@ -6,9 +6,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome BookMall</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/goodsDetail.css?after"/>
+	<link rel="stylesheet" type="text/css" href="/resources/css/goodsDetail.css?after"/>
 	<script
-	  src="https://code.jquery.com/jquery-3.4.1.js"
+src="https://code.jquery.com/jquery-3.4.1.js"
 	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	  crossorigin="anonymous">
 	</script>
@@ -54,7 +54,7 @@
 		<div class="top_area">
 			<!-- 로고영역 -->
 			<div class="logo_area">
-				<a href="/main"><img src="resources/img/mLogo.jpg"></a>
+				<a href="/main"><img src="/resources/img/mLogo.jpg"></a>
 			</div>
 			
 			<div class="search_area">
@@ -123,7 +123,7 @@
 							${goodsInfo.publisher }
 						</span>
 						<span>|</span>
-						<span>
+						<span class="publeyear">
 							${goodsInfo.publeYear }
 						</span>
 					</div>
@@ -220,6 +220,46 @@
 	</div>	<!-- End - class="wrap" -->	
 </div>	<!-- End - class="wrapper" -->
 
+<script>
+$(document).ready(function(){
+	
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+			
+		if(bobj.data("bookid")) {
+			const uploadPath = bobj.data("path");
+			const uuid = bobj.data("uuid");
+			const fileName = bobj.data("filename");
+			
+			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			
+			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+			
+		} else {
+			$(this).find("img").attr('src', '/resources/img/goodsNoImage.png');
+		}
+	});
+	
+	/* publeYear */
+	const year = "${goodsInfo.publeYear}";
+	
+	let tempYear = year.substr(0,10);
+	
+	let yearArray = tempYear.split("-")
+	let publeYear = yearArray[0] + "년 " + yearArray[1] + "월 " + yearArray[2] + "일";
+	
+	$(".publeyear").html(publeYear);
+	
+	
+	
+	
+});
+
+
+
+</script>
 
 
 </body>
