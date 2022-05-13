@@ -20,10 +20,12 @@ public class CartInterceptor  implements HandlerInterceptor {
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
 		
-		
-		
-		
-		return HandlerInterceptor.super.preHandle(request, response, handler);
+		if(mvo == null) {
+			response.sendRedirect("/main");
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	

@@ -41,6 +41,7 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/cart/**"/>
+			<exclude-mapping path="/cart/add"/>
 			<beans:bean id="CartInterceptor" class="com.shop.interceptor.CartInterceptor"></beans:bean>
 		</interceptor>
 	

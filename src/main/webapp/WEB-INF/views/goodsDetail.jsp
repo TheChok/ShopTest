@@ -41,7 +41,7 @@ src="https://code.jquery.com/jquery-3.4.1.js"
 						마이룸
 					</li>
 					<li>
-						장바구니
+						<a href="/cart/${member.member_id }">장바구니</a>
 					</li>
 				</c:if>
 				<li>
@@ -128,7 +128,6 @@ src="https://code.jquery.com/jquery-3.4.1.js"
 						</span>
 					</div>
 					<div class="line">
-						
 					</div>
 					<div class="price">
 						<div class="sale_price">정가 : <fmt:formatNumber value="${goodsInfo.book_price }" pattern="#,### 원"/></div>
@@ -137,17 +136,19 @@ src="https://code.jquery.com/jquery-3.4.1.js"
 							[<fmt:formatNumber value="${goodsInfo.book_discount * 100 }" pattern="###"/>%
 							 <fmt:formatNumber value="${goodsInfo.book_price * goodsInfo.book_discount }" pattern="#,### 원"/> 할인]
 						</div>
+						<div>
+							적립 포인트 : <span class="point_span"></span>
+						</div>
 					</div>
 					<div class="line">
-						
 					</div>
 					<div class="button">
 						<div class="button_quantity">
 							주문수량
-							<input type="text" value="1"/>
+							<input type="text" class="quantity_input" value="1"/>
 							<span>
-								<button></button>
-								<button></button>
+								<button class="plus_btn">+</button>
+								<button class="minus-btn">-</button>
 							</span>
 						</div>
 						<div class="button_set">
@@ -242,6 +243,7 @@ $(document).ready(function(){
 		}
 	});
 	
+	
 	/* publeYear */
 	const year = "${goodsInfo.publeYear}";
 	
@@ -253,9 +255,65 @@ $(document).ready(function(){
 	$(".publeyear").html(publeYear);
 	
 	
+	/* 포인트 삽입 */
+	let salePrice 	= "${goodsInfo.book_price - (goodsInfo.book_price * goodsInfo.book_discount)}"
+	let point		= salePrice * 0.05;
+	point			= Math.floor(point);
+	$(".point_span").text(point);
 	
 	
+}); // End - $(document).ready(function())
+
+/* 수량 버튼 조작 */
+let quantity = $(".quantity_input").val();
+$(".plus_btn").on("click", function() {
+	$(".quantity_input").val(++quantity);
 });
+$(".minus_btn").on("click", function() {
+	if(quantity > 1) {
+		$(".quantity_input").val(--quantity);
+	}
+});
+
+
+/*  서버로 전송할 데이터 */
+const form = {
+				member_id : '${member.member_id}',
+				book_id:	'${goodsInfo.book_id}',
+				book_count:	''
+}
+
+
+/* 장바구니 추가 버튼 */
+$(".btn_cart").on("click", function(e) {
+	e.preventDefault();
+	
+	form.book_count = $(".quantity_input").val();
+	$.ajax({
+			url:		'/cart/add',
+			type:		'POST',
+			data:		form,
+			success:	function(result) {
+				cartAlert(result);
+			} 
+	});
+});
+
+
+/* cartAlert */
+function cartAlert(result) {
+	if(result == '0') {
+		alert("장바구니에 추가를 하지 못하였습니다.")
+	} else if(result == '1') {
+		alert("장바구니에 추가되었습니다.");
+	} else if(result == '2') {
+		alert("장바구니에 이미 추가되어져 있습니다.");
+	} else if(result == '5') {
+		alert("로그인이 필요합니다.");
+	}
+}
+	
+
 
 
 

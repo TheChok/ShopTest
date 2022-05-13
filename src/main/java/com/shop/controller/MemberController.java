@@ -171,13 +171,13 @@ public class MemberController {
 			encodePw	= lvo.getMember_pw();						// 데이터베이스에 저장한 인코딩된 비밀번호
 			
 			if(true == pwEncoder.matches(rawPw, encodePw)) {		// 비밀번호 일치 여부 판단
-				lvo.setMember_pw("");						// 인코딩된 비밀번호 정보 지움
-				session.setAttribute("member", lvo);		// session에 사용자의 정보 저장
+				lvo.setMember_pw("");								// 인코딩된 비밀번호 정보 지움
+				session.setAttribute("member", lvo);				// session에 사용자의 정보 저장
 				return "redirect:/main";
 				
 			} else {
 				rttr.addFlashAttribute("result", 0);
-				return "redirect:/member/login";			// 로그인 페이지로 이동
+				return "redirect:/member/login";					// 로그인 페이지로 이동
 				
 			}
 		} else {													// 일치하는 아이디가 존재하지 않을 시(로그인 실패)
