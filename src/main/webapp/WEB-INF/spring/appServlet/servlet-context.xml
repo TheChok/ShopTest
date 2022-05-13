@@ -39,6 +39,11 @@
 			<mapping path="/admin/**"></mapping>
 			<beans:bean id="AdminInterceptor" class="com.shop.interceptor.AdminInterceptor"></beans:bean>
 		</interceptor>
+		<interceptor>
+			<mapping path="/cart/**"/>
+			<beans:bean id="CartInterceptor" class="com.shop.interceptor.CartInterceptor"></beans:bean>
+		</interceptor>
+	
 	</interceptors>
 	
 	<!-- 업로드 관련 빈 -->
