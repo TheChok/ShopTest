@@ -17,6 +17,7 @@
 <body>
 
 <div class="wrapper">
+
 	<div class="wrap">
 	
 		<!-- class="top_gnb_area" -->
