@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.mapper.AttachMapper;
 import com.shop.mapper.CartMapper;
+import com.shop.model.AttachImageVO;
 import com.shop.model.CartDTO;
 
 //-------------------------------------------------------------------------------------------------------//
@@ -16,6 +18,9 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	private CartMapper cartMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 	
 	//---------------------------------------------------------------------------------------------------//
 	// 카트 추가
@@ -48,7 +53,13 @@ public class CartServiceImpl implements CartService {
 		List<CartDTO> cart = cartMapper.getCart(member_id);
 		
 		for(CartDTO dto : cart) {
+			// 종합정보 초기화
 			dto.initSaleTotal();
+			
+			// 이미지 정보 얻기
+			int book_id = dto.getBook_id();
+			List<AttachImageVO> imageList = attachMapper.getAttachList(book_id);
+			dto.setImageList(imageList);
 		}
 		
 		return cart;
