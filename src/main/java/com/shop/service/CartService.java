@@ -18,10 +18,6 @@ public interface CartService {
 	// 카트 수량 수정
 	public int modifyCount(CartDTO cart);
 	
-	// 카트 삭제
-	public int deleteCart(int cart_);
-	
-	
 	
 	
 	

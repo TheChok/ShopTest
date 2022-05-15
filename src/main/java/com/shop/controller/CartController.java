@@ -76,16 +76,6 @@ public class CartController {
 		return "redirect:/cart/" + cart.getMember_id();
 	}
 	
-	//--------------------------------------------------------------------------------------------------------------//
-	// 장바구니 내 항목 개별 삭제
-	//--------------------------------------------------------------------------------------------------------------//
-	@PostMapping("/cart/delete")
-	public String deleteCartPOST(CartDTO cart) {
-		
-		cartService.deleteCart(cart.getCart_id());
-		
-		return "redirect:/cart/" + cart.getMember_id();
-	}
 	
 	
 } // End - public class CartController
