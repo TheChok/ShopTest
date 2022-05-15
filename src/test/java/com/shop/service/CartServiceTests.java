@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.shop.model.CartDTO;
-
 //-----------------------------------------------------------------------------------------------//
 // public class CartServiceTests
 //-----------------------------------------------------------------------------------------------//
@@ -18,6 +16,7 @@ public class CartServiceTests {
 	@Autowired
 	private CartService service;
 	
+/*
 	@Test
 	public void addCartTest() {
 		//given
@@ -37,9 +36,15 @@ public class CartServiceTests {
 		System.out.println("** result : " + result);
 		
 	}
-	
-	
-	
+*/	
+/*	
+	// 카트 삭제
+	@Test
+	public void cartDeleteTest() {
+		int cart_id = 4;
+		service.deleteCart(cart_id);
+	}
+*/	
 	
 	
 	

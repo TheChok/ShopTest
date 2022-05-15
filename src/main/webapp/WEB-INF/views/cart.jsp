@@ -154,12 +154,14 @@
 										<button class="quantity_btn plus_btn">+</button>
 										<button class="quantity_btn minus_btn">-</button>
 									</div>
-									<a class="quantity_modify_btn">변경</a>
+									<a class="quantity_modify_btn" data-cartId="${ci.cart_id }">변경</a>
 								</td>
 								<td class="td_width_4 table_text_align_center">
 									<fmt:formatNumber value="${ci.sale_price * ci.book_count }" pattern="#,### 원"/>
 								</td>
-								<td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td>
+								<td class="td_width_4 table_text_align_center delete_btn">
+									<button class="delete_btn" data-cartid=${ci.cart_id }>삭제</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -246,9 +248,18 @@
 				<a>주문하기</a>
 			</div>
 			
+			<!-- 수량 조정 form -->
+			<form action="/cart/update" method="post" class="quantity_update_form">
+				<input type="hidden" name="cart_id" 	class="update_cart_id"/>
+				<input type="hidden" name="book_count" 	class="update_book_count"/>
+				<input type="hidden" name="member_id" 	value="${member.member_id }"/>
+			</form>
+			
+			
 			
 			
 		</div>	<!-- End - class="content_area" -->
+		
 		
 		<!-- Footer 영역 -->
         <div class="footer_nav">
@@ -390,6 +401,28 @@ function setTotalInfo() {
 	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());	// 최종 가격(총 가격 + 배송비)
 	
 }
+
+/* 수량버튼 */
+$(".plus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	$(this).parent("div").find("input").val(++quantity);
+});
+$(".minus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	if(quantity > 1) {
+		$(this).parent("div").find("input").val(--quantity);
+	}
+});
+
+
+/* 수량 수정 버튼 */
+$(".quantity_modify_btn").on("click", function(){
+	let cartId = $(this).data("cartid");
+	let bookCount = $(this).parent("td").find("input").val();
+	$(".update_cart_id").val(cartId);
+	$(".update_book_count").val(bookCount);
+	$(".quantity_update_form").submit();
+});
 
 
 
