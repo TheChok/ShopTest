@@ -37,11 +37,11 @@ public class CartServiceTests {
 		
 	}
 */	
-/*	
+/*
 	// 카트 삭제
 	@Test
 	public void cartDeleteTest() {
-		int cart_id = 4;
+		int cart_id = 9;
 		service.deleteCart(cart_id);
 	}
 */	

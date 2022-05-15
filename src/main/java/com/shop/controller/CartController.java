@@ -15,9 +15,12 @@ import com.shop.model.CartDTO;
 import com.shop.model.MemberVO;
 import com.shop.service.CartService;
 
+import lombok.extern.log4j.Log4j;
+
 //------------------------------------------------------------------------------------------------------//
 // public class CartController
 //------------------------------------------------------------------------------------------------------//
+@Log4j
 @Controller
 public class CartController {
 	
@@ -70,13 +73,23 @@ public class CartController {
 	//--------------------------------------------------------------------------------------------------------------//
 	@PostMapping("/cart/update")
 	public String updateCarPOST(CartDTO cart) {
-		
+
 		cartService.modifyCount(cart);
 		
 		return "redirect:/cart/" + cart.getMember_id();
 	}
 	
-	
+	//--------------------------------------------------------------------------------------------------------------//
+	// 장바구니 삭제
+	//--------------------------------------------------------------------------------------------------------------//
+	@PostMapping("/cart/delete")
+	public String deleteCartPOST(CartDTO cart) {
+		log.info("장바구니 삭제 컨트롤러에 진입했습니다.");
+		System.out.println("cart.getCart_id ==>" + cart.getCart_id());
+		cartService.deleteCart(cart.getCart_id());
+		
+		return "redirect:/cart/" + cart.getMember_id();
+	}
 	
 } // End - public class CartController
 

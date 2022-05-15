@@ -154,13 +154,13 @@
 										<button class="quantity_btn plus_btn">+</button>
 										<button class="quantity_btn minus_btn">-</button>
 									</div>
-									<a class="quantity_modify_btn" data-cartId="${ci.cart_id }">변경</a>
+									<a class="quantity_modify_btn" data-cartid="${ci.cart_id }">변경</a>
 								</td>
 								<td class="td_width_4 table_text_align_center">
 									<fmt:formatNumber value="${ci.sale_price * ci.book_count }" pattern="#,### 원"/>
 								</td>
 								<td class="td_width_4 table_text_align_center delete_btn">
-									<button class="delete_btn">삭제</button>
+									<button class="delete_btn" data-subid="${ci.cart_id }">${ci.cart_id }</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -255,6 +255,11 @@
 				<input type="hidden" name="member_id" 	value="${member.member_id }"/>
 			</form>
 			
+			<!-- 삭제 form -->
+			<form action="/cart/delete" method="post" class="quantity_delete_form">
+				<input type="hidden" name="cart_id" class="delete_cart_id">
+				<input type="hidden" name="member_id" value="${member.member_id}">
+			</form>
 			
 			
 			
@@ -422,6 +427,16 @@ $(".quantity_modify_btn").on("click", function(){
 	$(".update_cart_id").val(cartId);
 	$(".update_book_count").val(bookCount);
 	$(".quantity_update_form").submit();
+});
+
+
+/* 장바구니 삭제 버튼 */
+$(".delete_btn").on("click", function(e){
+	e.preventDefault();	
+	const cart_id = $(this).data("subid");
+	$(".delete_cart_id").val(cart_id);
+	alert(cart_id);
+	//$(".quantity_delete_form").submit();
 });
 
 
