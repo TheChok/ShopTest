@@ -377,7 +377,6 @@ function setTotalInfo() {
 	
 	
 	$(".cart_info_td").each(function(index, element){
-		
 		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
 			// 총 가격
 			totalPrice += parseInt($(element).find(".individual_total_price_input").val());
@@ -388,7 +387,6 @@ function setTotalInfo() {
 			// 총 마일리지
 			totalPoint += parseInt($(element).find(".individual_total_point_input").val());			
 		}
-
 	});
 	
 	/* 배송비 결정 */
@@ -446,31 +444,32 @@ $(".delete_btn").on("click", function(e){
 });
 
 
-/* 주문 페이지 이동 */
+/* 주문 페이지 이동 */	
 $(".order_btn").on("click", function(){
 	
 	let form_contents 	= '';
-	let orderNumber		= 0;
+	let orderNumber 	= 0;
 	
 	$(".cart_info_td").each(function(index, element){
 		
-		let book_id 			= $(element).find(".individual_book_id_input").val();
-		let book_count 	 		= $(element).find(".individual_book_count_input").val();
-		
-		let book_id_input 		= "<input name='orders["+ orderNumber +"].book_id' type='hidden' value='"+ book_id +"'>";
-		form_contents += book_id_input;
-		
-		let book_count_input	= "<input name='orders["+ orderNumber +"].book_count type='hidden' value='"+ book_count +"'>";
-		form_contents += book_count_input;
-		
-		orderNumber += 1;
-	});
-	
+		if($(element).find(".individual_cart_checkbox").is(":checked") == true){	//체크여부
+			
+			let book_id = $(element).find(".individual_book_id_input").val();
+			let book_count = $(element).find(".individual_book_count_input").val();
+			
+			let book_id_input = "<input name='orders["+ orderNumber +"].book_id' type='hidden' value='"+ book_id +"'>";
+			form_contents += book_id_input;
+			
+			let book_count_input = "<input name='orders["+ orderNumber +"].book_count' type='hidden' value='"+ book_count +"'>";
+			form_contents += book_count_input;
+			
+			orderNumber += 1;
+		}
+	});	
+
 	$(".order_form").html(form_contents);
 	$(".order_form").submit();
-	
 });
-
 
 </script>
 

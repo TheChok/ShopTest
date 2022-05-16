@@ -173,10 +173,78 @@
 				</div>
 				
 				<!-- 상품 정보 -->
-				
+				<div class="orderGoods_div">
+					<!-- 상품 종류 -->
+					<div class="goods_kind_div">
+						주문상품 <span class="goods_kind_div_kind"></span>종 <span class="goods_kind_div_count"></span>개
+					</div>
+					
+					<!-- 상품 테이블 -->
+					<table class="goods_subject_table">
+						<colgroup>
+							<col width="15%">
+							<col width="45%">
+							<col width="40%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>이미지</th>
+								<th>상품 정보</th>
+								<th>판매가</th>
+							</tr>
+						</tbody>
+					</table>
+					<table class="goods_table">
+						<colgroup>
+							<col width="15%">
+							<col width="45%">
+							<col width="40%">
+						</colgroup>
+						<tbody>
+							<c:forEach items="${orderList }" var="ol">
+								<tr>
+									<td>
+										<!-- 이미지<td> -->
+									</td>
+									<td>${ol.book_name }</td>
+									<td class="goods_table_price_td">
+										<fmt:formatNumber value="${ol.sale_price }" pattern="#,### 원"/> | 수량 ${ol.book_count}개 <br>
+										<fmt:formatNumber value="${ol.total_price }" pattern="#,### 원"/><br>[
+										<fmt:formatNumber value="${ol.totalPoint }" pattern="#,### 원"/>P]
+										<input type="hidden" class="individual_book_price_input" 	value="${ol.book_price }"/>
+										<input type="hidden" class="individual_sale_price_input" 	value="${ol.sale_price }"/>
+										<input type="hidden" class="individual_book_count_input" 	value="${ol.book_count }"/>
+										<input type="hidden" class="individual_total_price_input" 	value="${ol.sale_price * ol.book_count }"/>
+										<input type="hidden" class="individual_point_input" 		value="${ol.point }"/>
+										<input type="hidden" class="individual_totalPoint_input" 	value="${ol.totalPoint }"/>
+										<input type="hidden" class="individual_book_id_input" 		value="${ol.book_id }"/>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 				
 				<!-- 포인트 정보 -->
-				
+				<div class="point_div">
+					<div class="point_div_subject">포인트 사용</div>
+					<table class="point_table">
+						<colgroup>
+							<col width="25%">
+							<col width="*">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>포인트 사용</th>
+								<td>
+									${memberInfo.point } | <input class="order_point_input" value="0"/>원
+									<a class="order_point_input_btn order_point_input_btn_N" data-state="N">모두사용</a>
+									<a class="order_point_input_btn order_point_input_btn_Y" data-stete="Y" style="display: none;">사용취소</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				
 				<!-- 주문 종합 정보 -->
 				
@@ -307,8 +375,58 @@ function execution_daum_address(){
 	} // End - oncomplete: function(data) {
 	}).open(); // End - new daum.Postcode({
 } // End - function execution_daum_address(){
+	
+	
+/* 포인트 입력 */
+// 0 이상 & 최대 포인트 수 이하
+$(".order_point_input").on("propertychange change keyup paste input", function(){
+
+	const maxPoint = parseInt('${memberInfo.point}');	
+	
+	let inputValue = parseInt($(this).val());	
+	
+	if(inputValue < 0){
+		$(this).val(0);
+	} else if(inputValue > maxPoint){
+		$(this).val(maxPoint);
+	}	
 
 	
+});
+
+
+/* 포인트 모두사용, 취소 버튼 
+ * Y: 모두사용 상태  /  N: 모두 취소 상태
+ */
+ $(".order_point_input_btn").on("click", function(){
+
+	const maxPoint = parseInt('${memberInfo.point}');	
+	
+	let state = $(this).data("state");	
+	
+	if(state == 'N'){
+		console.log("n동작");
+		/* 모두 사용 */
+		
+		//값 변경
+		$(".order_point_input").val(maxPoint);
+		//글 변경
+		$(".order_point_input_btn_Y").css("display", "inline-block");
+		$(".order_point_input_btn_N").css("display", "none");
+		
+	} else if(state == 'Y'){
+		console.log("y동작");
+		/* 모두 취소 */
+		
+		//값 변경
+		$(".order_point_input").val(0);
+		//글 변경
+		$(".order_point_input_btn_Y").css("display", "none");
+		$(".order_point_input_btn_N").css("display", "inline-block");		
+	}	
+
+});
+
 
 
 
