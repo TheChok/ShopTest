@@ -176,6 +176,13 @@ src="https://code.jquery.com/jquery-3.4.1.js"
 				리뷰
 			</div>		
 			
+			<!-- 주문 form -->
+			<form action="/order/${member.member_id}" method="get" class="order_form">
+				<input type="hidden" name="orders[0].book_id" 	 value="${goodsInfo.book_id }"/>
+				<input type="hidden" name="orders[0].book_count" value=""/>
+			</form>
+			
+			
 		</div> <!-- End - content_area -->
 		
 		<!-- Footer 영역 -->
@@ -264,6 +271,8 @@ $(document).ready(function(){
 	
 }); // End - $(document).ready(function())
 
+
+
 /* 수량 버튼 조작 */
 let quantity = $(".quantity_input").val();
 $(".plus_btn").on("click", function() {
@@ -294,13 +303,12 @@ $(".btn_cart").on("click", function(e) {
 			type:		'POST',
 			data:		form,
 			success:	function(result) {
-				cartAlert(result);
+				cartAlert(result);	// 이건 호출하는거
 			} 
 	});
 });
 
-
-/* cartAlert */
+/* cartAlert(result) */				// 이건 호출할거 만든거
 function cartAlert(result) {
 	if(result == '0') {
 		alert("장바구니에 추가를 하지 못하였습니다.")
@@ -313,7 +321,13 @@ function cartAlert(result) {
 	}
 }
 	
-
+	
+/* 바로구매 버튼 */
+$(".btn_buy").on("click", function(){
+	let book_count = $(".quantity_input").val();
+	$(".order_form").find("input[name='orders[0].book_count']").val(book_count);
+	$(".order_form").submit();
+});
 
 
 

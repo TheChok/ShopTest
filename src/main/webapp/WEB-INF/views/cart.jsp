@@ -12,7 +12,7 @@
 	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	  crossorigin="anonymous">
 	</script>
-  
+	
 </head>
 <body>
 
@@ -134,8 +134,9 @@
 									<input type="hidden" 	class="individual_sale_price_input" 	value="${ci.sale_price }"/>
 									<input type="hidden" 	class="individual_book_count_input" 	value="${ci.book_count }" />
 									<input type="hidden" 	class="individual_total_price_input" 	value="${ci.sale_price * ci.book_count }" />
-									<input type="hidden" 	class="individual_point_input" 		value="${ci.point }" />
+									<input type="hidden" 	class="individual_point_input" 			value="${ci.point }" />
 									<input type="hidden" 	class="individual_total_point_input" 	value="${ci.totalPoint }" />
+									<input type="hidden"	class="individual_book_id_input"		value="${ci.book_id }"/>
 								</td>
 								<td class="td_width_2">
 									<div class="image_wrap" data-bookid="${ci.imageList[0].book_id}" data-path="${ci.imageList[0].uploadPath}" data-uuid="${ci.imageList[0].uuid}" data-filename="${ci.imageList[0].fileName}">
@@ -154,13 +155,15 @@
 										<button class="quantity_btn plus_btn">+</button>
 										<button class="quantity_btn minus_btn">-</button>
 									</div>
-									<a class="quantity_modify_btn" data-cartid="${ci.cart_id }">변경</a>
+									<a class="quantity_modify_btn" data-cartId="${ci.cart_id }">변경</a>
 								</td>
 								<td class="td_width_4 table_text_align_center">
 									<fmt:formatNumber value="${ci.sale_price * ci.book_count }" pattern="#,### 원"/>
 								</td>
-								<td class="td_width_4 table_text_align_center delete_btn">
-									<button class="delete_btn" data-subid="${ci.cart_id }">${ci.cart_id }</button>
+								<td class="td_width_4 table_text_align_center">
+									<div>
+										<button class="delete_btn" data-cartid="${ci.cart_id }">삭제</button>
+									</div>
 								</td>
 							</tr>
 						</c:forEach>
@@ -245,7 +248,7 @@
 			
 			<!-- 구매 버튼 영역 -->
 			<div class="content_btn_section">
-				<a>주문하기</a>
+				<a class="order_btn">주문하기</a>
 			</div>
 			
 			<!-- 수량 조정 form -->
@@ -261,6 +264,10 @@
 				<input type="hidden" name="member_id" value="${member.member_id}">
 			</form>
 			
+			<!-- 주문 form -->
+			<form action="/order/${member.member_id }" method="get" class="order_form">
+				
+			</form>
 			
 			
 		</div>	<!-- End - class="content_area" -->
@@ -432,13 +439,37 @@ $(".quantity_modify_btn").on("click", function(){
 
 /* 장바구니 삭제 버튼 */
 $(".delete_btn").on("click", function(e){
-	e.preventDefault();	
-	const cart_id = $(this).data("subid");
-	$(".delete_cart_id").val(cart_id);
-	alert(cart_id);
-	//$(".quantity_delete_form").submit();
+	e.preventDefault();
+	let cartId = $(this).data("cartid");
+	$(".delete_cart_id").val(cartId);
+	$(".quantity_delete_form").submit();
 });
 
+
+/* 주문 페이지 이동 */
+$(".order_btn").on("click", function(){
+	
+	let form_contents 	= '';
+	let orderNumber		= 0;
+	
+	$(".cart_info_td").each(function(index, element){
+		
+		let book_id 			= $(element).find(".individual_book_id_input").val();
+		let book_count 	 		= $(element).find(".individual_book_count_input").val();
+		
+		let book_id_input 		= "<input name='orders["+ orderNumber +"].book_id' type='hidden' value='"+ book_id +"'>";
+		form_contents += book_id_input;
+		
+		let book_count_input	= "<input name='orders["+ orderNumber +"].book_count type='hidden' value='"+ book_count +"'>";
+		form_contents += book_count_input;
+		
+		orderNumber += 1;
+	});
+	
+	$(".order_form").html(form_contents);
+	$(".order_form").submit();
+	
+});
 
 
 </script>
