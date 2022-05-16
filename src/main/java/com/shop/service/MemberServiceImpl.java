@@ -13,7 +13,7 @@ import com.shop.model.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	MemberMapper membermapper;
+	MemberMapper memberMapper;
 	
 	//----------------------------------------------------------------------------------//
 	// 회원 가입
@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void memberJoin(MemberVO memberVO) {
 		
-		membermapper.memberJoin(memberVO);		
+		memberMapper.memberJoin(memberVO);		
 		
 	}
 
@@ -30,17 +30,26 @@ public class MemberServiceImpl implements MemberService {
 	//----------------------------------------------------------------------------------//
 	@Override
 	public int idCheck(String member_id) throws Exception {
-
-		return membermapper.idCheck(member_id);
+		
+		return memberMapper.idCheck(member_id);
 	}
-
+	
 	//----------------------------------------------------------------------------------//
 	// 로그인
 	//----------------------------------------------------------------------------------//
 	@Override
 	public MemberVO memberLogin(MemberVO member) throws Exception {
 		
-		return membermapper.memberLogin(member);
+		return memberMapper.memberLogin(member);
+	}
+	
+	//----------------------------------------------------------------------------------//
+	// 주문자 정보
+	//----------------------------------------------------------------------------------//
+	@Override
+	public MemberVO getMemberInfo(String member_id) {
+		
+		return memberMapper.getMemberInfo(member_id);
 	}
 	
 	

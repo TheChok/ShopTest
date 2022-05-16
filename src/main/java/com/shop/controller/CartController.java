@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.model.CartDTO;
 import com.shop.model.MemberVO;
+import com.shop.model.OrderPageDTO;
 import com.shop.service.CartService;
 
 import lombok.extern.log4j.Log4j;

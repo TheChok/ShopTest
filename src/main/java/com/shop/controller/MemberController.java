@@ -27,7 +27,6 @@ import com.shop.service.MemberService;
 @Controller
 @RequestMapping(value="/member")
 public class MemberController {
-	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
@@ -38,6 +37,7 @@ public class MemberController {
 	
 	@Autowired
     private BCryptPasswordEncoder pwEncoder;
+	
 	
 	//-----------------------------------------------------------------------//
 	// 회원가입 페이지로 이동

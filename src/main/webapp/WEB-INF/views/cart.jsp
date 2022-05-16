@@ -255,7 +255,7 @@
 			<form action="/cart/update" method="post" class="quantity_update_form">
 				<input type="hidden" name="cart_id" 	class="update_cart_id"/>
 				<input type="hidden" name="book_count" 	class="update_book_count"/>
-				<input type="hidden" name="member_id" 	value="${member.member_id }"/>
+				<input type="hidden" name="member_id" 	value="${member.member_id}"/>
 			</form>
 			
 			<!-- 삭제 form -->
@@ -265,7 +265,7 @@
 			</form>
 			
 			<!-- 주문 form -->
-			<form action="/order/${member.member_id }" method="get" class="order_form">
+			<form action="/order/${member.member_id}" method="get" class="order_form">
 				
 			</form>
 			

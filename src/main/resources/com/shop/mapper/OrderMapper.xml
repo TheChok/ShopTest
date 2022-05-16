@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.shop.mapper.OrderMapper">
+	
+	<!-- 주문상품 정보 -->
+	<select id="getGoodsInfo" resultType="com.shop.model.OrderPageItemDTO">
+		SELECT 	book_id, book_name, book_price, book_discount 
+		FROM 	book_book
+		WHERE	book_id=#{book_id}
+	</select>
+	
+	
+	
+	
+	
+  </mapper>
