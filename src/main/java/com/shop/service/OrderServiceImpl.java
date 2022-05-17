@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.mapper.AttachMapper;
 import com.shop.mapper.OrderMapper;
+import com.shop.model.AttachImageVO;
 import com.shop.model.OrderPageItemDTO;
 
 //-----------------------------------------------------------------------------------------------------------------------//
@@ -16,7 +18,10 @@ import com.shop.model.OrderPageItemDTO;
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
-	private OrderMapper orderMapper;
+	private OrderMapper 	orderMapper;
+	
+	@Autowired
+	private AttachMapper	attachMapper;
 	
 	//-----------------------------------------------------------------------------------------//
 	// 주문상품 정보
@@ -32,6 +37,10 @@ public class OrderServiceImpl implements OrderService {
 			
 			goodsInfo.setBook_count(ord.getBook_count());
 			goodsInfo.initSaleTotal();
+			
+				// 이미지 추가
+				List<AttachImageVO> imageList = attachMapper.getAttachList(goodsInfo.getBook_id());
+				goodsInfo.setImageList(imageList);
 			
 			result.add(goodsInfo);
 		}

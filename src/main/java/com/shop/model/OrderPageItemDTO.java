@@ -1,5 +1,7 @@
 package com.shop.model;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +28,10 @@ public class OrderPageItemDTO {
 	private int		total_price;
 	private int		point;
 	private int		totalPoint;
+	
+	// 상품 이미지
+	private List<AttachImageVO> imageList; 
+	
 	
 	// initSaleTotal
 	public void initSaleTotal() {
