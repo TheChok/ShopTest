@@ -29,7 +29,7 @@ public class OrderItemDTO {
 	public void initSaleTotal() {
 		this.sale_price 	= (int)(this.book_price * (1 - this.book_discount));
 		this.total_price 	= this.sale_price * this.book_count;
-		this.savePoint		= (int)(Math.floor(this.sale_price));
+		this.savePoint		= (int)(Math.floor(this.sale_price * 0.05));
 		this.totalSavePoint = this.savePoint * this.book_count;
 	}
 	

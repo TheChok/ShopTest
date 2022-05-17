@@ -140,10 +140,10 @@
 										<td>
 											${memberInfo.member_addr1 }<br> ${memberInfo.member_addr2 }<br> ${memberInfo.member_addr3 }
 											<input type="hidden" class="selectAddress" 		value="T"/>
-											<input type="hidden" class="addressee_input" 	value="${memberInfo.member_name }"/>
-											<input type="hidden" class="address1_input" 	value="${memberInfo.member_addr1 }"/>
-											<input type="hidden" class="address2_input" 	value="${memberInfo.member_addr2 }"/>
-											<input type="hidden" class="address3_input" 	value="${memberInfo.member_addr3 }"/>
+											<input type="hidden" class="addressee_input1" 	value="${memberInfo.member_name }" >
+											<input type="hidden" class="address1_input1" 	value="${memberInfo.member_addr1 }"/>
+											<input type="hidden" class="address2_input1" 	value="${memberInfo.member_addr2 }"/>
+											<input type="hidden" class="address3_input1" 	value="${memberInfo.member_addr3 }"/>
 										</td>
 									</tr>
 								</tbody>
@@ -159,16 +159,16 @@
 									<tr>
 										<th>이름</th>
 										<td>
-											<input class="addressee_input"/>
+											<input class="addressee_input2"/>
 										</td>
 									</tr>
 									<tr>
 										<th>주소</th>
 										<td>
 											<input type="hidden" class="selectAddress" 		value="F"/>
-											<input class="address1_input" readonly="readonly"/><a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a><br>
-											<input class="address2_input" readonly="readonly"/><br>
-											<input class="address3_input" readonly="readonly"/>
+											<input class="address1_input2" readonly="readonly"/><a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a><br>
+											<input class="address2_input2" readonly="readonly"/><br>
+											<input class="address3_input2" readonly="readonly"/>
 										</td>
 									</tr>
 								</tbody>
@@ -299,9 +299,9 @@
 				<input type="hidden"  name="member_id" value="${memberInfo.member_id }"/>
 				<!-- 주소록 & 받는이 -->
 				<input type="hidden"  name="addressee"/>
-				<input type="hidden"  name="memberAddr1"/>
-				<input type="hidden"  name="memberAddr2"/>
-				<input type="hidden"  name="memberAddr3"/>
+				<input type="hidden"  name="member_addr1"/>
+				<input type="hidden"  name="member_addr2"/>
+				<input type="hidden"  name="member_addr3"/>
 				
 				<!-- 사용 포인트 -->
 				<input type="hidden"  name="usePoint"/>
@@ -453,14 +453,14 @@ function execution_daum_address(){
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            $(".address_input_1").val(data.zonecode);
+            $(".address1_input2").val(data.zonecode);
             //$("[name=memberAddr1]").val(data.zonecode);    // 대체가능
-            $(".address_input_2").val(addr);
+            $(".address2_input2").val(addr);
             //$("[name=memberAddr2]").val(addr);            // 대체가능
 
             // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
-            $(".address_input_3").attr("readonly", false);
-            $('.address_input_3').focus();
+            $(".address3_input2").attr("readonly", false);
+            $('.address3_input2').focus();
             
          }
     }).open();    
@@ -561,11 +561,19 @@ $(".order_btn").on("click", function(){
 
 	/* 주소 정보 & 받는이*/
 	$(".addressInfo_input_div").each(function(i, obj){
-		if($(obj).find(".selectAddress").val() === 'T'){
-			$("input[name='addressee']").val($(obj).find(".addressee_input").val());
-			$("input[name='memberAddr1']").val($(obj).find(".address1_input").val());
-			$("input[name='memberAddr2']").val($(obj).find(".address2_input").val());
-			$("input[name='memberAddr3']").val($(obj).find(".address3_input").val());
+		if($(obj).find(".selectAddress").val() == 'T'){
+			
+			$("input[name='addressee']").val($(obj).find(".addressee_input1").val());
+			$("input[name='member_addr1']").val($(obj).find(".address1_input1").val());
+			$("input[name='member_addr2']").val($(obj).find(".address2_input1").val());
+			$("input[name='member_addr3']").val($(obj).find(".address3_input1").val());
+			
+		} else if($(obj).find(".selectAddress").val() == 'F'){
+			
+			$("input[name='addressee']").val($(obj).find(".addressee_input2").val());
+			$("input[name='member_addr1']").val($(obj).find(".address1_input2").val());
+			$("input[name='member_addr2']").val($(obj).find(".address2_input2").val());
+			$("input[name='member_addr3']").val($(obj).find(".address3_input2").val());
 		}
 	});	
 	
@@ -575,12 +583,12 @@ $(".order_btn").on("click", function(){
 	/* 상품정보 */
 	let form_contents = ''; 
 	$(".goods_table_price_td").each(function(index, element){
-		let bookId = $(element).find(".individual_bookId_input").val();
-		let bookCount = $(element).find(".individual_bookCount_input").val();
-		let bookId_input = "<input name='orders[" + index + "].bookId' type='hidden' value='" + bookId + "'>";
-		form_contents += bookId_input;
-		let bookCount_input = "<input name='orders[" + index + "].bookCount' type='hidden' value='" + bookCount + "'>";
-		form_contents += bookCount_input;
+		let bookId 			= $(element).find(".individual_book_id_input").val();
+		let bookCount 		= $(element).find(".individual_book_count_input").val();
+		let bookId_input 	= "<input name='orders[" + index + "].book_id' 	  type='hidden' value='" + bookId + "'>";
+		form_contents 		+= bookId_input;
+		let bookCount_input = "<input name='orders[" + index + "].book_count' type='hidden' value='" + bookCount + "'>";
+		form_contents 		+= bookCount_input;
 	});	
 	$(".order_form").append(form_contents);	
 	
