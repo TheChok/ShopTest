@@ -140,10 +140,10 @@
 										<td>
 											${memberInfo.member_addr1 }<br> ${memberInfo.member_addr2 }<br> ${memberInfo.member_addr3 }
 											<input type="hidden" class="selectAddress" 		value="T"/>
-											<input type="hidden" class="addressee_input1" 	value="${memberInfo.member_name }" >
-											<input type="hidden" class="address1_input1" 	value="${memberInfo.member_addr1 }"/>
-											<input type="hidden" class="address2_input1" 	value="${memberInfo.member_addr2 }"/>
-											<input type="hidden" class="address3_input1" 	value="${memberInfo.member_addr3 }"/>
+											<input type="hidden" class="addressee_input" 	value="${memberInfo.member_name }" >
+											<input type="hidden" class="address1_input" 	value="${memberInfo.member_addr1 }"/>
+											<input type="hidden" class="address2_input" 	value="${memberInfo.member_addr2 }"/>
+											<input type="hidden" class="address3_input" 	value="${memberInfo.member_addr3 }"/>
 										</td>
 									</tr>
 								</tbody>
@@ -561,21 +561,14 @@ $(".order_btn").on("click", function(){
 
 	/* 주소 정보 & 받는이*/
 	$(".addressInfo_input_div").each(function(i, obj){
-		if($(obj).find(".selectAddress").val() == 'T'){
-			
-			$("input[name='addressee']").val($(obj).find(".addressee_input1").val());
-			$("input[name='member_addr1']").val($(obj).find(".address1_input1").val());
-			$("input[name='member_addr2']").val($(obj).find(".address2_input1").val());
-			$("input[name='member_addr3']").val($(obj).find(".address3_input1").val());
-			
-		} else if($(obj).find(".selectAddress").val() == 'F'){
-			
-			$("input[name='addressee']").val($(obj).find(".addressee_input2").val());
-			$("input[name='member_addr1']").val($(obj).find(".address1_input2").val());
-			$("input[name='member_addr2']").val($(obj).find(".address2_input2").val());
-			$("input[name='member_addr3']").val($(obj).find(".address3_input2").val());
+		if($(obj).find(".selectAddress").val() === 'T'){
+			$("input[name='addressee']").val($(obj).find(".addressee_input").val());
+			$("input[name='member_addr1']").val($(obj).find(".address1_input").val());
+			$("input[name='member_addr2']").val($(obj).find(".address2_input").val());
+			$("input[name='member_addr3']").val($(obj).find(".address3_input").val());
 		}
 	});	
+	
 	
 	/* 사용 포인트 */
 	$("input[name='usePoint']").val($(".order_point_input").val());	

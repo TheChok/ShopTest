@@ -22,7 +22,7 @@ public class OrderDTO {
 	private	String	member_addr2;		 // 회원주소
 	private	String	member_addr3;		 // 회원상세주소
 	
-	private String	order_state;		 // 주문상태
+	private String	order_state;		 	// 주문상태
 	private List<OrderItemDTO> 	orders;	 // 주문상품
 	private int		deliveryCost;		 // 배송비
 	private int 	usePoint;			 // 사용포인트

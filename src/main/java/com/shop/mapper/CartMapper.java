@@ -24,7 +24,8 @@ public interface CartMapper {
 	// 카트 삭제
 	public int deleteCart(int cart_id);
 	
-	
+	// 카트 제거(주문)
+	public int deleteOrderCart(CartDTO dto);
 	
 	
 } // End - public interface CartMapper
