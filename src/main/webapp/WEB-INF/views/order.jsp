@@ -561,7 +561,7 @@ $(".order_btn").on("click", function(){
 
 	/* 주소 정보 & 받는이*/
 	$(".addressInfo_input_div").each(function(i, obj){
-		if($(obj).find(".selectAddress").val() === 'T'){
+		if($(obj).find(".selectAddress").val() == 'T'){
 			$("input[name='addressee']").val($(obj).find(".addressee_input").val());
 			$("input[name='member_addr1']").val($(obj).find(".address1_input").val());
 			$("input[name='member_addr2']").val($(obj).find(".address2_input").val());
