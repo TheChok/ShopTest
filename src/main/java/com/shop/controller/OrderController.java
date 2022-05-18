@@ -60,9 +60,9 @@ public class OrderController {
 			memberLogin.setMember_pw("");
 			session.setAttribute("member", memberLogin);
 			
-		} catch(Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 			
+			e.printStackTrace();
 		}
 		
 		return "redirect:/main";

@@ -24,7 +24,7 @@
 	<insert id="enrollOrder">
 		INSERT 
 		INTO	book_order(order_id, addressee, member_id, member_addr1, member_addr2, member_addr3, order_state, deliveryCost, usePoint) 
-		VALUES	(#{order_id}, #{addressee}, #{member_id}, #{member_addr1}, #{member_addr2}, #{member_addr3}, #{order_state}, #{deliveryCost}, #{usePoint})
+		VALUES	(#{order_id}, #{addressee}, #{member_id}, #{member_addr1}, #{member_addr2}, #{member_addr3}, '배송준비', #{deliveryCost}, #{usePoint})
 	</insert>
 	
 	

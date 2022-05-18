@@ -36,6 +36,7 @@ import com.shop.model.AttachImageVO;
 import com.shop.model.AuthorVO;
 import com.shop.model.BookVO;
 import com.shop.model.Criteria;
+import com.shop.model.OrderDTO;
 import com.shop.model.PageDTO;
 import com.shop.service.AdminService;
 import com.shop.service.AuthorService;
@@ -499,6 +500,30 @@ public class AdminController {
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	} // End - public ResponseEntity<String> deleteFile(String fileName)
+	
+	
+	//------------------------------------------------------------------------------------------//	
+	// 주문 현황 페이지
+	//------------------------------------------------------------------------------------------//
+	@GetMapping("/orderList")
+	public String orderListGET(Criteria cri, Model model) {
+		
+		List<OrderDTO> list = adminService.getOrderList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("pageMaker", new PageDTO(cri, adminService.getOrderTotal(cri)));
+			
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+		
+		
+		return "/admin/orderList";
+	}
+	
+	
+	
 	
 	
 	

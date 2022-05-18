@@ -38,7 +38,7 @@ public class OrderMapperTests {
 		
 		OrderItemDTO order1 = new OrderItemDTO();
 		
-		order1.setBook_id(36);
+		order1.setBook_id(14);
 		order1.setBook_count(5);
 		order1.setBook_price(70000);
 		order1.setBook_discount(0.1);
@@ -60,7 +60,7 @@ public class OrderMapperTests {
 		
 	}
 */	
-/*	
+/*
 	// orderItem 테이블 등록
 	@Test
 	public void enrollOrderItemTest() {
@@ -68,7 +68,7 @@ public class OrderMapperTests {
 		OrderItemDTO oid = new OrderItemDTO();
 		
 		oid.setOrder_id("test1");
-		oid.setBook_id(35);
+		oid.setBook_id(14);
 		oid.setBook_count(5);
 		oid.setBook_price(70000);
 		oid.setBook_discount(0.1);
@@ -78,32 +78,32 @@ public class OrderMapperTests {
 		orderMapper.enrollOrderItem(oid);
 		
 	}
-*/	
-/*	
+*/
+/*
 	// 회원 돈, 포인트 정보 변경
 	@Test
 	public void deductMoneyTest() {
 		MemberVO member = new MemberVO();
 		
-		member.setMember_id("admin");
+		member.setMember_id("admin5");
 		member.setMoney(500000000);
 		member.setPoint(100000000);
 		
 		orderMapper.deductMoney(member);
 	}
 */	
-/*	
+/*
 	// 상품 재고 변경
 	@Test
 	public void deductStockTest() {
 		BookVO book = new BookVO();
 		
-		book.setBook_id(36);
+		book.setBook_id(14);
 		book.setBook_stock(256);
 		
 		orderMapper.deductStock(book);
 	}
-*/	
+*/
 	
 	
 	

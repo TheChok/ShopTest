@@ -11,6 +11,7 @@ import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
 import com.shop.model.CateVO;
 import com.shop.model.Criteria;
+import com.shop.model.OrderDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -133,6 +134,22 @@ public class AdminServiceImpl implements AdminService {
 	public List<AttachImageVO> getAttachInfo(int book_id) {
 		log.info("getAttachInfo.............");
 		return adminMapper.getAttachInfo(book_id);
+	}
+
+	//--------------------------------------------------------------------------------//
+	// 주문 상품 리스트
+	//--------------------------------------------------------------------------------//
+	@Override
+	public List<OrderDTO> getOrderList(Criteria cri) {
+		return adminMapper.getOrderList(cri);
+	}
+
+	//--------------------------------------------------------------------------------//
+	// 주문 총 갯수
+	//--------------------------------------------------------------------------------//
+	@Override
+	public int getOrderTotal(Criteria cri) {
+		return adminMapper.getOrderTotal(cri);
 	}
 	
 	
