@@ -8,7 +8,7 @@
 	<title>Welcome BookMall</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/goodsDetail.css?after"/>
 	<script
-src="https://code.jquery.com/jquery-3.4.1.js"
+	  src="https://code.jquery.com/jquery-3.4.1.js"
 	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	  crossorigin="anonymous">
 	</script>
@@ -173,7 +173,16 @@ src="https://code.jquery.com/jquery-3.4.1.js"
 				
 			</div>
 			<div class="content_bottom">
-				리뷰
+				<div class="reply_subject">
+					<h2>리뷰</h2>
+				</div>
+				
+				<c:if test="${member != null }">
+					<div class="reply_button_wrap">
+						<button>리뷰 쓰기</button>
+					</div>
+				</c:if>
+				
 			</div>		
 			
 			<!-- 주문 form -->
@@ -328,6 +337,27 @@ $(".btn_buy").on("click", function(){
 	$(".order_form").find("input[name='orders[0].book_count']").val(book_count);
 	$(".order_form").submit();
 });
+
+
+/* 리뷰쓰기 */
+$(".reply_button_wrap").on("click", function(e){
+	e.preventDefault();			
+	
+	const memberId = '${member.member_id}';
+	const bookId = '${goodsInfo.book_id}';
+
+	let popUrl = "/replyEnroll/" + memberId + "?book_id=" + bookId;
+	console.log(popUrl);
+	let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+	
+	window.open(popUrl,"리뷰 쓰기",popOption);
+	
+});
+
+
+
+
+
 
 
 
