@@ -124,7 +124,7 @@
 		    	where 	rownum <= #{pageNum} * #{amount} 
 		]]>    
 		<if test="keyword != null">
-				and memberId like '%'||#{keyword}||'%' 
+				and member_id like '%'||#{keyword}||'%' 
 		</if>
 		<![CDATA[
 		    

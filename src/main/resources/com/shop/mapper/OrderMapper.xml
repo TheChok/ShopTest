@@ -62,17 +62,17 @@
 	
 	<!-- 주문 상품 정보(주문취소) -->
 	<select id="getOrderItemInfo" resultType="com.shop.model.OrderItemDTO">
-		select 	*
-		from	book_orderItem;
-		where	order_id = ${order_id}
+		SELECT 	* 
+		FROM	book_orderitem 
+		WHERE 	order_id=#{order_id}
 	</select>
 	
 	
 	<!-- 주문 정보(주문취소) -->
 	<select id="getOrder" resultType="com.shop.model.OrderDTO">
-		select	* 
-		from	book_order 
-		where 	order_id=#{order_id}
+		SELECT	* 
+		FROM	book_order 
+		WHERE 	order_id= #{order_id}
 	</select>
 	
 	

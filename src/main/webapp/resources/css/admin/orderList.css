@@ -141,6 +141,18 @@ ul{
 .th_column_5{
 	width:				140px;
 }
+
+.delete_btn{
+	border:				none;
+	color:				white;
+	padding:			5px 15px;
+	cursor:				pointer;
+	background-color:	#F7564B;
+}
+.delete_btn:hover{
+	background-color:	#DA190B;
+}
+
 .table_empty{
 	height: 			50px;
     text-align: 		center;

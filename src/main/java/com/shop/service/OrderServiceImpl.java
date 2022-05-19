@@ -75,20 +75,21 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void order(OrderDTO ord) {
-		/* 사용할 데이터가져오기 */
-		/* 회원 정보 */
+		
+	/* 사용할 데이터가져오기 */
+		/* 1. 회원 정보 셋팅 */
 		MemberVO member = memberMapper.getMemberInfo(ord.getMember_id());
-		/* 주문 정보 */
+		
+		/* 2. 주문 정보 셋팅 */
 		List<OrderItemDTO> ords = new ArrayList<>();
-		for(OrderItemDTO oit : ord.getOrders()) {
+		for(OrderItemDTO oit : ord.getOrders()) {			// DB 처리 전 주문정보를 변수에 셋팅해준다.
+
 			OrderItemDTO orderItem = orderMapper.getOrderInfo(oit.getBook_id());
-			// 수량 셋팅
-			orderItem.setBook_count(oit.getBook_count());
-			// 기본정보 셋팅
-			orderItem.initSaleTotal();
-			//List객체 추가
-			ords.add(orderItem);
+			orderItem.setBook_count(oit.getBook_count());	// 수량 셋팅
+			orderItem.initSaleTotal();						// 기본정보 셋팅
+			ords.add(orderItem);							// List객체에 셋팅한 정보 추가
 		}
+		
 		/* OrderDTO 셋팅 */
 		ord.setOrders(ords);
 		ord.getOrderPriceInfo();
@@ -99,13 +100,13 @@ public class OrderServiceImpl implements OrderService {
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
 		String orderId = member.getMember_id() + format.format(date);
-		ord.setOrder_id(orderId);
+		ord.setOrder_id(orderId);					// DB에 입력할 Order_id 생성
 		
 		/* db넣기 */
-		orderMapper.enrollOrder(ord);		//vam_order 등록
-		for(OrderItemDTO oit : ord.getOrders()) {		//vam_orderItem 등록
+		orderMapper.enrollOrder(ord);				// book_order 등록
+		for(OrderItemDTO oit : ord.getOrders()) {	// book_orderItem 등록
 			oit.setOrder_id(orderId);
-			orderMapper.enrollOrderItem(oit);			
+			orderMapper.enrollOrderItem(oit);		// *** DB 처리 부분 ***
 		}
 
 	/* 비용 포인트 변동 적용 */
@@ -148,44 +149,44 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void orderCancel(OrderCancelDTO dto) {
-		// 주문, 주문상품 객체
-			// 회원
+		/* 주문, 주문상품 객체 */
+		
+			/*회원*/
 			MemberVO member = memberMapper.getMemberInfo(dto.getMember_id());
-			
-			// 주문상품
+			/*주문상품*/
 			List<OrderItemDTO> ords = orderMapper.getOrderItemInfo(dto.getOrder_id());
 			for(OrderItemDTO ord : ords) {
 				ord.initSaleTotal();
 			}
 			
-			// 주문
+			/* 주문 */
 			OrderDTO orw = orderMapper.getOrder(dto.getOrder_id());
 			orw.setOrders(ords);
 			orw.getOrderPriceInfo();
 			
-		// 주문상품 취소 DB
-		orderMapper.orderCancle(dto.getOrder_id());
-		
-		// 돈, 포인트, 재고 변환
-			// 돈
+		/* 주문상품 취소 DB */
+		orderMapper.orderCancle(dto.getOrder_id());			// 배송상태 -> '주문취소'로 변경
+			
+		/* 돈, 포인트, 재고 변환 */
+			/* 돈 */
 			int calMoney = member.getMoney();
 			calMoney += orw.getOrderFinalSalePrice();
 			member.setMoney(calMoney);
 			
-			// 포인트
+			/* 포인트 */
 			int calPoint = member.getPoint();
-			calPoint = calPoint = orw.getUsePoint() - orw.getOrderSavePoint();
+			calPoint = calPoint + orw.getUsePoint() - orw.getOrderSavePoint();
+			member.setPoint(calPoint);
 			
-				// DB 적용
-				orderMapper.deductMoney(member);
-			
-			// 재고
+			/* DB적용 */
+			orderMapper.deductMoney(member);
+				
+			/* 재고 */
 			for(OrderItemDTO ord : orw.getOrders()) {
 				BookVO book = bookMapper.getGoodsInfo(ord.getBook_id());
 				book.setBook_stock(book.getBook_stock() + ord.getBook_count());
 				orderMapper.deductStock(book);
-			}
-			
+			}		
 		
 	}
 	

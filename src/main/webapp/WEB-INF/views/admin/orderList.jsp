@@ -113,7 +113,15 @@
 	       		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"/>
 	       		<input type="hidden" name="amount" 	value="${pageMaker.cri.amount }"/>
 	       		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"/>
-	       	</form>
+			</form>
+			<form id="deleteForm" action="/admin/orderCancel" method="post">
+				<input type="hidden" name="order_id"/>
+				<input type="hidden" name="pageNum" 	value="${pageMaker.cri.pageNum }"/>
+				<input type="hidden" name="amount" 		value="${pageMaker.cri.amount }"/>
+				<input type="hidden" name="keyword" 	value="${pageMaker.cri.keyword }"/>
+				<input type="hidden" name="member_id" 	value="${member.member_id }"/>
+			</form>
+	       
 	       
 	    </div>	<!-- End - class="admin_content_wrap" -->
 	    
@@ -152,7 +160,16 @@ $(".pageMaker_btn a").on("click", function(e){
 });
 
 
-
+/* 삭제 버튼 */
+$(".delete_btn").on("click", function(e){
+	
+	e.preventDefault();
+	
+	let id = $(this).data("orderid");
+	
+	$("#deleteForm").find("input[name='order_id']").val(id);
+	$("#deleteForm").submit();
+});
 
 
 
