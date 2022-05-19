@@ -152,14 +152,14 @@ $(".cancel_btn").on("click", function(e){
 /* 등록 버튼 */
 $(".enroll_btn").on("click", function(e){
 
-	const book_id 	= '${bookInfo.book_id}';
-	const member_id 	= '${member_id}';
+	const bookId 	= '${bookInfo.book_id}';
+	const memberId 	= '${member_id}';
 	const rating 	= $("select").val();
 	const content 	= $("textarea").val();
 
 	const data = {
-			book_id : 	book_id,
-			member_id : member_id,
+			book_id : 	bookId,
+			member_id : memberId,
 			rating : 	rating,
 			content : 	content
 	}		
