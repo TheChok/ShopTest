@@ -36,10 +36,12 @@ import com.shop.model.AttachImageVO;
 import com.shop.model.AuthorVO;
 import com.shop.model.BookVO;
 import com.shop.model.Criteria;
+import com.shop.model.OrderCancelDTO;
 import com.shop.model.OrderDTO;
 import com.shop.model.PageDTO;
 import com.shop.service.AdminService;
 import com.shop.service.AuthorService;
+import com.shop.service.OrderService;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -57,6 +59,10 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private OrderService orderService;
+	
 
 	// 관리자 페이지 이동 및 관리
 	// 작가 등록 및 관리
@@ -501,7 +507,6 @@ public class AdminController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	} // End - public ResponseEntity<String> deleteFile(String fileName)
 	
-	
 	//------------------------------------------------------------------------------------------//	
 	// 주문 현황 페이지
 	//------------------------------------------------------------------------------------------//
@@ -521,6 +526,19 @@ public class AdminController {
 		
 		return "/admin/orderList";
 	}
+	
+	//------------------------------------------------------------------------------------------//	
+	// 주문 삭제
+	//------------------------------------------------------------------------------------------//
+	@PostMapping("/orderCancel")
+	public String orderCancelPOST(OrderCancelDTO dto) {
+		
+		orderService.orderCancel(dto);
+		
+		return "redirect:/admin/orderList?keyword="+ dto.getKeyword() +"&amount="+ dto.getAmount() +"&pageNum="+ dto.getPageNum();
+	}
+	
+	
 	
 	
 	

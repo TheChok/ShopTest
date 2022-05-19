@@ -18,6 +18,7 @@ import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
 import com.shop.model.CartDTO;
 import com.shop.model.MemberVO;
+import com.shop.model.OrderCancelDTO;
 import com.shop.model.OrderDTO;
 import com.shop.model.OrderItemDTO;
 import com.shop.model.OrderPageItemDTO;
@@ -139,6 +140,53 @@ public class OrderServiceImpl implements OrderService {
 			
 			cartMapper.deleteOrderCart(dto);
 		}
+	}
+	
+	//-----------------------------------------------------------------------------------------//
+	// 주문 취소
+	//-----------------------------------------------------------------------------------------//
+	@Override
+	@Transactional
+	public void orderCancel(OrderCancelDTO dto) {
+		// 주문, 주문상품 객체
+			// 회원
+			MemberVO member = memberMapper.getMemberInfo(dto.getMember_id());
+			
+			// 주문상품
+			List<OrderItemDTO> ords = orderMapper.getOrderItemInfo(dto.getOrder_id());
+			for(OrderItemDTO ord : ords) {
+				ord.initSaleTotal();
+			}
+			
+			// 주문
+			OrderDTO orw = orderMapper.getOrder(dto.getOrder_id());
+			orw.setOrders(ords);
+			orw.getOrderPriceInfo();
+			
+		// 주문상품 취소 DB
+		orderMapper.orderCancle(dto.getOrder_id());
+		
+		// 돈, 포인트, 재고 변환
+			// 돈
+			int calMoney = member.getMoney();
+			calMoney += orw.getOrderFinalSalePrice();
+			member.setMoney(calMoney);
+			
+			// 포인트
+			int calPoint = member.getPoint();
+			calPoint = calPoint = orw.getUsePoint() - orw.getOrderSavePoint();
+			
+				// DB 적용
+				orderMapper.deductMoney(member);
+			
+			// 재고
+			for(OrderItemDTO ord : orw.getOrders()) {
+				BookVO book = bookMapper.getGoodsInfo(ord.getBook_id());
+				book.setBook_stock(book.getBook_stock() + ord.getBook_count());
+				orderMapper.deductStock(book);
+			}
+			
+		
 	}
 	
 	

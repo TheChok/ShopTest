@@ -52,10 +52,28 @@
 	</update>
 	
 	
+	<!-- 주문 취소 -->
+	<update id="orderCancle">
+		UPDATE 	book_order 
+		SET 	order_state= '주문취소' 
+		WHERE 	order_id=#{order_id}
+	</update>
 	
 	
+	<!-- 주문 상품 정보(주문취소) -->
+	<select id="getOrderItemInfo" resultType="com.shop.model.OrderItemDTO">
+		select 	*
+		from	book_orderItem;
+		where	order_id = ${order_id}
+	</select>
 	
 	
+	<!-- 주문 정보(주문취소) -->
+	<select id="getOrder" resultType="com.shop.model.OrderDTO">
+		select	* 
+		from	book_order 
+		where 	order_id=#{order_id}
+	</select>
 	
 	
 	
