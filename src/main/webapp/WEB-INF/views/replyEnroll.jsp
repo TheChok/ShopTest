@@ -19,7 +19,8 @@
 	/* 전체 배경화면 색상 */
 	.wrapper_div{
 		background-color:	#F5F5F5;
-		height:				100%;
+		height:				auto;
+		width:				auto;
 	}
 	
 	/* 팝업창 제목 */
@@ -165,17 +166,24 @@ $(".enroll_btn").on("click", function(e){
 	}		
 	
 	$.ajax({
-		data : data,
-		type : 'POST',
-		url : '/reply/enroll',
-		success : function(result){
+		data : 		data,
+		type : 		'POST',
+		url : 		'/reply/enroll',
+		success : 	function(result){
+			
+			// 댓글 초기화
+			$(opener.location).attr("href", "javascript:replyListInit();");s
+			
 			window.close();
+		},
+		error :		function(data){
+			alert("에러 발생");
 		}
 		
-	});		
+	});	
+	
 	
 });
-
 
 
 </script>	

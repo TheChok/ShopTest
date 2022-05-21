@@ -11,15 +11,44 @@
  		values	(test_SEQ.nextval, #{book_id}, #{member_id}, #{content}, #{rating})
  	</insert>
  	
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ 	
+ 	<!-- 댓글 존재 체크 -->
+ 	<select id="checkReply" resultType="Integer">
+ 		select 	reply_id 
+ 		from	test_reply 
+ 		where	member_id=#{member_id} AND book_id=#{book_id}
+ 	</select>
+ 	
+ 	
+	<!-- 댓글 페이징 -->
+  	<select id="getReplyList" resultType="com.shop.model.ReplyDTO">
+  	
+  		<![CDATA[
+		SELECT * FROM
+		(  		
+			select 	rownum as rn, reply_id, book_id, member_id, content, rating, regDate
+			from 	test_reply
+			where 	rownum <= #{pageNum} * #{amount}  and bookId = #{bookId}	
+			order by regDate desc  	
+  		)
+  		WHERE rn > (#{pageNum} -1) * #{amount}
+  		]]>	
+  		
+  	</select>
+  	
+  	
+  	<!-- 댓글 총 갯수 -->
+  	<select id="getReplyTotal" resultType="int">
+  		SELECT 	count(*)
+  		FROM 	test_reply
+  		WHERE 	book_id = #{book_id}
+  	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
   </mapper>

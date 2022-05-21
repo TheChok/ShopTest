@@ -18,7 +18,7 @@ public class Criteria {
 	private String	keyword;		// 검색 키워드
 	private String	authorArr[]; 	// 작가 리스트
 	private String	cateCode;		// 카테고리 코드
-	
+	private int 	book_id;		// 상품 번호(댓글 기능에서 사용)
 	
 	// 생성자
 	public Criteria(int pageNum, int amount) {
