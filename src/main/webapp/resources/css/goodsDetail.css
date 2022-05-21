@@ -274,7 +274,7 @@ a{
 	margin:				auto;
 }
 .reply_content_ul{
-	list_style:			none;
+	list-style:			none;
 }
 .comment_wrap{
 	position:			relative;

@@ -39,10 +39,16 @@ public class ReplyController {
 	//------------------------------------------------------------------------------------//
 	@RequestMapping(value="/check", method=RequestMethod.POST)
 	public String replyCheckPOST(ReplyDTO dto) {
-		
 		return replyService.checkReply(dto);
 	}
-
+	
+	//------------------------------------------------------------------------------------//
+	/* 댓글 페이징 */
+	//------------------------------------------------------------------------------------//
+	@GetMapping(value="/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ReplyPageDTO replyListPOST(Criteria cri) {
+		return replyService.replyList(cri);
+	}
 	
 	
 	

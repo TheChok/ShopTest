@@ -24,13 +24,14 @@
   	<select id="getReplyList" resultType="com.shop.model.ReplyDTO">
   	
   		<![CDATA[
-		SELECT * FROM
-		(  		
-			select 	rownum as rn, reply_id, book_id, member_id, content, rating, regDate
-			from 	test_reply
-			where 	rownum <= #{pageNum} * #{amount}  and bookId = #{bookId}	
-			order by regDate desc  	
-  		)
+		SELECT * FROM 
+		( 
+			select 	rownum as rn, reply_id, book_id, member_id, content, rating, regDate 
+			from 	test_reply 
+			where 	rownum <= #{pageNum} * #{amount} 
+			and 	book_id = #{book_id} 
+			order by regDate desc 
+  		) 
   		WHERE rn > (#{pageNum} -1) * #{amount}
   		]]>	
   		

@@ -27,7 +27,7 @@
 						<a href="/member/login">로그인</a>
 					</li>
 					<li>
-						<a href="member/join">회원가입</a>
+						<a href="/member/join">회원가입</a>
 					</li>
 				</c:if>
 				<c:if test="${member != null }">
@@ -330,16 +330,25 @@ $(document).ready(function(){
 	const book_id = '${goodsInfo.book_id}';	
 
 	$.getJSON("/reply/list", {book_id : book_id}, function(obj){
-		
 		makeReplyContent(obj);
-		
 	});	
 	
 	
 	
 }); // End - $(document).ready(function())
 
-
+/* gnb_area 로그아웃 버튼 작동 */
+$("#gnb_logout_button").click(function(){
+    //alert("버튼 작동");
+    $.ajax({
+        type:"POST",
+        url:"/member/logout.do",
+        success:function(data){
+            //alert("로그아웃 성공");
+            document.location.reload();     
+        } 
+    }); // ajax 
+});
 
 /* 수량 버튼 조작 */
 let quantity = $(".quantity_input").val();
@@ -434,36 +443,42 @@ const cri = {
 	book_id : '${goodsInfo.book_id}',
 	pageNum : 1,
 	amount : 10
-}	
+}
 
+/* 댓글 페이지 이동 버튼 동작 */
+$(document).on('click', '.pageMaker_btn a', function(e){
+	e.preventDefault();
+	
+	let page = $(this).attr("href");	
+	cri.pageNum = page;		
+	
+	replyListInit();
+
+ });
 
 /* 댓글 데이터 서버 요청 및 댓글 동적 생성 메서드 */
-let replyListInit = function() {
-	$.getJSON("reply/list", cri, function(obj){
+let replyListInit = function(){
+	$.getJSON("/reply/list", cri , function(obj){
 		makeReplyContent(obj);
 	});
 }
 
-
 /* 댓글(리뷰) 동적 생성 메서드 */
 function makeReplyContent(obj){
 	
-	if(obj.list.length == 0){
-		$(".reply_not_div").html('<span>리뷰가 없습니다.</span>');
+	if(obj.list.length === 0) {
+		$(".reply_not_div").html('<span>등록된 리뷰가 없습니다.</span>');
 		$(".reply_content_ul").html('');
 		$(".pageMaker").html('');
-		
-	} else{
-		
+	} else {
 		$(".reply_not_div").html('');
 		
 		const list = obj.list;
 		const pf = obj.pageInfo;
-		const userId = '${member.member_id}';		
+		const user_id = '${member.member_id}';	
 		
 		/* list */
-		
-		let reply_list = '';			
+		let reply_list = '';		
 		
 		$(list).each(function(i,obj){
 			reply_list += '<li>';
@@ -475,7 +490,7 @@ function makeReplyContent(obj){
 			reply_list += '<span class="date_span">'+ obj.regDate +'</span>';
 			/* 평점 */
 			reply_list += '<span class="rating_span">평점 : <span class="rating_value_span">'+ obj.rating +'</span>점</span>';
-			if(obj.member_id == user_id){
+			if(obj.member_id === user_id){
 				reply_list += '<a class="update_reply_btn" href="'+ obj.reply_id +'">수정</a><a class="delete_reply_btn" href="'+ obj.reply_id +'">삭제</a>';
 			}
 			reply_list += '</div>'; //<div class="reply_top">
@@ -486,15 +501,15 @@ function makeReplyContent(obj){
 			reply_list += '</li>';
 		});		
 		
-		$(".reply_content_ul").html(reply_list);			
+		
+		$(".reply_content_ul").html(reply_list);
 		
 		/* 페이지 버튼 */
-		
 		let reply_pageMaker = '';	
 		
 			/* prev */
 			if(pf.prev){
-				let prev_num = pf.pageStart - 1;
+				let prev_num = pf.pageStart -1;
 				reply_pageMaker += '<li class="pageMaker_btn prev">';
 				reply_pageMaker += '<a href="'+ prev_num +'">이전</a>';
 				reply_pageMaker += '</li>';	
@@ -502,7 +517,7 @@ function makeReplyContent(obj){
 			/* numbre btn */
 			for(let i = pf.pageStart; i < pf.pageEnd+1; i++){
 				reply_pageMaker += '<li class="pageMaker_btn ';
-				if(pf.cri.pageNum == i){
+				if(pf.cri.pageNum === i){
 					reply_pageMaker += 'active';
 				}
 				reply_pageMaker += '">';
@@ -511,20 +526,17 @@ function makeReplyContent(obj){
 			}
 			/* next */
 			if(pf.next){
-				let next_num = pf.pageEnd + 1;
+				let next_num = pf.pageEnd +1;
 				reply_pageMaker += '<li class="pageMaker_btn next">';
 				reply_pageMaker += '<a href="'+ next_num +'">다음</a>';
 				reply_pageMaker += '</li>';	
 			}	
 			
-			console.log(reply_pageMaker);
-		$(".pageMaker").html(reply_pageMaker);				
+		$(".pageMaker").html(reply_pageMaker);	
 		
-	}		
+	}
 	
 }
-
-
 
 </script>
 
