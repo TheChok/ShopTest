@@ -58,9 +58,14 @@ public class ReplyController {
 		replyService.updateReply(dto);
 	}
 	
-	
-	
-	
+	//------------------------------------------------------------------------------------//
+	// 댓글 삭제
+	//------------------------------------------------------------------------------------//
+	@PostMapping("/delete")
+	public void replyDeletePOST(ReplyDTO dto) {
+		System.out.println("댓글 삭제 컨트롤러에 진입했습니다.");
+		replyService.deleteReply(dto);
+	}
 	
 	
 	

@@ -130,7 +130,7 @@
 			</select>
 		</div>
 		<div class="content_div">
-			<h4>리뷰</h4>
+			<h4>리뷰 수정</h4>
 			<textarea name="content">${replyInfo.content }</textarea>
 		</div>
 		
@@ -145,13 +145,51 @@
 	
 <script>
 
-$(".cancel_btn").on("click", function(e){
+$(document).ready(function(){
+
+	let rating = '${replyInfo.rating}';		
+
+	$("option").each(function(i,obj){
+		if(rating === $(obj).val()){
+			$(obj).attr("selected", "selected");
+		}
+	});		
+	
+});	
+
+// 취소 버튼
+$(".cancel_btn").on("click", function(){
 	window.close();
 });
-	
-	
-});
 
+// 등록 버튼
+$(".update_btn").on("click", function(){
+	
+	const reply_id = '${replyInfo.reply_id}';
+	const book_id = '${replyInfo.book_id}';
+	const member_id = '${member_id}';
+	const rating = $("select").val();
+	const content = $("textarea").val();		
+	
+	const data = {
+			reply_id : reply_id,
+			book_id : book_id,
+			member_id : member_id,
+			rating : rating,
+			content : content
+	}	
+	
+	$.ajax({
+		data : data,
+		type : 'POST',
+		url : '/reply/update',
+		success : function(result){
+			$(opener.location).attr("href", "javascript:replyListInit();");
+			window.close();
+		}			
+	});		
+	
+});	
 
 
 

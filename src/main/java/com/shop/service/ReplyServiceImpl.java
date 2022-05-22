@@ -44,8 +44,6 @@ public class ReplyServiceImpl implements ReplyService {
 			return "0";
 		}
 		
-		
-		
 	}
 	
 	//--------------------------------------------------------------------------------------//
@@ -81,19 +79,16 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyMapper.getUpdateReply(reply_id);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//--------------------------------------------------------------------------------------//
+	// 댓글 삭제
+	//--------------------------------------------------------------------------------------//
+	@Override
+	public int deleteReply(ReplyDTO dto) {
+		
+		int result = replyMapper.deleteReply(dto.getReply_id());
+		
+		return result;
+	}
 	
 	
 	

@@ -62,7 +62,12 @@
  	</select>
  	
  	
- 	
+ 	<!-- 댓글 삭제 -->
+ 	<delete id="deleteReply">
+ 		DELETE 
+ 		FROM 	test_reply 
+ 		WHERE	reply_id=#{reply_id}
+ 	</delete>
  	
  	
  	

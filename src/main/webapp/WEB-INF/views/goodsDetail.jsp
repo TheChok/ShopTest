@@ -474,6 +474,28 @@ $(document).on('click', '.update_reply_btn', function(e){
 	window.open(popUrl,"리뷰 수정",popOption);
 });	
 
+/* 리뷰 삭제 버튼 */
+$(document).on('click', '.delete_reply_btn', function(e){
+	e.preventDefault();
+	
+	let reply_id = $(this).attr("href");	
+
+	$.ajax({
+		data : {
+			reply_id : reply_id,
+			book_id : '${goodsInfo.book_id}'
+		},
+		url : '/reply/delete',
+		type : 'POST',
+		success : function(result){
+			replyListInit();
+			alert('삭제가 완료되엇습니다.');
+		}
+	});		
+		
+});	
+
+
 /* 댓글(리뷰) 동적 생성 메서드 */
 function makeReplyContent(obj){
 	
