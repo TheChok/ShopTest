@@ -30,7 +30,7 @@
 			from 	test_reply 
 			where 	rownum <= #{pageNum} * #{amount} 
 			and 	book_id = #{book_id} 
-			order by regDate desc 
+			order by reply_id desc 
   		) 
   		WHERE rn > (#{pageNum} -1) * #{amount}
   		]]>	
@@ -44,6 +44,23 @@
   		FROM 	test_reply
   		WHERE 	book_id = #{book_id}
   	</select>
+ 	
+ 	
+ 	<!-- 댓글 수정 -->
+ 	<update id="updateReply">
+ 		UPDATE 	test_reply 
+ 		SET		content=#{content}, rating=#{rating} 
+ 		WHERE	reply_id=#{reply_id}
+ 	</update>
+ 	
+ 	
+ 	<!-- 댓글 한 개 정보(수정페이지) -->
+ 	<select id="getUpdateReply" resultType="com.shop.model.ReplyDTO">
+ 		SELECT	* 
+ 		FROM	test_reply 
+ 		WHERE	reply_id=#{reply_id}
+ 	</select>
+ 	
  	
  	
  	

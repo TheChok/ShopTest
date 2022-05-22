@@ -463,6 +463,17 @@ let replyListInit = function(){
 	});
 }
 
+/* 리뷰 수정 버튼 */
+$(document).on('click', '.update_reply_btn', function(e){
+	e.preventDefault();
+	
+	let reply_id = $(this).attr("href");
+	let popUrl = "/replyUpdate?reply_id=" + reply_id + "&book_id=" + '${goodsInfo.book_id}' + "&member_id=" + '${member.member_id}';	
+	let popOption = "width = 490px, height=450px, top=300px, left=300px, scrollbars=yes"	
+	
+	window.open(popUrl,"리뷰 수정",popOption);
+});	
+
 /* 댓글(리뷰) 동적 생성 메서드 */
 function makeReplyContent(obj){
 	

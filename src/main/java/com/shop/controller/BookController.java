@@ -25,7 +25,9 @@ import com.shop.model.AttachImageVO;
 import com.shop.model.BookVO;
 import com.shop.model.Criteria;
 import com.shop.model.PageDTO;
+import com.shop.model.ReplyDTO;
 import com.shop.service.BookService;
+import com.shop.service.ReplyService;
 
 //---------------------------------------------------------------------------//
 // public class BookController
@@ -36,10 +38,14 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	@Autowired
-	private AttachMapper attachMapper;
+	private AttachMapper 	attachMapper;
 	
 	@Autowired
-	private BookService bookService;
+	private BookService 	bookService;
+	
+	@Autowired
+	private ReplyService 	replyService;
+	
 	
 	//---------------------------------------------------------------------------//
 	// 메인페이지로 이동
@@ -146,8 +152,20 @@ public class BookController {
 		return "/replyEnroll";
 	}	
 	
-	
-	
+	//------------------------------------------------------------------------------------------//
+	// 리뷰 수정 팝업창
+	//------------------------------------------------------------------------------------------//
+	@GetMapping("/replyUpdate")
+	public String replyUpdateWindowGET(ReplyDTO dto, Model model) {
+		System.out.println("리뷰 수정 컨트롤러에 진입했습니다.");
+		
+		BookVO book = bookService.getBookIdName(dto.getBook_id());
+		model.addAttribute("bookInfo", book);
+		model.addAttribute("replyInfo", replyService.getUpdateReply(dto.getReply_id()));
+		model.addAttribute("member_id", dto.getMember_id());
+		
+		return "/replyUpdate";
+	}
 	
 	
 	

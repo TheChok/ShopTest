@@ -22,6 +22,15 @@ public interface ReplyMapper {
 	// 댓글 총 갯수(페이징)
 	public int getReplyTotal(int book_id);
 	
+	// 댓글 수정
+	public int updateReply(ReplyDTO dto);
+	
+	// 댓글 한 개 정보(수정페이지)
+	public ReplyDTO getUpdateReply(int reply_id);
+	
+	
+	
+	
 	
 	
 	
