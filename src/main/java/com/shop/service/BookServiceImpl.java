@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.mapper.AdminMapper;
 import com.shop.mapper.AttachMapper;
@@ -14,6 +15,7 @@ import com.shop.model.BookVO;
 import com.shop.model.CateFilterDTO;
 import com.shop.model.CateVO;
 import com.shop.model.Criteria;
+import com.shop.model.SelectDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -150,6 +152,23 @@ public class BookServiceImpl implements BookService {
 	public BookVO getBookIdName(int book_id) {
 		
 		return bookMapper.getBookIdName(book_id);
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------------------------//
+	// 평점 순 상품 정보
+	//-----------------------------------------------------------------------------------------------------------------------------//
+	@Override
+	public List<SelectDTO> likeSelect() {
+		
+		List<SelectDTO> list = bookMapper.likeSelect();
+		
+		list.forEach(dto -> {
+			int book_id = dto.getBook_id();
+			List<AttachImageVO> imageList = attachMapper.getAttachList(book_id);
+			dto.setImageList(imageList);
+		});
+		
+		return list;
 	}
 	
 	

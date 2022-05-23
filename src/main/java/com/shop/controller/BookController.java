@@ -56,6 +56,9 @@ public class BookController {
 		
 		model.addAttribute("cate1", bookService.getCateCode1());
 		model.addAttribute("cate2", bookService.getCateCode2());
+		model.addAttribute("ls", 	bookService.likeSelect());
+		
+		System.out.println("ls 요청 결과 값 : " + bookService.likeSelect());
 	}
 	
 	

@@ -6,6 +6,7 @@ import com.shop.model.BookVO;
 import com.shop.model.CateFilterDTO;
 import com.shop.model.CateVO;
 import com.shop.model.Criteria;
+import com.shop.model.SelectDTO;
 
 //-------------------------------------------------------------------------------------------------------------//
 // public interface BookService
@@ -33,7 +34,8 @@ public interface BookService {
 	// 상품 id 이름
 	public BookVO getBookIdName(int book_id);
 	
-	
+	// 평점 순 상품 정보
+	public List<SelectDTO> likeSelect();
 	
 	
 	

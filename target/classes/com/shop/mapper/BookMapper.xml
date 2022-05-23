@@ -159,7 +159,19 @@
 	</select>
 	
 	
-	
+	<!-- 평점 순 상품 정보 -->
+	<select id="likeSelect" resultType="com.shop.model.SelectDTO">
+		SELECT * FROM
+		(
+		    	select	book_id, book_name, ratingAvg, 
+		                (select cate_name from book_cate where book_book.cateCode=book_cate.cateCode) as cate_name 
+		    	from	book_book
+		    	order by ratingAvg desc nulls last
+		)
+		<![CDATA[
+		WHERE rownum < 9
+		]]>
+	</select>
 	
 	
   </mapper>

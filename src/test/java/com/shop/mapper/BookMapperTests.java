@@ -1,12 +1,14 @@
 package com.shop.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.shop.model.BookVO;
+import com.shop.model.SelectDTO;
 import com.shop.service.BookService;
 
 //----------------------------------------------------------------------------------------------------------------------//
@@ -130,7 +132,7 @@ public class BookMapperTests {
 		
 	}
 */	
-	
+/*	
 	// 상품 상세 정보
 	@Test
 	public void getGoodsInfoTest() {
@@ -143,11 +145,19 @@ public class BookMapperTests {
 		System.out.println("book_id : " + goodsInfo.getBook_id());
 		System.out.println("이미지 정보 : " + goodsInfo.getImageList().isEmpty());
 		
+	}
+*/	
+	
+	// 평점 순 상품 정보
+	@Test
+	public void likeSelect() {
+		
+		List<SelectDTO> list = bookService.likeSelect();
+		
+		System.out.println("결과값 : " + list);
+		
 		
 	}
-	
-	
-	
 	
 	
 }

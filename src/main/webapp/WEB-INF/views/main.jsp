@@ -78,10 +78,12 @@
 			<div class="login_area">
 			
 				<!-- 로그인 하지 않은 상태 -->
+				<!-- 
 				<c:if test="${member == null }">
 					<div class="login_button"><a href="/member/login">로그인</a></div>
 					<span><a href="/member/join">회원가입</a></span>
 				</c:if>
+				 -->
 				
 				<!-- 로그인 한 상태 -->
 				<c:if test="${member != null }">
@@ -147,7 +149,37 @@
 				</div>
 			</div>
 			
-		</div>
+			<div class="ls_wrap">
+				<div class="ls_div_subject">
+					평점순 상품
+				</div>
+				<div class="ls_div">
+					<c:forEach items="${ls}" var="ls">
+						<a href="/goodsDetail/${ls.book_id}">
+							<div class="ls_div_content_wrap">
+								<div class="ls_div_content">
+									
+									<div class="image_wrap" data-bookid="${ls.imageList[0].book_id}" data-path="${ls.imageList[0].uploadPath}" data-uuid="${ls.imageList[0].uuid}" data-filename="${ls.imageList[0].fileName}">
+										<img>
+									</div>
+									
+									<div class="ls_category">
+										${ls.cate_name}
+									</div>
+									<div class="ls_rating">
+										${ls.ratingAvg}
+									</div>
+									<div class="ls_bookName">
+										${ls.book_name}
+									</div>							
+								</div>
+							</div>
+						</a>					
+					</c:forEach>					
+				</div>
+			</div>
+			
+		</div> <!-- End - class="content_area" -->
 		
 		
 		<!-- Footer 영역 -->
@@ -197,13 +229,38 @@
 
 $(document).ready(function(){
 	
+	// 슬라이드 처리
 	$(".slide_div").slick({
 		dots : true,
 		autoplay : true,
-		autoplaySpeed : 6000,
+		autoplaySpeed : 3000
 	});
 	
+	$(".ls_div").slick({
+		slidesToShow: 4,
+		slidesToScroll: 4,
+		prevArrow : "<button type='button' class='ls_div_content_prev'><</button>",		// 이전 화살표 모양 설정
+		nextArrow : "<button type='button' class='ls_div_content_next'>></button>"		// 다음 화살표 모양 설정
+	});
 	
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+			
+		if(bobj.data("bookid")) {
+			const uploadPath = bobj.data("path");
+			const uuid = bobj.data("uuid");
+			const fileName = bobj.data("filename");
+			
+			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			
+			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+			
+		} else {
+			$(this).find("img").attr('src', '/resources/img/goodsNoImage.png');
+		}
+	});
 	
 	
 });
