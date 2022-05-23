@@ -217,6 +217,28 @@ a{
 	color:				#606267;
 }
 
+/* 슬라이드 옵션 */
+.slick-prev{
+	left: 				160px;
+    z-index: 			1;
+}
+.slick-next{
+	right: 				160px;
+    z-index: 			1;
+}
+.slide_div img{
+	margin: 			auto;
+}
+.slide_div_wrap{
+	padding: 			15px 0 15px 0;
+    background: 		#E6E9F6;
+}
+.image_wrap img{
+	max-width: 			85%;
+    height: 			auto;
+    display: 			block;
+	margin: 			auto;
+}
 
 /* footer navai 영역 */
 .footer_nav{

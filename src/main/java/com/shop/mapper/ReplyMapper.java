@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shop.model.Criteria;
 import com.shop.model.ReplyDTO;
+import com.shop.model.UpdateReplyDTO;
 
 //-------------------------------------------------------------------------------------------------------//
 // public interface ReplyMapper
@@ -30,6 +31,12 @@ public interface ReplyMapper {
 	
 	// 댓글 삭제
 	public int deleteReply(int reply_id);
+	
+	// 평점 평균 구하기
+	public Double getRatingAverage(int book_id);
+	
+	// 평점 평균 반영하기
+	public int updateRating(UpdateReplyDTO dto);
 	
 	
 	

@@ -27,7 +27,7 @@ public interface ReplyService {
 	// 댓글 삭제
 	public int deleteReply(ReplyDTO dto);
 	
-	
+
 	
 	
 	

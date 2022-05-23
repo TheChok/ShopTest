@@ -2,12 +2,14 @@ package com.shop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shop.mapper.ReplyMapper;
 import com.shop.model.Criteria;
 import com.shop.model.PageDTO;
 import com.shop.model.ReplyDTO;
 import com.shop.model.ReplyPageDTO;
+import com.shop.model.UpdateReplyDTO;
 
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -26,6 +28,8 @@ public class ReplyServiceImpl implements ReplyService {
 	public int enrollReply(ReplyDTO dto) {
 		
 		int result = replyMapper.enrollReply(dto);
+		
+		setRating(dto.getBook_id());
 		
 		return result;
 	}
@@ -67,6 +71,8 @@ public class ReplyServiceImpl implements ReplyService {
 		
 		int result = replyMapper.updateReply(dto);
 		
+		setRating(dto.getBook_id());
+		
 		return result;
 	}
 
@@ -87,9 +93,32 @@ public class ReplyServiceImpl implements ReplyService {
 		
 		int result = replyMapper.deleteReply(dto.getReply_id());
 		
+		setRating(dto.getBook_id());
+		
 		return result;
 	}
 	
+	//--------------------------------------------------------------------------------------//
+	// 평점 평균 반영 및 등록
+	//--------------------------------------------------------------------------------------//
+	@Transactional
+	public void setRating(int book_id) {
+		
+		Double ratingAvg = replyMapper.getRatingAverage(book_id);
+		
+		if(ratingAvg == null) ratingAvg = 0.0;
+		
+		ratingAvg = (double)(Math.round(ratingAvg*10));
+		ratingAvg = ratingAvg / 10;
+		
+		UpdateReplyDTO urd = new UpdateReplyDTO();
+		urd.setBook_id(book_id);
+		urd.setRatingAvg(ratingAvg);
+		
+		replyMapper.updateRating(urd);
+		
+		
+	}
 	
 	
 	

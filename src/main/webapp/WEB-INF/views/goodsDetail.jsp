@@ -179,7 +179,7 @@
 				
 				<c:if test="${member != null }">
 					<div class="reply_button_wrap">
-						<button>리뷰 쓰기</button>
+						<button class="reply_button_wrap1">리뷰 쓰기</button>
 					</div>
 				</c:if>
 				
@@ -408,7 +408,7 @@ $(".btn_buy").on("click", function(){
 
 
 /* 리뷰쓰기 */
-$(".reply_button_wrap").on("click", function(e){
+$(".reply_button_wrap1").on("click", function(e){
 	e.preventDefault();			
 	
 	const member_id = '${member.member_id}';
