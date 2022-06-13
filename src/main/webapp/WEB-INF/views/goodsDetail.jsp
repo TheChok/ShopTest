@@ -163,9 +163,11 @@
 			</div>	
 			<div class="content_middle">
 				<div class="book_intro">
+					<h2>책소개</h2><br><br>
 					${goodsInfo.book_intro }
-				</div>
+				</div><br><br><hr>
 				<div class="book_content">
+					<h2>목차</h2><br><br>
 					${goodsInfo.book_contents }
 				</div>
 			</div>

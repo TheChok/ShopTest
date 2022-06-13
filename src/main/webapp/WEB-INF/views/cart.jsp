@@ -110,7 +110,7 @@
 				</div>
 				
 				<table class="subject_table">
-					<caption>표 제목 부분</caption>
+					<caption></caption>
 					<tbody>
 						<tr>
 							<th class="td_width_1"></th>
@@ -124,7 +124,7 @@
 					</tbody>
 				</table>
 				<table class="cart_table">
-					<caption>표 내용 부분</caption>
+					<caption></caption>
 					<tbody>
 						<c:forEach items="${cartInfo }" var="ci">
 							<tr>

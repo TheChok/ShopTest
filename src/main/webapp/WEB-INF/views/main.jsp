@@ -152,6 +152,7 @@
 			<div class="ls_wrap">
 				<div class="ls_div_subject">
 					평점순 상품
+					<br><hr><br>
 				</div>
 				<div class="ls_div">
 					<c:forEach items="${ls}" var="ls">
@@ -177,6 +178,7 @@
 						</a>					
 					</c:forEach>					
 				</div>
+				<br><br><hr>
 			</div>
 			
 		</div> <!-- End - class="content_area" -->
