@@ -1,5 +1,9 @@
 package com.shop.controller;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shop.EnumCartStatus;
 import com.shop.model.CartDTO;
 import com.shop.model.MemberVO;
 import com.shop.model.OrderPageDTO;
@@ -33,7 +38,7 @@ public class CartController {
 	 * 0: 등록 실패
 	 * 1: 등록 성공
 	 * 2: 등록된 데이터 존재
-	 * 5: 로그인 필요
+	 * 3: 로그인 필요
 	 * */
 	
 	//--------------------------------------------------------------------------------------------------------------//
@@ -46,15 +51,25 @@ public class CartController {
 		// 로그인 체크
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		System.out.println(mvo);
+		
+		String eResult = null;
 		
 		if(mvo == null) {
-			return "5";
-		}
+			eResult = EnumCartStatus.LOGIN_NOT_ERROR + "";
+		} else {
+			// 카트 등록
+			int result = cartService.addCart(cart);
+			if(result == 1) {
+				eResult = EnumCartStatus.SUCCESS + "";
+			} else {
+				
+			}
+		} 
+		System.out.println(eResult);
 		
-		// 카트 등록
-		int result = cartService.addCart(cart);
 		
-		return result + "";
+		return eResult;
 		
 	}
 	

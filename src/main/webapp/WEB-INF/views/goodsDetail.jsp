@@ -371,6 +371,12 @@ const form = {
 				book_count:	''
 }
 
+const errorCode = {
+	FAIL_ERROR: 		"FAIL_ERROR",
+	SUCCESS:			"SUCCESS",
+	SAME_ERROR:			"SAME_ERROR", 
+	LOGIN_NOT_ERROR: 	"LOGIN_NOT_ERROR"
+}
 
 /* 장바구니 추가 버튼 */
 $(".btn_cart").on("click", function(e) {
@@ -382,24 +388,28 @@ $(".btn_cart").on("click", function(e) {
 			type:		'POST',
 			data:		form,
 			success:	function(result) {
+				console.log(result);
 				cartAlert(result);	// 이건 호출하는거
-			} 
+			}
 	});
+	
 });
 
 /* cartAlert(result) */				// 이건 호출할거 만든거
 function cartAlert(result) {
-	if(result == '0') {
-		alert("장바구니에 추가를 하지 못하였습니다.")
-	} else if(result == '1') {
+	
+	
+	if(result == errorCode.FAIL_ERROR) {
+		alert("장바구니에 추가를 하지 못하였습니다.");
+	} else if(result == errorCode.SUCCESS) {
 		alert("장바구니에 추가되었습니다.");
-	} else if(result == '2') {
+	} else if(result == errorCode.SAME_ERROR) {
 		alert("장바구니에 이미 추가되어져 있습니다.");
-	} else if(result == '5') {
+	} else if(result == errorCode.LOGIN_NOT_ERROR) {
 		alert("로그인이 필요합니다.");
 	}
 }
-	
+ 
 	
 /* 바로구매 버튼 */
 $(".btn_buy").on("click", function(){
