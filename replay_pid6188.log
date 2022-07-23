@@ -28,11 +28,7 @@ instanceKlass java/util/concurrent/locks/ReentrantReadWriteLock$Sync$HoldCounter
 instanceKlass org/eclipse/jdt/ls/core/internal/handlers/BundleUtils$BundleInfo
 instanceKlass org/eclipse/jdt/ls/core/internal/handlers/BundleUtils
 instanceKlass org/eclipse/m2e/core/internal/index/IndexManager
-instanceKlass org/eclipse/jdt/ls/core/internal/contentassist/TypeFilter
-instanceKlass org/eclipse/jdt/ls/core/internal/handlers/MapFlattener
-instanceKlass sun/nio/fs/WindowsUriSupport
-instanceKlass org/eclipse/jdt/ls/core/internal/preferences/ClientPreferences
-instanceKlass com/google/gson/internal/bind/ObjectTypeAdapter$2
+
 instanceKlass com/google/gson/internal/LinkedTreeMap$LinkedTreeMapIterator
 instanceKlass com/google/gson/internal/ConstructorConstructor$13
 instanceKlass org/eclipse/jdt/ls/core/internal/JSONUtility
