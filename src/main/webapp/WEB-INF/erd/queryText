@@ -1,0 +1,249 @@
+-- 1) 회원 테이블
+CREATE TABLE BOOK_MEMBER(
+  member_id          VARCHAR2(50),
+  member_pw         VARCHAR2(100) NOT NULL,
+  member_name   VARCHAR2(30) NOT NULL,
+  member_emaill     VARCHAR2(100) NOT NULL,
+  member_addr1      VARCHAR2(100) NOT NULL,
+  member_addr2       VARCHAR2(100) NOT NULL,
+  member_addr3       VARCHAR2(100) NOT NULL,
+  admin_ck               NUMBER NOT NULL,
+  reg_date               DATE NOT NULL,
+  money                 number NOT NULL,
+  point                 number NOT NULL,
+  PRIMARY KEY(member_id)
+);
+
+
+
+-- 2) 국가 테이블 생성
+create table book_nation(
+    nation_id       varchar2(2) primary key,
+    nation_name  varchar2(50)
+);
+
+-- 국가 테이블 데이터 삽입
+insert into book_nation values('01', '국내');
+insert into book_nation values('02', '국외');
+
+
+
+-- 3) 작가 테이블 생성
+create table book_author(
+    author_id       number primary key,
+    author_name  varchar2(50),
+    nation_id       varchar2(2),
+    author_intro    long,
+    foreign key(nation_id) REFERENCES book_nation(nation_id)
+);
+
+create SEQUENCE author_seq INCREMENT by 1 start with 1;
+create SEQUENCE book_seq INCREMENT by 1 start with 1;
+-- drop sequence author_seq;
+
+alter table book_author add regDate date default sysdate;
+alter table book_author add updateDate date default sysdate;
+
+
+
+-- 4) 상품 테이블 
+create table book_book(
+    book_id      number primary key,
+    book_name varchar2(50)   not null, 
+    author_id    number,
+    publeyear   Date not null,
+    publisher    varchar2(70) not null,
+    catecode   varchar2(30),
+    book_price  number not null,
+    book_stock number not null,
+    book_discount number(2,2),
+    book_intro  clob,
+    book_contents clob,
+    regdate      date default sysdate,
+    updatedate date default sysdate
+);
+
+create SEQUENCE book_seq INCREMENT by 1 start with 1;
+-- drop sequence book_seq;
+
+
+
+-- 5) 카테고리 테이블
+create table book_cate(
+    tier number(1) not null,
+    cate_name varchar2(30) not null,
+    cateCode varchar2(30) not null primary key,
+    cate_parent varchar2(30),
+    foreign key(cate_parent) references book_cate(cateCode) 
+);
+
+
+
+-- 데이터 삽입
+insert into book_cate(tier, cate_name, cateCode) values (1, '국내', '100000');
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '소설', '101000','100000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '한국소설', '101001','101000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '영미소설', '101002','101000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '일본소설', '101003','101000');
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '시/에세이', '102000','100000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '한국시', '102001','102000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '해외시', '102002','102000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '경제/경영', '103000','100000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '경영일반', '103001','103000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '경영이론', '103002','103000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '경제일반', '103003','103000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '경제이론', '103004','103000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '자기계발', '104000','100000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '성공/처세', '104001','104000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '자기능력계발', '104002','104000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '인간관계', '104003','104000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '인문', '105000','100000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '심리학', '105001','105000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '교육학', '105002','105000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '철학', '105003','105000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '역사/문화', '106000','100000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '역사일반', '106001','106000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '세계사', '106002','106000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '한국사', '106003','106000');
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '과학', '107000','100000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '과학이론', '107001','107000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '수학', '107002','107000');
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '물리학', '107003','107000');
+        
+insert into book_cate(tier, cate_name, cateCode) values (1, '국외', '200000');
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '문학', '201000','200000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '소설', '201001','201000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '시', '201002','201000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '희곡', '201003','201000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '인문/사회', '202000','200000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '교양', '202001','202000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '철학', '202002','202000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '경제/경영', '203000','200000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '경제학', '203001','203000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '경영학', '203002','203000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '투자', '203003','203000');    
+    insert into book_cate(tier, cate_name, cateCode, cate_parent) values (2, '과학/기술', '204000','200000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '교양과학', '204001','204000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '물리학', '204002','204000');    
+        insert into book_cate(tier, cate_name, cateCode, cate_parent) values (3, '수학', '204003','204000');  
+    
+
+-- 외래키 추가
+alter table book_book add FOREIGN key (author_id) REFERENCES book_author(author_id);
+alter table book_book add FOREIGN key (cateCode) REFERENCES book_cate(cateCode);
+
+
+
+-- 6) 이미지 테이블
+create table book_image(
+        book_id int ,
+        fileName varchar2(100) not null,
+        uploadPath varchar2(200) not null,
+        uuid varchar2(100)not null ,
+        primary key (uuid),
+        foreign key (book_id) references book_book(book_id)
+    );
+
+
+
+-- 7) 카트 테이블
+create table book_cart(
+    cart_id number primary key,
+    member_id varchar2(50),
+    book_id number,
+    book_count number,
+    foreign key (member_id) references book_member(member_id),
+    foreign key (book_id) references book_book(book_id)
+);
+
+create SEQUENCE cart_seq INCREMENT by 1 start with 1;
+-- drop cart book_seq;
+
+
+
+-- 8) 주문 테이블
+create table book_order(
+    order_id            varchar2(50)  PRIMARY KEY,
+    addressee         varchar2(50)  not null,
+    member_id         varchar2(50),
+    member_addr1    varchar2(100) not null,
+    member_addr2    varchar2(100) not null,
+    member_addr3    varchar2(100) not null,
+    order_state         varchar2(30),
+    deliveryCost       number          not null,
+    usePoint            number          not null,
+    orderDate           date              default sysdate,
+    
+    FOREIGN KEY(member_id) REFERENCES book_member(member_id)
+);
+
+
+
+-- 9) 주문 목록 테이블
+-- 상품 <-> 주문 테이블은 n:m 관계, 논리테이블에서 다 대 다 관계는 1:n, m:1 관계로 만들어줘야 함.
+-- 주문 목록 테이블을 이용해 상품 <-> 주문목록 <-> 주문 순으로 다 대 다 관계를 해소시켜 준다.
+create table book_orderItem(
+    orderItem_id        number primary key,
+    order_id             varchar2(5),
+    book_id             number,
+    book_count        number    not null,
+    book_price         number    not null,
+    book_discount    number    not null,
+    savePoint        number     not null,
+    
+    FOREIGN KEY(order_id) REFERENCES book_order(order_id),
+    FOREIGN KEY(book_id) REFERENCES book_book(book_id)
+);
+
+create SEQUENCE item_seq INCREMENT by 1 start with 1;
+
+--컬럼명 변경 : editid -> edit_id
+ALTER TABLE book_member RENAME COLUMN member_emaill TO member_email;
+
+-- 컬럼 사이즈 변경
+alter table book_orderitem modify (order_id varchar2(100));
+
+
+
+-- 10) 리뷰 테이블
+create table book_reply(
+    reply_id         number           primary key,
+    book_id        number            not null,
+    member_id    varchar2(100)   not null,
+    regDate        date                 default sysdate,
+    content       varchar2(3500),
+    rating           number(2, 1)     not null,
+
+    FOREIGN KEY(member_id) REFERENCES book_member(member_id),
+    FOREIGN KEY(book_id) REFERENCES book_book(book_id),
+    UNIQUE(book_id, member_id)
+);
+
+-- 테스트 테이블
+-- 리뷰테이블 작성 시 의존성 없이 사용할 목적으로 book_reply가 아닌 test_reply를 사용했습니다.
+create table test_reply(
+    reply_id         number           primary key,
+    book_id        number            not null,
+    member_id    varchar2(100)   not null,
+    regDate        date                 default sysdate,
+    content       varchar2(3500),
+    rating           number(2, 1)     not null
+
+);
+
+-- book_book 테이블에 ratingAvg 속성 추가
+alter table book_book add ratingAvg number(2, 1);
+
+create SEQUENCE test_seq INCREMENT by 1 start with 1;
+-- drop SEQUENCE test_seq;
+
+-- 메인화면에서 출력될 제품목록
+-- 평점 순, 내림차 순, 가져오는건 8개(메인화면은 4개씩 나눔)
+SELECT * FROM
+(
+    select     book_id, book_name, ratingAvg, 
+                (select cate_name from book_cate where book_book.cateCode=book_cate.cateCode) as cate_name 
+    from	    book_book
+    order by ratingAvg desc nulls last
+)
+where rownum < 9;
