@@ -16,6 +16,15 @@ public class MemberServiceImpl implements MemberService {
 	MemberMapper memberMapper;
 	
 	//----------------------------------------------------------------------------------//
+	// 아이디 중복 검사
+	//----------------------------------------------------------------------------------//
+	@Override
+	public int idCheck(String member_id) throws Exception {
+		
+		return memberMapper.idCheck(member_id);
+	}
+	
+	//----------------------------------------------------------------------------------//
 	// 회원 가입
 	//----------------------------------------------------------------------------------//
 	@Override
@@ -25,14 +34,6 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
-	//----------------------------------------------------------------------------------//
-	// 아이디 중복 검사
-	//----------------------------------------------------------------------------------//
-	@Override
-	public int idCheck(String member_id) throws Exception {
-		
-		return memberMapper.idCheck(member_id);
-	}
 	
 	//----------------------------------------------------------------------------------//
 	// 로그인

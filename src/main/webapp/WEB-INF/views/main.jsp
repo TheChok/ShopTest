@@ -24,7 +24,9 @@
 	
 		<!-- class="top_gnb_area" -->
 		<div class="top_gnb_area">
+		
 			<ul class="list">
+			
 				<c:if test="${member == null }">
 					<li>
 						<a href="/member/login">로그인</a>
@@ -33,10 +35,13 @@
 						<a href="member/join">회원가입</a>
 					</li>
 				</c:if>
+				
 				<c:if test="${member != null }">
+				
 					<c:if test="${member.admin_ck == 1 }">
 						<li><a href="/admin/admain">관리자 페이지</a></li>
 					</c:if>
+					
 					<li>
 						<a id="gnb_logout_button">로그아웃</a>
 					</li>
@@ -47,6 +52,7 @@
 						<a href="/cart/${member.member_id }">장바구니</a>
 					</li>
 				</c:if>
+				
 				<li>
 					고객센터
 				</li>

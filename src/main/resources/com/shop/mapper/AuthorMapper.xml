@@ -26,7 +26,6 @@
 				    rownum <= #{pageNum} * #{amount} 
 				  )
 			WHERE rn > (#{pageNum} - 1) * #{amount} 
-			ORDER BY author_id desc
 		]]>
 	</select>
 	

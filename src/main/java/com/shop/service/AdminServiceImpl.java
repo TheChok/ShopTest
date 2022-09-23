@@ -32,24 +32,18 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void bookEnroll(BookVO book) {
-		
 		log.info("(service)bookEnroll....");
-		
 		adminMapper.bookEnroll(book);
-		
 		if(book.getImageList() == null || book.getImageList().size() <= 0) {
 			return;
 		}
 		
 		book.getImageList().forEach(attach ->{
-			
 			System.out.println("book.getBook_id ==> " + book.getBook_id());
 			
 			attach.setBook_id(book.getBook_id());
 			adminMapper.imageEnroll(attach);
-			
 		});
-		
 	}
 	
 	//--------------------------------------------------------------------------------//
@@ -97,20 +91,15 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int goodsModify(BookVO vo) {
 		log.info("goodsModify.................");
-		
 		int result = adminMapper.goodsModify(vo);
-		
 		if(result == 1 && vo.getImageList() != null && vo.getImageList().size() > 0) {
 			adminMapper.deleteImageAll(vo.getBook_id());
-			
+
 			vo.getImageList().forEach(attach -> {
 				attach.setBook_id(vo.getBook_id());
 				adminMapper.imageEnroll(attach);
-				
 			});
-			
 		}
-		
 		return result;
 	}
 	
@@ -121,9 +110,7 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public int goodsDelete(int book_id) {
 		log.info("goodsDelete.................");
-		
 		adminMapper.deleteImageAll(book_id);
-		
 		return adminMapper.goodsDelete(book_id);
 	}
 	

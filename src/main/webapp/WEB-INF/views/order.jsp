@@ -100,7 +100,7 @@
 		
 		<!-- class="content_area" -->
 		<div class="content_area">
-			<div class="content_subject"><span>장바구니</span></div>
+			<div class="content_subject"><span>구매페이지</span></div>
 			
 			<div class="content_main">
 				<!-- 회원 정보 -->
@@ -523,7 +523,7 @@ function setTotalInfo(){
 	let totalCount = 0;				// 총 갯수
 	let totalKind = 0;				// 총 종류
 	let totalPoint = 0;				// 총 마일리지
-	let deliveryPrice = 0;			// 배송비
+	let deliveryPrice = 3000;		// 배송비
 	let usePoint = 0;				// 사용 포인트(할인가격)
 	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)	
 	
@@ -535,18 +535,16 @@ function setTotalInfo(){
 	});	
 
 	/* 배송비 결정 */
-	if(totalPrice >= 30000 || totalPrice == 0)	deliveryPrice = 0;
-	else										deliveryPrice = 3000;
-	
-	finalTotalPrice = totalPrice + deliveryPrice;	
+	if(totalPrice >= 30000) deliveryPrice = 0;
+	finalTotalPrice = totalPrice + deliveryPrice;
+
 	
 	/* 사용 포인트 */
 	usePoint = $(".order_point_input").val();
-	
-	finalTotalPrice = totalPrice - usePoint;	
+	finalTotalPrice -= usePoint;	
 	
 	/* 값 삽입 */
-	$(".totalPrice_span").text(totalPrice.toLocaleString());				// 총 가격
+	$(".totalPrice_span").text(finalTotalPrice.toLocaleString());			// 총 가격
 	$(".goods_kind_div_kind").text(totalKind);								// 총 종류
 	$(".goods_kind_div_count").text(totalCount);							// 총 갯수
 	$(".totalPoint_span").text(totalPoint.toLocaleString());				// 총 마일리지

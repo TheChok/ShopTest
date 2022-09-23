@@ -1,9 +1,5 @@
 package com.shop.controller;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shop.EnumCartStatus;
 import com.shop.model.CartDTO;
 import com.shop.model.MemberVO;
-import com.shop.model.OrderPageDTO;
 import com.shop.service.CartService;
 
 import lombok.extern.log4j.Log4j;
@@ -68,9 +63,7 @@ public class CartController {
 		} 
 		System.out.println(eResult);
 		
-		
 		return eResult;
-		
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------//

@@ -26,27 +26,19 @@ public class ReplyServiceImpl implements ReplyService {
 	//--------------------------------------------------------------------------------------//
 	@Override
 	public int enrollReply(ReplyDTO dto) {
-		
 		int result = replyMapper.enrollReply(dto);
-		
 		setRating(dto.getBook_id());
-		
 		return result;
 	}
 	
 	//--------------------------------------------------------------------------------------//
-	// 댓글 존재 체크
+	// 댓글 존재여부 확인
 	//--------------------------------------------------------------------------------------//
 	@Override
 	public String checkReply(ReplyDTO dto) {
-		
 		Integer result = replyMapper.checkReply(dto);
-		
-		if(result != null) {
-			return "1";
-		} else {
-			return "0";
-		}
+		if(result != null) 	return "1";
+		else 				return "0";
 		
 	}
 	
@@ -68,11 +60,8 @@ public class ReplyServiceImpl implements ReplyService {
 	//--------------------------------------------------------------------------------------//
 	@Override
 	public int updateReply(ReplyDTO dto) {
-		
 		int result = replyMapper.updateReply(dto);
-		
 		setRating(dto.getBook_id());
-		
 		return result;
 	}
 
@@ -81,7 +70,6 @@ public class ReplyServiceImpl implements ReplyService {
 	//--------------------------------------------------------------------------------------//
 	@Override
 	public ReplyDTO getUpdateReply(int reply_id) {
-		
 		return replyMapper.getUpdateReply(reply_id);
 	}
 	
@@ -90,11 +78,8 @@ public class ReplyServiceImpl implements ReplyService {
 	//--------------------------------------------------------------------------------------//
 	@Override
 	public int deleteReply(ReplyDTO dto) {
-		
 		int result = replyMapper.deleteReply(dto.getReply_id());
-		
 		setRating(dto.getBook_id());
-		
 		return result;
 	}
 	
@@ -103,7 +88,6 @@ public class ReplyServiceImpl implements ReplyService {
 	//--------------------------------------------------------------------------------------//
 	@Transactional
 	public void setRating(int book_id) {
-		
 		Double ratingAvg = replyMapper.getRatingAverage(book_id);
 		
 		if(ratingAvg == null) ratingAvg = 0.0;

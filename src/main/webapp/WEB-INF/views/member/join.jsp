@@ -17,9 +17,11 @@
 <div class="wrapper">
 	<form id="join_form" method="post">
 	<div class="wrap">
+	
 			<div class="subjecet">
 				<span>회원가입</span>
 			</div>
+			
 			<div class="id_wrap">
 				<div class="id_name">아이디</div>
 				<div class="id_input_box">
@@ -29,6 +31,7 @@
 				<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 				<span class="final_id_ck">아이디를 입력해주세요.</span>
 			</div>
+			
 			<div class="pw_wrap">
 				<div class="pw_name">비밀번호</div>
 				<div class="pw_input_box">
@@ -52,11 +55,14 @@
 				</div>
 				<span class="final_name_ck">이름을 입력해주세요.</span>
 			</div>
+			
 			<div class="email_wrap">
+			
 				<div class="email_name">이메일</div> 
 				<div class="email_input_box">
 					<input class="email_input" name="member_email">
 				</div>
+				
 				<span class="final_email_ck">이메일을 입력해주세요.</span>
 				<span class="email_input_box_warn"></span>
 				<div class="email_check_wrap">
@@ -70,6 +76,7 @@
 					<span id="email_check_input_box_warn"></span>
 				</div>
 			</div>
+			
 			<div class="address_wrap">
 				<div class="address_name">주소</div>
 				<div class="address_input_1_wrap">
@@ -218,9 +225,10 @@ $(".id_input").on("propertychange change keyup paste input", function(){
 				$('.id_input_re_1').css("display", "none");		
 				idck_check = false;
 			}
-		}// success 종료
-	}); // ajax 종료	
-});// function 종료
+		}
+	}); // ajax 종료
+	
+});
 
 
 /* 인증번호 이메일 전송 */
@@ -241,7 +249,6 @@ $(".email_check_button").click(function(){
 	}
 	
 	$.ajax({
-		
         type:"GET",
         url: "emailCheck?email=" + email,
         success: function(data) {
@@ -251,14 +258,11 @@ $(".email_check_button").click(function(){
         	checkBox.attr("disabled", false);
         	boxWrap.attr("id", "email_check_input_box_true");
         	code	= data;
-        	
         },
         error:	function(error) {
         	alert(error);
         }
-        
     });
-	
 });
 
 

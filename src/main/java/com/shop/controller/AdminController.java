@@ -65,8 +65,9 @@ public class AdminController {
 	
 
 	// 관리자 페이지 이동 및 관리
-	// 작가 등록 및 관리
 	// 상품 등록 및 관리
+	// 작가 등록 및 관리
+	
 	
 	
 	// 관리자 페이지 이동 및 관리
@@ -288,32 +289,26 @@ public class AdminController {
 	//------------------------------------------------------------------------------------------//
 	@PostMapping("authorDelete")
 	public String authorDelte(int author_id, RedirectAttributes rttr) throws Exception {
-		
 		logger.info("authorDeletePOST........... author : " + author_id);
-		
 		int result = 0;
 		
 		try {
-			
 			result = authorService.authorDelete(author_id);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			
+
 			result = 2;
 			rttr.addFlashAttribute("delete_result", result);
-			
 			return "redirect:/admin/authorManage";
 		}
-		
 		rttr.addFlashAttribute("delete_result", result);
-		
 		return "redirect:/admin/authorManage";
 	}
 	
 	
 	
-	// 관리자 페이지 - 상품 등록 및 관리
+	// 상품 등록 및 관리
 	
 	//------------------------------------------------------------------------------------------//	
 	// 상품 등록(book)
@@ -374,14 +369,11 @@ public class AdminController {
 			}
 			
 			if(!type.startsWith("image")) {
-				
 				List<AttachImageVO> list = null;
 				return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
-				
 			}
 			
 		}// for
-		
 		
 		// 기본 폴더 생성	-- 1
 		String uploadFolder = "C:\\upload";	
@@ -403,7 +395,6 @@ public class AdminController {
 		List<AttachImageVO> list = new ArrayList();
 		
 		for(MultipartFile multipartFile : uploadFile) {
-			
 			// 이미지 정보 객체
 			AttachImageVO vo = new AttachImageVO();
 			
@@ -422,56 +413,28 @@ public class AdminController {
 			
 			// 파일 저장
 			try {
-				multipartFile.transferTo(saveFile);							// saveFile에 바인딩된 정보에 따라 '해당 경로'에 '해당 파일'을 전송(저장)함.
+				// saveFile에 바인딩된 정보에 따라 '해당 경로'에 '해당 파일'을 전송(저장)함.
+				multipartFile.transferTo(saveFile);							
 				
-				
-				// 썸네일 생성(ImageIO)										// 기본 파일 외에 썸네일 파일을 추가 생성해서 저장할것임.
-/*
-				// 방법 1
+				// 썸네일 생성(ImageIO)
+				// 기본 파일 외에 썸네일 파일을 추가 생성해서 저장할것임.
 				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
-
-				BufferedImage bo_image = ImageIO.read(saveFile);
-				
-					// 비율
-					double ratio = 3;
-					// 넓이, 높이
-					int width 	 = (int) (bo_image.getWidth() / ratio);
-					int height	 = (int) (bo_image.getHeight() / ratio);
-				
-				BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-				
-				Graphics2D graphic = bt_image.createGraphics();
-				
-				graphic.drawImage(bo_image, 0, 0, width, height, null);
-				
-				ImageIO.write(bt_image, "jpg", thumbnailFile);
-*/
-				
-				// 방법 2
-				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
-				
 				BufferedImage bo_image	= ImageIO.read(saveFile);
-				
 					// 비율
 					double ratio = 3;
 					// 넓이, 높이
 					int width	 = (int) (bo_image.getWidth() / ratio);
 					int height	 = (int) (bo_image.getHeight() / ratio);
-				
-				Thumbnails.of(saveFile)
+
+					Thumbnails.of(saveFile)
 				.size(width, height)
 				.toFile(thumbnailFile);
-				
-				
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			
 			list.add(vo);
 		}
-		
 		ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list, HttpStatus.OK);
-		
 		return result;
 	} // End - public ResponseEntity<AttachImageVO> uploadAjaxActionPOST(MultipartFile[] uploadFile)
 	
