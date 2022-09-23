@@ -89,7 +89,6 @@ public class ReplyServiceImpl implements ReplyService {
 	@Transactional
 	public void setRating(int book_id) {
 		Double ratingAvg = replyMapper.getRatingAverage(book_id);
-		
 		if(ratingAvg == null) ratingAvg = 0.0;
 		
 		ratingAvg = (double)(Math.round(ratingAvg*10));
