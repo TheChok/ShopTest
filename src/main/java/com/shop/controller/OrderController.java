@@ -29,13 +29,27 @@ public class OrderController {
 	private MemberService memberSerivce;
 	
 	//---------------------------------------------------------------------//
+	// 확인용
+	//---------------------------------------------------------------------//
+	@GetMapping("/order/")
+	public String orderPgaeGET2(OrderPageDTO opd, Model model) {
+		return "redirect:/main";
+	}
+	
+	//---------------------------------------------------------------------//
 	// 주문 페이지 이동
 	//---------------------------------------------------------------------//
 	@GetMapping("/order/{member_id}")
 	public String orderPgaeGET(@PathVariable("member_id") String member_id, OrderPageDTO opd, Model model) {
 		
-		model.addAttribute("orderList", orderService.getGoodsInfo(opd.getOrders()));
-		model.addAttribute("memberInfo", memberSerivce.getMemberInfo(member_id));
+		
+		try {
+			model.addAttribute("orderList", orderService.getGoodsInfo(opd.getOrders()));
+			model.addAttribute("memberInfo", memberSerivce.getMemberInfo(member_id));
+		} catch(Exception e) {
+			return "redirect:/main";
+		}
+
 		
 		return "/order";
 	}
@@ -61,7 +75,6 @@ public class OrderController {
 			session.setAttribute("member", memberLogin);
 			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		
